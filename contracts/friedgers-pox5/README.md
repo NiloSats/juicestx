@@ -114,6 +114,52 @@ liability** — the admin can never sweep a staker's in-flight peg-out as if it 
 > should mean more, the real floor is full solvency
 > (`balance >= earned-fees + withdrawal-liability + unclaimed-staker-rewards`), not `balance − gross`.
 
+#### `sweep-fee-refunds` — admin skim that can't rug stakers
+
+Admin-only recovery of the contract's **surplus** sBTC — chiefly the accept-case **fee dust**
+(`max-fee − actual-fee` minted back when an L1 peg-out is accepted), which isn't attributable
+to any single staker and would otherwise be stranded. The safety comes entirely from how
+"surplus" is defined:
+
+```clarity
+reserved  = earned-fees + withdrawal-liability + unclaimed-staker-rewards
+sweepable = (if (>= balance reserved) (- balance reserved) u0)   ;; floored at 0
+```
+
+It subtracts **every outstanding obligation** — unwithdrawn operator fees, all live withdrawal
+liabilities, and all unclaimed staker rewards — and only the excess is sweepable. So by
+construction the admin **can never pull staker principal or pending-payout funds**.
+
+**The key invariant (covers the reclaim gap):** a rejected-but-unreclaimed withdrawal's
+`amount + max-fee` sits in **both** the sBTC balance (the protocol returned it here) *and* in
+`withdrawal-liability` (the entry is still live), so the two **cancel** — the refund stays
+untouchable whether or not anyone has called `reclaim-failed-withdrawal` yet.
+
+**Operational catch:** while a withdrawal is **pending**, or **accepted but not yet retired**
+via `settle-accepted-withdrawal`, its full `amount + max-fee` still counts in
+`withdrawal-liability` and therefore **suppresses** the sweepable total. To actually collect the
+accept-case dust the admin must first `settle-accepted-withdrawal` the accepted requests (and
+wait for pending ones to finalize). That's why settlement isn't just cleanup — it's what
+*unlocks* the dust for sweeping. Flow: compute `sweepable` → `authorize-admin` →
+assert `sweepable > u0` (`ERR_NO_REFUNDS`) → transfer to `recipient`.
+
+#### `register-self` — bootstrap this contract as a pox-5 signer
+
+The one-time, admin-only handshake that puts the signer-manager **on the pox-5 signer roster**.
+Until this runs the contract has no signer identity, so none of the staking/reward machinery
+(`validate-stake!` callbacks, `claim-rewards`, per-staker payouts) is reachable. Two chained
+pox-5 calls:
+
+1. **`grant-signer-key`** — binds the 33-byte `signer-key` to `current-contract`, proven by
+   `auth-id` + `signer-sig` (a signature showing the caller controls that key). The grant is
+   **single-use** ("must not have been used yet") so a key can't be claimed twice / stolen.
+2. **`register-signer`** — enrolls the contract as a signer under that key, passing the
+   `signer-manager` trait ref so pox-5 knows which contract to call back (`validate-stake!`, etc.).
+
+Admin-gated (`authorize-admin`) because becoming the protocol's signer is a privileged,
+foundational action. TL;DR: *prove a signer key and register this contract as a pox-5 signer,
+unlocking everything else that depends on signer identity.*
+
 ### `pool.clar` — the LST pool (jBTC)
 SIP-010 fungible token (`pool-sbtc`). Holders get a liquid token whose redemption rate
 rises as rewards accrue — no per-user payout. Routes deposits into **vaults** that are
