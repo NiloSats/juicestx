@@ -32,13 +32,17 @@ const NODE=process.env.STACKS_API_URL||'http://77.42.3.101/stacks-api';
 const API=process.env.STXER_API_URL||'https://api.stxer.xyz';
 const u=Cl.uint,cp=id=>Cl.contractPrincipal(...id.split('.'));
 const sbtcCv=cp(SBTC),wstxCv=cp(WSTX);
-// L-1: 0.3 BTC sold in 0.1 BTC chunks. Sized for AMM depth at the tip fork: the
-// 1% floor takes only part of one chunk (partial sale, then u16047), and the rest
-// sells at 3% / 10%, so the batch closes. At the tip, 3 BTC in 1 BTC chunks no
-// longer clears within 10% in the fixed plan.
-const BIG=30000000;
+// L-1: 0.06 BTC in one chunk, sold up a slippage ladder (LADDER bps). Live AMM
+// prices sit anywhere from on the Lazer mid to ~1% off it, and depth moves: on
+// 2026-10-13 one fork took ~0.003 BTC inside 1% and ~0.137 BTC inside 10%, the
+// next took nothing inside 1%. So the plan does not assume which step sells
+// first: each step is one sale plus a same-block retry, and the checks ask that
+// the first sale that sells anything is partial (rest kept), that a later call
+// sells more, and that the batch closes inside 10%.
+const BIG=6000000;
+const LADDER=[100,150,200,300,500,1000,1000,1000];
 const BAND_FUND=300000,BAND_CAP=198380; // #8: Void Kael's measured book-capacity band 198,320-198,440
-const CHUNK=10000000;    // L-1 max-chunk setting (0.1 BTC)
+const CHUNK=BIG;         // L-1 max-chunk setting: the whole batch is one chunk
 const MAKER=100000;      // #7: vault maker order, filled by a real taker
 async function read(id,fn,args=[]){
  const [address,name]=id.split('.');
@@ -127,6 +131,9 @@ const D=claim('#6 resume / L-1 small batch',2,6);
 vaultSbtc('#6: next claim funded on top of the 2-sat dust (6 + 2 = 8)','(ok u8)');
 age('L-1 small',288);
 advance();
+// the floor is not what L-1 small tests (ROUTER_SLACK_SATS is): 10% lets the
+// AMMs take 9 sats even when their price sits ~1% off the Lazer mid
+call('L-1 small: admin widens slippage to 10%',POOL,'set-vault-slippage-bps',[u(1000)],'(ok true)');
 const d8=call('L-1 small: a sale of 8 sats (<= ROUTER_SLACK_SATS) reverts u16047',VAULT,'router-swap',[update],'(err u16047)',STRANGER);
 const d8bal=vaultSbtc('L-1 small: nothing left the vault','(ok u8)');
 ev('L-1 small: batch still open, cooldown not burned',VAULT,'(get-config)',v=>v.includes('(last-router-swap u0)'));
@@ -134,30 +141,31 @@ const d9don=donate('L-1 small: whale donates 1 sat',1);
 const d9=call('L-1 small: 9 sats sell in the same burn block (the revert burned no cooldown)',VAULT,'router-swap',[update],v=>ok(v)&&v.includes('(amount u9)')&&v.includes('(unsold u0)'),STRANGER);
 vaultSbtc('L-1 small: vault empty after the sale','(ok u0)');
 const dFin=finalize('L-1 small',D.c,v=>/^\(ok u[1-9]\d*\)$/.test(v));
+call('L-1 small: restore 1% slippage',POOL,'set-vault-slippage-bps',[u(100)],'(ok true)');
 post.push({kind:'small',d8,d9,dFin});
 
 // ---- L-1: partial sale, rest kept, next call sells more ----
 const C=claim('L-1 batch',3,BIG);
-vaultSbtc('L-1: vault holds the 0.3 BTC claim',`(ok u${BIG})`);
-call('L-1: chunk cap at 0.1 BTC',POOL,'set-vault-max-chunk-sats',[u(CHUNK)],'(ok true)');
+vaultSbtc('L-1: vault holds the 0.06 BTC claim',`(ok u${BIG})`);
+call('L-1: chunk cap at 0.06 BTC',POOL,'set-vault-max-chunk-sats',[u(CHUNK)],'(ok true)');
 age('L-1',288);
 advance();
-const l1=[],l1bal=[],l1clk=[],l1bps=[];
+const l1=[],l1bal=[],l1clk=[],l1bps=[],l1retry=[];
 function sale(label,bps){l1.push(call(label,VAULT,'router-swap',[update],any,STRANGER));l1bps.push(bps);
  l1bal.push(vaultSbtc(`${label}: vault balance`,v=>/^\(ok u\d+\)$/.test(v)));
- l1clk.push(ev(`${label}: clock`,VAULT,'(get-clock)',any));}
-sale('L-1 sale 1 at 1%',100);
-call('L-1: second call in the same burn block hits the cooldown',VAULT,'router-swap',[update],'(err u16044)',STRANGER);
-for(const n of [2,3,4]){advance();sale(`L-1 sale ${n} at 1%`,100);}
-call('L-1: admin widens slippage to 3%',POOL,'set-vault-slippage-bps',[u(300)],'(ok true)');
-advance();sale('L-1 sale 5 at 3%',300);
-call('L-1: admin widens slippage to 10%',POOL,'set-vault-slippage-bps',[u(1000)],'(ok true)');
-for(const n of [6,7,8]){advance();sale(`L-1 sale ${n} at 10%`,1000);}
+ l1clk.push(ev(`${label}: clock`,VAULT,'(get-clock)',any));
+ // u16044 after a sale (cooldown), u16047 after a refusal (no cooldown burned), u16031 once closed
+ l1retry.push(call(`${label}: second call in the same burn block`,VAULT,'router-swap',[update],any,STRANGER));}
+let lastBps=100;
+LADDER.forEach((bps,k)=>{
+ if(bps!==lastBps){call(`L-1: admin widens slippage to ${bps/100}%`,POOL,'set-vault-slippage-bps',[u(bps)],'(ok true)');lastBps=bps;}
+ if(k>0)advance();sale(`L-1 sale ${k+1} at ${bps/100}%`,bps);
+});
 ev('L-1: batch closed once empty',VAULT,'(get-clock)',v=>v.includes('(ready-to-finish true)'));
 const cFin=finalize('L-1',C.c,v=>/^\(ok u[1-9]\d*\)$/.test(v));
 call('L-1: restore 1% slippage',POOL,'set-vault-slippage-bps',[u(100)],'(ok true)');
 call('L-1: restore the 1M chunk',POOL,'set-vault-max-chunk-sats',[u(1000000)],'(ok true)');
-post.push({kind:'l1',slots:l1,bal:l1bal,clk:l1clk,bps:l1bps,fin:cFin,total:BIG});
+post.push({kind:'l1',slots:l1,bal:l1bal,clk:l1clk,bps:l1bps,retry:l1retry,fin:cFin,total:BIG});
 const dustAfterL1=vaultSbtc('L-1: dust left after the batch',v=>/^\(ok u[0-2]\)$/.test(v));
 
 // ---- Void Kael #7: a 1-sat jing-place after the sell-out ----
@@ -167,6 +175,8 @@ const dustAfterL1=vaultSbtc('L-1: dust left after the batch',v=>/^\(ok u[0-2]\)$
 // then the live order sells out.
 const E=claim('#7 batch',4,MAKER);
 const e7funded=vaultSbtc('#7: vault holds the claim (+ any L-1 dust)',v=>/^\(ok u\d+\)$/.test(v));
+// DEP's unlocked STX on mainnet is under the 2 STX bid (most of it is stacked)
+builder.withSender(TAKER).addSTXTransfer({recipient:DEP,amount:10000000});plan.push({label:'#7: fund DEP with 10 STX for its bid',kind:'tx',want:'(ok true)'});builder.withSender(DEP);
 call('#7: a real STX bid rests far under the ask (Y book not empty)',MARKET,'deposit-token-y',[u(2000000),u(mid*90n/100n),Cl.none(),wstxCv,Cl.stringAscii('wstx')],'(ok u2000000)',DEP);
 const e7p1=call('#7: vault places its ask (pending: the Y book is not empty)',VAULT,'jing-place',[update],v=>ok(v),STRANGER);
 call('#7: anyone settles the vault ask live (no cross)',MARKET,'settle-token-x-deposit',[Cl.principal(VAULT),update,sbtcCv,Cl.stringAscii('sbtc-token')],ok,STRANGER);
@@ -199,7 +209,7 @@ const f8bid=BigInt(BAND_CAP)*mid/10000000000n;
 call('#8: real STX bid sized near the measured band',MARKET,'deposit-token-y',[u(f8bid),u(mid*105n/100n),Cl.none(),wstxCv,Cl.stringAscii('wstx')],v=>ok(v),TAKER);
 const f8settle=call('#8: settle the bid live if it went pending',MARKET,'settle-token-y-deposit',[Cl.principal(TAKER),update,wstxCv,Cl.stringAscii('wstx')],any,STRANGER);
 ev('#8: the bid is live',MARKET,`(get-token-y-deposit (var-get current-cycle) '${TAKER})`,`u${f8bid}`);
-const f8cap=ev('#8: book taker capacity at the vault floor',MARKET,`(get-taker-capacity u${mid} u${mid*99n/100n} true '${VAULT})`,any);
+const f8cap=ev('#8: book taker capacity at the vault floor',MARKET,`(get-taker-capacity u${mid} u${mid*99n/100n} true '${VAULT} (some 0x${proof.hex.replace(/^0x/,'')}))`,any);
 const f8=call('#8: router-swap with a book leg and the rest to the AMMs',VAULT,'router-swap',[update],v=>ok(v),STRANGER);
 const f8bal=vaultSbtc('#8: vault balance after the sale',v=>/^\(ok u\d+\)$/.test(v));
 post.push({kind:'eight',f8,f8cap,f8bal,dust:null});
@@ -257,7 +267,15 @@ for(const p of post){
    if(partialAt<0&&unsold>0n)partialAt=k;
    held=held-sold;
   });
-  push('L-1: a 1% sale was partial (0 < unsold < chunk)',partialAt>=0&&p.bps[partialAt]===100,`first partial at sale ${partialAt+1}`);
+  const firstSold=p.slots.findIndex(s=>checks[s].actual.startsWith('(ok'));
+  push('L-1: the first sale that sells is partial (0 < unsold < chunk)',firstSold>=0&&partialAt===firstSold,`first sale ok at ${firstSold+1} (${p.bps[firstSold]} bps), first partial at ${partialAt+1}`);
+  let cooled=0;
+  p.retry.forEach((slot,k)=>{const prev=checks[p.slots[k]].actual,r=checks[slot].actual;
+   const closed=U(checks[p.bal[k]].actual)<=2n||prev==='(err u16031)'; // the sale emptied the batch
+   const want=closed?'(err u16031)':prev.startsWith('(ok')?'(err u16044)':'(err u16047)';
+   if(r==='(err u16044)')cooled++;
+   push(`L-1 sale ${k+1}: same-block retry ${want}`,r===want&&events(slot).ft.length===0,`${r} after ${prev.slice(0,20)}`);});
+  push('L-1: the cooldown was hit after a sale',cooled>0,`${cooled} retries hit u16044`);
   const later=p.slots.slice(partialAt+1).findIndex(s=>checks[s].actual.startsWith('(ok'));
   push('L-1: a later call sold more of the kept rest',partialAt>=0&&later>=0,later>=0?`sale ${partialAt+2+later} sold more`:'none');
   push('L-1: vault ends empty (<= DUST_SATS)',held<=2n,`held ${held}`);
@@ -279,11 +297,12 @@ for(const p of post){
  }
  if(p.kind==='eight'){
   const r=checks[p.f8].actual;console.log('#8 capacity',checks[p.f8cap].actual);
-  // market gross-up of the book's net capacity: 0 if net-cap is 0, else floor(((net-cap+1)*10020-1)/10000)
-  {const cap=checks[p.f8cap].actual,net=field(cap,'net-cap'),gross=field(cap,'gross-cap'),want=net===0n?0n:((net+1n)*10020n-1n)/10000n;
-   push('#8: gross-cap = gross-up(net-cap) at 20 bps',gross===want,`net-cap ${net}, gross-cap ${gross}, model ${want}`);}
+  // market gross-up of the book's net capacity at the rebate bps the update's
+  // age sets (20..70): 0 if net-cap is 0, else floor(((net-cap+1)*(1e4+bps)-1)/1e4)
+  {const cap=checks[p.f8cap].actual,net=field(cap,'net-cap'),gross=field(cap,'gross-cap'),bps=field(cap,'rebate-bps'),want=net===0n?0n:((net+1n)*(10000n+bps)-1n)/10000n;
+   push('#8: gross-cap = gross-up(net-cap) at the quoted rebate bps',bps>=20n&&bps<=70n&&gross===want,`net-cap ${net}, gross-cap ${gross}, rebate-bps ${bps}, model ${want}`);}
   if(r.startsWith('(ok')){const e=events(p.f8),f=flows(e),amount=field(r,'amount'),unsold=field(r,'unsold');
-   const oldAllow=amount+1000n,newAllow=amount+1000n+51n; // amount + min-x + JING_REBATE_DUST_SATS
+   const oldAllow=amount+1000n,newAllow=amount+1000n+51n+7n; // amount + min-x + JING_REBATE_DUST_SATS + ceil(min-x * 70 bps) (F1)
    const fromMkt=e.ft.filter(t=>t.recipient===VAULT&&t.sender===MARKET).reduce((a,t)=>a+BigInt(t.amount),0n);
    push('#8: gross sBTC outflow within the new allowance',f.sbtcOut<=newAllow,`gross out ${f.sbtcOut}, market refund ${fromMkt}, old allowance ${oldAllow}, new ${newAllow}, jing ${e.router?.['jing-in']?.value}/${e.router?.['jing-cap']?.value} ok ${e.router?.['jing-ok']?.type}, amms ${e.router?.['dlmm-in']?.value}/${e.router?.['xyk-in']?.value}/${e.router?.['velar-in']?.value}`);
    push('#8: net sBTC outflow equals sold',f.sbtcOut-f.sbtcIn===amount-unsold,`net ${f.sbtcOut-f.sbtcIn}, sold ${amount-unsold}`);

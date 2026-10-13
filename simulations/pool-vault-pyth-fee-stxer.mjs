@@ -5,17 +5,20 @@
 // Fixture: the oracle fee is var-set to u10 with Eval in the oracle's own
 // context (governance set-fee is not driven). A real STX maker bid rests on a
 // fresh exact v6-3 market, so the router's Jing leg verifies the update inside
-// the vault. The v6-3 market's swap verifies twice (entry and
-// settle-with-refresh), so one Jing fill costs the vault 2 x fee.
-// Expected: router-swap aborts with budget 0 and with budget = 1 x fee
-// (err u1, the with-stx allowance), and sells after
-// set-vault-pyth-fee-budget u100, the vault paying exactly 2 x fee.
+// the vault. How often one Jing fill verifies is read from the market
+// source deployed below (JING_SRC): the deployed v6-3 swap verified twice
+// (entry and settle-with-refresh); the bounty fix verifies once and hands
+// the feeds to settle-with-verified-feeds. So one fill costs the vault
+// VERIFIES x fee.
+// Expected: router-swap aborts with budget 0 and with budget = VERIFIES x
+// fee - 1 (err u1, the with-stx allowance), and sells after
+// set-vault-pyth-fee-budget u100, the vault paying exactly VERIFIES x fee.
 // Run: node simulations/pool-vault-pyth-fee-stxer.mjs
-import {appendJingStack} from './_jing-v6-3.mjs';
+import {appendJingStack,JING_SRC} from './_jing-v6-3.mjs';
 import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 import {withVaultArgument} from './_pool-vault-interface.mjs';
 import {createRequire} from 'node:module';
-import {mkdirSync,writeFileSync} from 'node:fs';
+import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here=dirname(fileURLToPath(import.meta.url));
@@ -37,6 +40,12 @@ const pid=`${DEP}.${POOL_NAME}`,vid=`${DEP}.${VAULT_NAME}`;
 const ALICE=getAddressFromPrivateKey('7'.repeat(64)+'01','mainnet');
 const BOB=getAddressFromPrivateKey('8'.repeat(64)+'01','mainnet');
 const FUND=100000,FEE=10,FLOAT=1000,BUDGET=100;
+// verifies per Jing fill, from the market source the fork deploys
+const marketSource=readFileSync(resolve(JING_SRC,'markets-sbtc-stx-jing-v6-3.clar'),'utf8');
+const VERIFIES=marketSource.includes('(settle-with-verified-feeds (get feed-x feeds) (get feed-y feeds)')?1:2;
+const SHORT=VERIFIES*FEE-1; // one uSTX under what a fill costs the vault
+if(BUDGET<VERIFIES*FEE)throw new Error('BUDGET must cover a fill');
+console.log(`market swap verifies ${VERIFIES}x per fill: a fill costs the vault ${VERIFIES*FEE} uSTX`);
 
 const {fetchLazerUpdateAny}=await import('./_pool-vault-lazer.mjs');
 const proof=await fetchLazerUpdateAny();
@@ -95,8 +104,9 @@ send('caller holds STX for its own refresh-mid fee',STRANGER,1000000);
 send(`vault STX float ${FLOAT} uSTX`,vid,FLOAT);
 call('budget 0: router-swap aborts on the with-stx allowance',vid,'router-swap',[update],'(err u1)',STRANGER);
 ev('nothing sold under budget 0',vid,`(contract-call? '${SBTC} get-balance current-contract)`,`(ok u${FUND})`);
-call(`set budget u${FEE} (one fee)`,pid,'set-vault-pyth-fee-budget',[Cl.uint(FEE)],'(ok true)');
-call('one-fee budget aborts too: a Jing fill verifies twice',vid,'router-swap',[update],'(err u1)',STRANGER);
+call(`set budget u${SHORT} (${VERIFIES} x fee - 1)`,pid,'set-vault-pyth-fee-budget',[Cl.uint(SHORT)],'(ok true)');
+call(`budget ${VERIFIES} x fee - 1 aborts too: a Jing fill verifies ${VERIFIES}x`,vid,'router-swap',[update],'(err u1)',STRANGER);
+ev(`nothing sold under budget u${SHORT}`,vid,`(contract-call? '${SBTC} get-balance current-contract)`,`(ok u${FUND})`);
 call(`admin sets budget u${BUDGET} through the pool`,pid,'set-vault-pyth-fee-budget',[Cl.uint(BUDGET)],'(ok true)');
 ev(`config reads pyth-fee-budget u${BUDGET}`,vid,'(get-config)',v=>v.includes(`(pyth-fee-budget u${BUDGET})`));
 const before=vaultStx('vault STX before the sale');
@@ -124,7 +134,7 @@ if(checks[sale].passed){
  const transfers=(result.steps[sale]?.Result?.Transaction?.Ok?.events??[]).map(e=>typeof e==='string'?JSON.parse(e):e).map(e=>e.stx_transfer_event).filter(Boolean);
  const vaultFees=transfers.filter(t=>t.sender===vid&&t.recipient===feeTo).map(t=>BigInt(t.amount));
  const callerFees=transfers.filter(t=>t.sender===STRANGER&&t.recipient===feeTo).map(t=>BigInt(t.amount));
- checks.push({label:`vault paid exactly 2 x ${FEE} uSTX to the fee recipient`,passed:vaultFees.length===2&&vaultFees.every(a=>a===BigInt(FEE)),actual:`vault fees [${vaultFees}] to ${feeTo}`});
+ checks.push({label:`vault paid exactly ${VERIFIES} x ${FEE} uSTX to the fee recipient`,passed:vaultFees.length===VERIFIES&&vaultFees.every(a=>a===BigInt(FEE)),actual:`vault fees [${vaultFees}] to ${feeTo}`});
  checks.push({label:`caller paid its own refresh-mid fee (1 x ${FEE})`,passed:callerFees.length===1&&callerFees[0]===BigInt(FEE),actual:`caller fees [${callerFees}]`});
  checks.push({label:'router out is net of the vault fees (vault STX delta = out)',passed:delta===out,actual:`delta ${delta}, out ${out}`});
  checks.push({label:'finalize passes the whole STX balance (float + out)',passed:uint(checks[fin].actual)===BigInt(FLOAT)+out,actual:`${checks[fin].actual} vs ${BigInt(FLOAT)+out}`});
@@ -138,7 +148,7 @@ if(checks[sale].passed){
 }
 for(const c of checks.slice(plan.length))console.log(`${c.passed?'PASS':'FAIL'} ${c.label}: ${c.actual}`);
 const dir=resolve(here,'results/pool-vault-stx');mkdirSync(dir,{recursive:true});
-writeFileSync(resolve(dir,'juice-pyth-fee.json'),JSON.stringify({id,url:`https://stxer.xyz/simulations/mainnet/${id}`,block:forkBlock,proofTimestamp:proof.ts,sourceHashes,
+writeFileSync(resolve(dir,'juice-pyth-fee.json'),JSON.stringify({id,url:`https://stxer.xyz/simulations/mainnet/${id}`,block:forkBlock,proofTimestamp:proof.ts,verifiesPerFill:VERIFIES,sourceHashes,
  fixtures:['live oracle fee var-set to u10 by Eval','PoX earned rewards and 1:3 shares seeded with Eval','vault clock aged by 288 blocks'],checks},null,2));
 const failed=checks.filter(c=>!c.passed).length;
 console.log(`=== juice-pyth-fee: ${checks.length-failed}/${checks.length} passed ===`);
