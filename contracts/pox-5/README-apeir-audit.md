@@ -69,3 +69,7 @@ The one real gap is not a donation: if the last sale itself leaves 3 to 8 sats u
 **Holds. Accepted, no change.** `emergency-recover` books the amounts the active vault reports, without a before/after balance diff. Adding the diff would only add a way for the emergency path to fail, and the path exists to get funds home when something is already wrong.
 
 The vault is trusted by construction: only the pinned active vault can be called, and the admin cannot switch it without a two-step change and a 4,032-block cooldown (about a month), with both vaults idle and no pending swap. That notice is the window for anyone to check the new vault's code before it can report anything.
+
+## Design note: OG cover is a lifetime high-water mark
+
+Found while writing the Clarinet suite, accepted. An OG's cover never shrinks, even after a full unstake. A whale could fill the whole 2.1M cap once, leave, and keep the 0% right for a later return, or a rival could fill it to end the promo. Either costs at least one cycle of locked STX, and the admin can reopen room at any time with `raise-og-cap` (raise-only).
