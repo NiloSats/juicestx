@@ -176,10 +176,28 @@ advance(CYCLE - ((burn - FIRST_BURN) % CYCLE) + 20, 'into the next cycle');
 builder.withSender(STX_WHALE).addSTXTransfer({ recipient: SAFE, amount: SECOND_PAYOUT });
 plan.push({ label: `a second payout of ${SECOND_PAYOUT / 1e6} STX lands`, kind: 'transfer' });
 builder.withSender(DEP);
+const act0 = ev('safe last-activity before the keeper restake', SAFE, '(var-get last-activity-block)', (v) => /^u\d+$/.test(v));
 const restake2 = call('keeper restakes it and rolls the lock: extend 1', SAFE, 'restake', [],
   (v) => v === `(ok (tuple (amount u${SECOND_PAYOUT}) (cycles-to-extend u1)))`);
 const info2 = ev('pox-5 position after the roll', POX, `(get-staker-info '${SAFE})`, (v) => v.includes(PID));
 const cyc2 = ev('current cycle', POX, '(current-pox-reward-cycle)', (v) => /^u\d+$/.test(v));
+const act1 = ev('safe last-activity after the keeper restake', SAFE, '(var-get last-activity-block)', (v) => /^u\d+$/.test(v));
+
+// -- 5. set-keeper, then unstake ------------------------------------------------
+const NEW_KEEPER = STRANGER, OUTSIDER = getAddressFromPrivateKey('9'.repeat(64) + '01', 'mainnet');
+call('a stranger cannot set the keeper (u4001)', SAFE, 'set-keeper', [Cl.principal(OUTSIDER), Cl.none(), Cl.none()], '(err u4001)', OUTSIDER);
+call('the owner sets a new keeper', SAFE, 'set-keeper', [Cl.principal(NEW_KEEPER), Cl.none(), Cl.none()], ok, OWNER);
+ev('get-keeper is the new keeper', SAFE, '(get-keeper)', NEW_KEEPER);
+builder.withSender(STX_WHALE).addSTXTransfer({ recipient: SAFE, amount: 1_000_000 });
+plan.push({ label: 'a third payout of 1 STX lands', kind: 'transfer' });
+builder.withSender(DEP);
+call('the old keeper is refused (u4001)', SAFE, 'restake', [], '(err u4001)');
+call('the new keeper restakes the 1 STX', SAFE, 'restake', [], (v) => ok(v) && v.includes('(amount u1000000)'), NEW_KEEPER);
+call('the owner unstakes', SAFE, 'unstake', [Cl.none(), Cl.none()], ok, OWNER);
+builder.withSender(STX_WHALE).addSTXTransfer({ recipient: SAFE, amount: 1_000_000 });
+plan.push({ label: 'another 1 STX lands after the unstake', kind: 'transfer' });
+builder.withSender(DEP);
+call('the keeper cannot re-lock a leaving safe (u4040)', SAFE, 'restake', [], '(err u4040)', NEW_KEEPER);
 
 console.log(`fork block ${forkBlock}, burn ${info.burn_block_height}, reward cycle fixture ${rewardCycle}, ${plan.length} steps`);
 const id = await builder.run();
@@ -206,12 +224,13 @@ const restaked = uintIn('amount')(a(restake1));
 const amt1 = uintIn('amount-ustx')(a(info1)), amt2 = uintIn('amount-ustx')(a(info2));
 const unlock2 = uintIn('first-reward-cycle')(a(info2)) + uintIn('num-cycles')(a(info2));
 const extra = [
-  ['the pool paid the safe its 4/8 share of the STX pot (no fee set)', paid === safeShare, `${paid} vs ${safeShare}`],
+  ['the pool paid the safe its 4/8 share of the STX pot (the safe is an OG: 0% fee)', paid === safeShare, `${paid} vs ${safeShare}`],
   ['restake staked exactly what the pool paid', restaked === paid, `${restaked} vs ${paid}`],
   ['pox-5 amount = stake + first payout', amt1 === BigInt(STAKE) + paid, `${amt1}`],
   ['locked = stake + first payout', uintIn('locked')(a(lock1)) === BigInt(STAKE) + paid, a(lock1)],
   ['pox-5 amount = stake + both payouts', amt2 === BigInt(STAKE) + paid + BigInt(SECOND_PAYOUT), `${amt2}`],
   ['after the roll the unlock is current + 1 + 96', unlock2 === BigInt(a(cyc2).slice(1)) + 97n, `${unlock2} vs ${a(cyc2)}`],
+  ['the keeper restake did not touch last-activity (recovery clock)', a(act0) === a(act1), `${a(act0)} -> ${a(act1)}`],
 ];
 for (const [label, passed, actual] of extra) {
   console.log(`${passed ? 'PASS' : 'FAIL'} ${label}: ${actual}`);
