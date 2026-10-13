@@ -1,15 +1,16 @@
 {
-  "id": "c1543afd1f4c9709eb25ab6f72c7d913",
-  "url": "https://stxer.xyz/simulations/mainnet/c1543afd1f4c9709eb25ab6f72c7d913",
-  "block": 9200798,
+  "id": "e79624762109100bd2d50d853ce93010",
+  "url": "https://stxer.xyz/simulations/mainnet/e79624762109100bd2d50d853ce93010",
+  "block": 9200897,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
     "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
-    "swap-router-sbtc-stx-jing-v5-3": "55239afe46852df5bcc6d4c00b3b668c49336b099dfc494dc2e98ba78645961c",
-    "juice-sbtc-autoswap": "fe12208c32a005e47924c4026553fe1be50898bea04df40d703254af19e04ec0",
-    "juice-pool-sbtc-signer": "935265f5e6f7d974a711d114b8ab59f0a7ee978466adbf88e70733484c2e2699"
+    "swap-router-sbtc-stx-jing-v5-3": "8eefe65bad4890400e09645d6f6c2c84b58897c00929e100a193c97faf0ffcd4",
+    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-sbtc-autoswap": "19d33c13b472dc2a3938af8f99bfa0a66350c271f3f8de5c71b9fcbf8ce1e22c",
+    "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39"
   },
   "checks": [
     {
@@ -48,6 +49,11 @@
       "actual": "(ok true)"
     },
     {
+      "label": "deploy juice-swap-vault-trait-v2 (repo source, new trait)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
       "label": "deploy juice-sbtc-autoswap (repo source)",
       "passed": true,
       "actual": "(ok true)"
@@ -60,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer (real grant path)",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0285559ce3298fb84fb9718091bf96ea22a1d36febff69d666bf882524a2630223)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x023684d316f63812d7c7377447f6dc5dfe276d6e5c953e8b5058213b7fa6cce208)))"
     },
     {
       "label": "OG status starts empty",
@@ -170,7 +176,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18131324599534)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18157621278260)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -195,7 +201,7 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17177044357453) (mid u19085604841615) (out u96212051) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17201957000457) (mid u19113285556064) (out u94660491) (unsold u0)))))"
     },
     {
       "label": "router cooldown: advance 1 burn blocks -> cycle offset 911",
@@ -205,32 +211,32 @@
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17177044357453) (mid u19085604841615) (out u96209630) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17201957000457) (mid u19113285556064) (out u94635723) (unsold u0)))))"
     },
     {
       "label": "finalize: the STX pot",
       "passed": true,
-      "actual": "(ok u192421681)"
+      "actual": "(ok u189296214)"
     },
     {
       "label": "OG1 owed (net view)",
       "passed": true,
-      "actual": "u94767678"
+      "actual": "u93228386"
     },
     {
       "label": "PAYER owed (net view)",
       "passed": true,
-      "actual": "u91400298"
+      "actual": "u89915702"
     },
     {
       "label": "pay-stx-stakers pays both",
       "passed": true,
-      "actual": "(ok u186167976)"
+      "actual": "(ok u183144088)"
     },
     {
       "label": "earned fees",
       "passed": true,
-      "actual": "u6253704"
+      "actual": "u6152126"
     },
     {
       "label": "?ref=telegram printed on-chain in validate-stake",
@@ -240,17 +246,17 @@
     {
       "label": "OG1 pays 5% only on the 300 STX above its 700 cover (grown by top-up)",
       "passed": true,
-      "actual": "u94767678 vs 94767678"
+      "actual": "u93228386 vs 93228386"
     },
     {
       "label": "PAYER pays the full 5%",
       "passed": true,
-      "actual": "u91400298 vs 91400298"
+      "actual": "u89915702 vs 89915702"
     },
     {
       "label": "earned fees = both fees",
       "passed": true,
-      "actual": "u6253704 vs 6253704"
+      "actual": "u6152126 vs 6152126"
     }
   ]
 }

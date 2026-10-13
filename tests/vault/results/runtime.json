@@ -1,8 +1,9 @@
 {
   "sourceHashes": {
     "juice-swap-vault-trait": "4881086b2a235c8857362c76f265bf1627ea1997c49c2a89b8d85f8920b6bf08",
-    "juice-pool-sbtc-signer": "935265f5e6f7d974a711d114b8ab59f0a7ee978466adbf88e70733484c2e2699",
-    "juice-sbtc-autoswap": "fe12208c32a005e47924c4026553fe1be50898bea04df40d703254af19e04ec0"
+    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39",
+    "juice-sbtc-autoswap": "19d33c13b472dc2a3938af8f99bfa0a66350c271f3f8de5c71b9fcbf8ce1e22c"
   },
   "status": "passed",
   "scope": "full-source local runtime with fixture dependencies; fork runs validate real dependency behavior"

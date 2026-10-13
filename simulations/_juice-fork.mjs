@@ -31,6 +31,15 @@ export function juiceSource(repoName,path,sourceHashes={}){
  sourceHashes[repoName]=sha(source);sourceHashes[name]=sha(deployed);
  return {name,source:deployed,repoSha256:sha(source),deployedSha256:sha(deployed)};
 }
+// juice-swap-vault-trait-v2 is new (v1 is on mainnet and can not gain
+// set-pyth-fee-budget), so every fork deploys it from the repo file, as DEP,
+// before the vault and the pool.
+export const TRAIT_NAME='juice-swap-vault-trait-v2',TRAIT_ID=`${DEP}.${TRAIT_NAME}`;
+export function traitSource(sourceHashes={}){
+ const source=readFileSync(new URL(`../contracts/pox-5/${TRAIT_NAME}.clar`,import.meta.url),'utf8');
+ sourceHashes[TRAIT_NAME]=sha(source);
+ return {name:TRAIT_NAME,source,sha256:sha(source)};
+}
 // One fork height for a whole rerun set: JUICE_FORK_BLOCK, else the newest
 // block at least JUICE_FORK_LAG_SECS (default 600) old. The lag keeps a freshly
 // fetched Lazer update inside the market's 80 s staleness limit after the sims

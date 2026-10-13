@@ -4,7 +4,7 @@
 // current Jing market / core / router, real sBTC, AMMs and PoX-5 claim path.
 // PoX earned rewards and 1:3 shares are Eval fixtures backed by real fork sBTC.
 import {appendJingStack} from './_jing-v6-3.mjs';
-import {POOL_ID,VAULT_ID,juiceSource,juiceForkBlock} from './_juice-fork.mjs';
+import {POOL_ID,VAULT_ID,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 import {withVaultArgument} from './_pool-vault-interface.mjs';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
@@ -66,6 +66,7 @@ const vaultStx=(label,want)=>ev(label,VAULT,'(stx-get-balance current-contract)'
 const age=(label,blocks)=>ev(`${label}: fixture ages the funding clock by ${blocks} blocks`,VAULT,`(begin (var-set batch-start (some (- burn-block-height u${blocks}))) true)`,'true');
 const donate=(label,n)=>call(label,SBTC,'transfer',[u(n),Cl.principal(WHALE),Cl.principal(VAULT),Cl.none()],'(ok true)',WHALE);
 // Repo sources under the fork names; only the contract names are rewritten (sourceHashes keeps both hashes).
+{const t=traitSource(sourceHashes);builder.addContractDeploy({contract_name:t.name,source_code:t.source,clarity_version:ClarityVersion.Clarity6});plan.push({label:`deploy ${t.name} (repo source, new trait)`,kind:'deploy'});}
 for(const repoName of ['juice-sbtc-autoswap','juice-pool-sbtc-signer']){
  const {name,source}=juiceSource(repoName,resolve(directory,'../contracts/pox-5/'+repoName+'.clar'),sourceHashes);
  builder.addContractDeploy({contract_name:name,source_code:source,clarity_version:ClarityVersion.Clarity6});

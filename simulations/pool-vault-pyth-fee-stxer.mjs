@@ -12,7 +12,7 @@
 // set-vault-pyth-fee-budget u100, the vault paying exactly 2 x fee.
 // Run: node simulations/pool-vault-pyth-fee-stxer.mjs
 import {appendJingStack} from './_jing-v6-3.mjs';
-import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock} from './_juice-fork.mjs';
+import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 import {withVaultArgument} from './_pool-vault-interface.mjs';
 import {createRequire} from 'node:module';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -61,6 +61,9 @@ const ev=(label,id,code,want)=>{builder.addEvalCode(id,code);plan.push({label,ki
 const send=(label,who,ustx)=>{builder.withSender(STX_WHALE).addSTXTransfer({recipient:who,amount:ustx});plan.push({label,kind:'tx',want:'(ok true)'});builder.withSender(DEP);};
 const vaultStx=label=>ev(label,vid,'(stx-get-balance current-contract)',v=>/^u\d+$/.test(v));
 
+const trait=traitSource(sourceHashes);
+builder.addContractDeploy({contract_name:trait.name,source_code:trait.source,clarity_version:ClarityVersion.Clarity6});
+plan.push({label:`deploy ${trait.name} (repo source, new trait)`,kind:'deploy'});
 deploy('juice-sbtc-autoswap',resolve(here,'../contracts/pox-5/juice-sbtc-autoswap.clar'));
 deploy('juice-pool-sbtc-signer',resolve(here,'../contracts/pox-5/juice-pool-sbtc-signer.clar'));
 ev('vault config starts with pyth-fee-budget u0',vid,'(get-config)',v=>v.includes('(pyth-fee-budget u0)'));

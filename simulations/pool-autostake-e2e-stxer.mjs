@@ -20,7 +20,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { appendJingStack } from './_jing-v6-3.mjs';
-import { POOL_NAME, VAULT_NAME, juiceSource, juiceForkBlock } from './_juice-fork.mjs';
+import { POOL_NAME, VAULT_NAME, juiceSource, juiceForkBlock, traitSource } from './_juice-fork.mjs';
 import { withVaultArgument } from './_pool-vault-interface.mjs';
 
 const require = createRequire(resolve(dirname(fileURLToPath(import.meta.url)), '../package.json'));
@@ -109,6 +109,9 @@ const ok = (v) => v.startsWith('(ok');
 const uintIn = (field) => (v) => BigInt((v.match(new RegExp(`${field} u(\\d+)`)) || [])[1] ?? '-1');
 
 // -- 1. contracts --------------------------------------------------------------
+const trait = traitSource(sourceHashes);
+builder.addContractDeploy({ contract_name: trait.name, source_code: trait.source, clarity_version: ClarityVersion.Clarity6 });
+plan.push({ label: `deploy ${trait.name} (repo source, new trait)`, kind: 'deploy' });
 deployJuice(VAULT_NAME, fileURLToPath(new URL('../contracts/pox-5/juice-sbtc-autoswap.clar', import.meta.url)));
 deployJuice(POOL_NAME, fileURLToPath(new URL('../contracts/pox-5/juice-pool-sbtc-signer.clar', import.meta.url)));
 call('register the pool as a pox-5 signer (real grant path)', PID, 'register-self',

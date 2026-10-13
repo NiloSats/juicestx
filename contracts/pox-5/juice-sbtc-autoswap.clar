@@ -1,4 +1,4 @@
-(impl-trait .juice-swap-vault-trait.swap-vault-trait)
+(impl-trait .juice-swap-vault-trait-v2.swap-vault-trait)
 
 (define-constant ERR_RECOVERY_TOO_SOON (err u16046))
 (define-constant ERR_BUSY (err u16045))

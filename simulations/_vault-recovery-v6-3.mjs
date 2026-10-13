@@ -5,7 +5,7 @@ import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {stacks,stxer,appendJingStack,fetchLazerUpdateAny,lazerFeedTimes,DEP,MARKET,CORE,LADDER,SBTC,WSTX} from './_jing-v6-3.mjs';
-import {VAULT_NAME,POOL_NAME,juiceSource,juiceForkBlock} from './_juice-fork.mjs';
+import {VAULT_NAME,POOL_NAME,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 const {Cl,ClarityVersion,cvToString,deserializeCV,makeUnsignedContractDeploy,PostConditionMode,getAddressFromPrivateKey}=stacks;
 const {SimulationBuilder,getSimulationResult,submitSimulationSteps,callContract,getNonce,setSender}=stxer;
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
@@ -38,12 +38,13 @@ export async function runRecoveryMatrix(kind) {
   caseName=`${kind}/${shape}/${route}`;step=0;const beforeChecks=checks.length;
   const b=SimulationBuilder.new({stacksNodeAPI:NODE}),plan=[];appendJingStack(b,plan,sourceHashes,forkBlock);sid=await b.run();console.log('View: https://stxer.xyz/simulations/mainnet/'+sid);
   const first=await getSimulationResult(sid);for(let i=0;i<plan.length;i++){step++;check(plan[i].label,decode(first.steps[i].Result),plan[i].want??ok);}
-  // The shared Juice vault trait is already deployed on mainnet; impl-trait
-  // and the pool's real dynamic call verify its zero-argument recovery ABI.
+  // Juice vault trait v2 is not on mainnet yet: it is deployed first below;
+  // impl-trait and the pool's real dynamic call verify its zero-argument recovery ABI.
   if(city)await deploy('ccd015-redemption-book-mia-stx',resolve(root,'contracts/extensions/ccd015-redemption-book-mia-stx.clar'));
   // Juice: repo sources under the fork names, only the names rewritten; both hashes recorded.
   if(juice){const v=juiceSource('juice-sbtc-autoswap',vaultPath),q=juiceSource('juice-pool-sbtc-signer',poolPath);
    sourceHashes['juice-sbtc-autoswap']=v.repoSha256;sourceHashes['juice-pool-sbtc-signer']=q.repoSha256;
+   const t=traitSource();await deploy(t.name,null,t.source);
    await deploy(v.name,null,v.source);await deploy(q.name,null,q.source);}
   else await deploy(name,vaultPath);
   if(!city){if(!juice)await deploy(pool.split('.')[1],poolPath);}

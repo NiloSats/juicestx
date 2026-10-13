@@ -8,7 +8,8 @@ replacements={"'SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v
 files={p.stem:p.read_text() for p in (here/'fixtures').glob('*.clar') if p.stem!='pool-emergency-wrappers'}
 files['mock-signer-trait']='(define-trait signer-manager-trait ((validate-stake! (principal uint uint uint uint bool (optional (buff 500))) (response bool uint))))'
 hashes={}
-files['juice-swap-vault-trait']=(root/'contracts/pox-5/juice-swap-vault-trait.clar').read_text();hashes['juice-swap-vault-trait']=hashlib.sha256(files['juice-swap-vault-trait'].encode()).hexdigest()
+for n in ['juice-swap-vault-trait','juice-swap-vault-trait-v2']:
+ files[n]=(root/f'contracts/pox-5/{n}.clar').read_text();hashes[n]=hashlib.sha256(files[n].encode()).hexdigest()
 for n in ['juice-pool-sbtc-signer','juice-sbtc-autoswap']:
  s=(root/f'contracts/pox-5/{n}.clar').read_text();hashes[n]=hashlib.sha256(s.encode()).hexdigest();files[n]=s
 for n,s in files.items():

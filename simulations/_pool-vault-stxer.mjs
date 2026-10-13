@@ -1,5 +1,5 @@
 import {appendJingStack} from './_jing-v6-3.mjs';
-import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock} from './_juice-fork.mjs';
+import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 import {withVaultArgument} from './_pool-vault-interface.mjs';
 // Shared fork runner; exact production pool/vault sources are deployed unchanged.
 import { createHash } from 'node:crypto';
@@ -37,6 +37,7 @@ export async function runPoolVaultFork({kind,poolSource,vaultSource,resultDirect
   builder.addContractDeploy({contract_name:name,source_code:source,clarity_version:ClarityVersion.Clarity6});plan.push({label:j?`deploy ${name} (repo source, names only rewritten)`:`deploy unchanged ${name}`,kind:'deploy'});};
  const call=(label,id,fn,args,want,sender=STRANGER)=>{if (/^deposit-token-[xy]$/.test(fn)&&args.length===6)args=args.filter((_,i)=>i!==3);builder.addContractCall({contract_id:id,function_name:fn,function_args:withVaultArgument(pid,vid,id,fn,args,Cl),sender});plan.push({label,kind:'tx',want});};
  const ev=(label,id,code,want)=>{builder.addEvalCode(id,code);plan.push({label,kind:'eval',want});};
+ if(kind==='juice'){const t=traitSource(sourceHashes);builder.addContractDeploy({contract_name:t.name,source_code:t.source,clarity_version:ClarityVersion.Clarity6});plan.push({label:`deploy ${t.name} (repo source, new trait)`,kind:'deploy'});}
  deploy(vault,vaultSource);deploy(pool,poolSource);
  ev('real PoX-5 cycle',POX,'(current-pox-reward-cycle)',v=>/^u\d+$/.test(v));
  ev('vault clock initially clear',vid,'(get-clock)',v=>v.includes('(batch-start none)')&&v.includes('(window-open false)'));
@@ -121,6 +122,7 @@ export async function runPoolVaultLifecycle({kind,poolSource,vaultSource,resultD
  const ev=(label,id,code,want)=>{builder.addEvalCode(id,code);plan.push({label,kind:'eval',want});};
  const advance=(n)=>{builder.addAdvanceBlocks({bitcoin_blocks:n,stacks_blocks_per_bitcoin:1,bitcoin_interval_secs:1});plan.push({label:`advance ${n} burn blocks, compressed timestamps`,kind:'advance'});};
  const ok=v=>v.startsWith('(ok');
+ if(kind==='juice'){const t=traitSource(sourceHashes);builder.addContractDeploy({contract_name:t.name,source_code:t.source,clarity_version:ClarityVersion.Clarity6});plan.push({label:`deploy ${t.name} (repo source, new trait)`,kind:'deploy'});}
  deploy(vault,vaultSource);deploy(pool,poolSource);
  const FUND=100000;
  call('fund real PoX sBTC balance (fork only)',SBTC,'transfer',[Cl.uint(FUND),Cl.principal(WHALE),Cl.principal(POX),Cl.none()],'(ok true)',WHALE);

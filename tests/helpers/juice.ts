@@ -138,7 +138,7 @@ export function principalsList(...who: string[]) {
 // lie (finish reports STX it never sends). Used to reach the pool's vault
 // upgrade and transfer-mismatch guards.
 export const FAKE_VAULT_SOURCE = `
-(impl-trait .juice-swap-vault-trait.swap-vault-trait)
+(impl-trait .juice-swap-vault-trait-v2.swap-vault-trait)
 (define-data-var pool-p principal .juice-pool-sbtc-signer)
 (define-data-var start (optional uint) none)
 (define-data-var resting uint u0)

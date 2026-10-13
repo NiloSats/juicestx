@@ -18,7 +18,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { appendJingStack } from './_jing-v6-3.mjs';
-import { POOL_NAME, VAULT_NAME, juiceSource, juiceForkBlock } from './_juice-fork.mjs';
+import { POOL_NAME, VAULT_NAME, juiceSource, juiceForkBlock, traitSource } from './_juice-fork.mjs';
 import { withVaultArgument } from './_pool-vault-interface.mjs';
 
 const directory = dirname(fileURLToPath(import.meta.url));
@@ -103,6 +103,9 @@ const stakeUpdate = (label, who, increase, want = ok) => call(label, POX, 'stake
   [Cl.contractPrincipal(DEP, POOL_NAME), Cl.contractPrincipal(DEP, POOL_NAME), Cl.uint(0), Cl.uint(increase), Cl.none()], want, who);
 
 // -- 1. contracts --------------------------------------------------------------
+const trait = traitSource(sourceHashes);
+builder.addContractDeploy({ contract_name: trait.name, source_code: trait.source, clarity_version: ClarityVersion.Clarity6 });
+plan.push({ label: `deploy ${trait.name} (repo source, new trait)`, kind: 'deploy' });
 for (const repoName of ['juice-sbtc-autoswap', 'juice-pool-sbtc-signer']) {
   const j = juiceSource(repoName, resolve(directory, `../contracts/pox-5/${repoName}.clar`), sourceHashes);
   builder.addContractDeploy({ contract_name: j.name, source_code: j.source, clarity_version: ClarityVersion.Clarity6 });

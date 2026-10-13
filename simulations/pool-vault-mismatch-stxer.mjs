@@ -9,7 +9,7 @@ import { createRequire } from 'node:module';
 const { Cl } = createRequire(import.meta.url)('@stacks/transactions');
 
 const FAKE_NAME = 'juice-fake-vault', FAKE = `${DEP}.${FAKE_NAME}`;
-const FAKE_SRC = `(impl-trait '${DEP}.juice-swap-vault-trait.swap-vault-trait)
+const FAKE_SRC = `(impl-trait '${DEP}.juice-swap-vault-trait-v2.swap-vault-trait)
 ;; Test double: sends \`send\` uSTX to the pool on finish but reports \`report\`.
 (define-data-var send uint u0)
 (define-data-var report uint u0)
@@ -31,6 +31,7 @@ const FAKE_SRC = `(impl-trait '${DEP}.juice-swap-vault-trait.swap-vault-trait)
 (define-public (set-dia-band-bps (v uint)) (ok true))
 (define-public (set-router-cooldown (v uint)) (ok true))
 (define-public (set-no-pyth-slippage-bps (v uint)) (ok true))
+(define-public (set-pyth-fee-budget (v uint)) (ok true))
 (define-public (jing-take (a uint) (u (buff 8192)))
   (ok { notification: "x", payload: { amount: u0, limit-price: u0, out: u0 } }))
 (define-public (router-swap-split (a uint) (b uint) (c uint) (d uint) (e uint) (u (buff 8192)))

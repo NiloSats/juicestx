@@ -13,7 +13,7 @@ const NODE=process.env.STACKS_API_URL||'http://77.42.3.101/stacks-api',API=proce
 const nativeMode=process.argv.includes('--native');
 (async()=>{
 const {withVaultArgument}=await import('./_pool-vault-interface.mjs');
-const {POOL_ID:POOL,VAULT_ID:VAULT,VAULT_NAME,juiceSource,juiceForkBlock}=await import('./_juice-fork.mjs');
+const {POOL_ID:POOL,VAULT_ID:VAULT,VAULT_NAME,juiceSource,juiceForkBlock,traitSource}=await import('./_juice-fork.mjs');
 const tipResp=await fetch(NODE+'/extended/v1/block?limit=1',{signal:AbortSignal.timeout(20000)});
 if(!tipResp.ok)throw Error('tip '+tipResp.status);
 const tip=(await tipResp.json()).results[0];
@@ -24,6 +24,7 @@ const plan=[],sourceHashes={};
 const ev=(label,id,code)=>{b.addEvalCode(id,code);plan.push({label,kind:'eval'});};
 const call=(label,id,fn,args,sender=DEP)=>{b.addContractCall({contract_id:id,function_name:fn,function_args:withVaultArgument(POOL,VAULT,id,fn,args,Cl),sender});plan.push({label,kind:'tx'});};
 // Repo sources under the fork names; only the contract names are rewritten (sourceHashes keeps both hashes).
+{const t=traitSource(sourceHashes);b.addContractDeploy({contract_name:t.name,source_code:t.source,clarity_version:ClarityVersion.Clarity6});plan.push({label:'deploy local '+t.name+' (new trait)',kind:'tx'});}
 for(const repoName of ['juice-sbtc-autoswap','juice-pool-sbtc-signer']){const {name,source}=juiceSource(repoName,base+'/contracts/pox-5/'+repoName+'.clar',sourceHashes);
 b.addContractDeploy({contract_name:name,source_code:source,clarity_version:ClarityVersion.Clarity6});plan.push({label:'deploy local '+name+' (names only rewritten)',kind:'tx'});}
 ev('raw DIA STX/USD',VAULT,`(contract-call? '${DIA} get-value "STX/USD")`);

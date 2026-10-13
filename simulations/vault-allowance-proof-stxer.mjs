@@ -24,7 +24,7 @@
 //
 // Run: PYTH_API_KEY=... node simulations/vault-allowance-proof-stxer.mjs
 import {appendJingStack,fetchLazerUpdateAny,lazerFeedTimes} from './_jing-v6-3.mjs';
-import {POOL_ID,VAULT_ID,juiceSource,juiceForkBlock} from './_juice-fork.mjs';
+import {POOL_ID,VAULT_ID,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
@@ -87,7 +87,8 @@ const forkBlock=await juiceForkBlock(NODE);
 const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[];
 appendJingStack(builder,plan,sourceHashes,forkBlock);
-for(const [name,src] of [[newVault.name,newSource],[newPool.name,newPool.source],['juice-sbtc-autoswap-oldallow',oldSource]]){
+const trait=traitSource(sourceHashes);
+for(const [name,src] of [[trait.name,trait.source],[newVault.name,newSource],[newPool.name,newPool.source],['juice-sbtc-autoswap-oldallow',oldSource]]){
  builder.withSender(DEP).addContractDeploy({contract_name:name,source_code:src,clarity_version:ClarityVersion.Clarity6});plan.push({label:`deploy ${name}`,kind:'deploy'});
 }
 const bcall=(label,sender,id,fn,args,want)=>{builder.withSender(sender).addContractCall({contract_id:id,function_name:fn,function_args:args});plan.push({label,kind:'tx',want});};

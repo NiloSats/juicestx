@@ -12,7 +12,7 @@ when the amended pool version is deployed.
 ## Upgrade sequence
 
 1. Later, deploy a new vault that implements
-   [juice-swap-vault-trait](juice-swap-vault-trait.clar) and binds its `POOL` to this
+   [juice-swap-vault-trait-v2](juice-swap-vault-trait-v2.clar) and binds its `POOL` to this
    exact rewards pool address. It must have no batch clock or resting/parked
    market positions. Donated STX/sBTC balances are allowed. The admin chooses/trusts the implementation; trait compatibility
    and a reported pool address do not constitute an audit of that implementation.
@@ -51,7 +51,7 @@ functions now take the **active vault as their last argument**:
 - `refloor-vault(update, vault)` and `jing-take(amount, update, vault)`
 - `router-swap-split(amount, jing, dlmm, xyk, velar, update, vault)`
 - `router-swap-split-dia(amount, dlmm, xyk, velar, vault)`
-- all seven `set-vault-*` controls, e.g. `set-vault-window-blocks(blocks, vault)`
+- all eight `set-vault-*` controls, e.g. `set-vault-window-blocks(blocks, vault)`
 
 Each checks `(contract-of vault)` against the stored address before making any
 external call. A stale/wrong target returns `u119`. Callers should read
@@ -66,7 +66,7 @@ The existing vault adds `get-upgrade-status`, a read-only response containing
 `pool`, `empty`, `sbtc-balance`, `stx-balance`, `batch-start`, `jing-resting`, and
 `jing-parked`. Its pricing,
 routing, cooldown and recovery logic are unchanged. It explicitly implements
-the new trait. Initial deployment order: trait, existing vault, amended pool.
+the new trait. Initial deployment order: trait-v2, existing vault, amended pool.
 The future replacement can be deployed at any compatible contract address; it
 does not need the original vault's name or deployer.
 
@@ -122,6 +122,14 @@ Comparing Clarity tokens before/after (ignoring whitespace and optional commas)
 confirmed identical executable content. Backend deployment templates match the
 formatted source byte for byte and use Clarity 6, account index 0. Deployment order
 is trait, vault, rewards pool; wait for each transaction to confirm before the next.
+
+Launch deploy order (current sources):
+
+1. `juice-swap-vault-trait-v2` (new, deploy first: v1 is already on mainnet and can't gain `set-pyth-fee-budget`)
+2. `juice-sbtc-autoswap` (implements trait-v2)
+3. `juice-pool-sbtc-signer` (takes trait-v2 vault arguments)
+
+`juice-swap-vault-trait` (v1) stays as deployed; Fast Pool vaults implement v1 and stay on it.
 [Curl commands and fees](https://github.com/Rapha-btc/faktory-dao/blob/master/backend/docs/juice-stx-rewards-deployment.md)
 are recorded in the backend repository.
 
