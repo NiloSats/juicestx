@@ -2,6 +2,8 @@
 
 Audit of `juice-sbtc-autoswap` and `juice-pool-sbtc-signer` at `f1615d0`, sent privately by apeir (https://apeir.dk/online/). Each finding below gets a verdict and what changed.
 
+**Paid:** 3,000 sats sBTC to apeir (`SP3BB5BATNP0M9B7H9PW2NQBX3EW1T63Q1HV56H0A`) on 2026-10-13, as a thank-you for the report and for disclosing the live `juice-pool-stx-signer` issue privately. Tx [`78608202`](https://explorer.hiro.so/txid/78608202ee201c861981b56b360452cf17ec8e46ae2c348fcb3734fc7ed9771f?chain=mainnet), memo `apeir audit juicestx`.
+
 | ID | Verdict | Status |
 |---|---|---|
 | M-1 | Holds | Fixed |
