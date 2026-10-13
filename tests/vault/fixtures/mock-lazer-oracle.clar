@@ -16,6 +16,16 @@
 ;; stxer harnesses against the real oracle.
 (define-data-var mid uint u32000000000000)
 
+;; Per-update fee in uSTX, charged to tx-sender on every verify like the live
+;; SPMV5...pyth-lazer-oracle (default u0, so nothing changes unless a test sets it).
+(define-data-var fee uint u0)
+;; the oracle itself collects: no test account is both payer and recipient
+(define-data-var fee-recipient principal current-contract)
+
+(define-public (set-fee (f uint))
+  (ok (var-set fee f))
+)
+
 (define-read-only (get-mid)
   (var-get mid)
 )
@@ -65,6 +75,10 @@
   )
   (let ((ts (* stacks-block-time u1000000)))
     (asserts! true (err u0))
+    (if (> (var-get fee) u0)
+      (try! (stx-transfer? (var-get fee) tx-sender (var-get fee-recipient)))
+      true
+    )
     (ok {
       timestamp: ts,
       channel: u0,

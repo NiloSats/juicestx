@@ -1,0 +1,211 @@
+{
+  "id": "5391538d177152e6b33190bf114c76d0",
+  "url": "https://stxer.xyz/simulations/mainnet/5391538d177152e6b33190bf114c76d0",
+  "block": 9200798,
+  "proofTimestamp": 1791933138,
+  "sourceHashes": {
+    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
+    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
+    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "swap-router-sbtc-stx-jing-v5-3": "55239afe46852df5bcc6d4c00b3b668c49336b099dfc494dc2e98ba78645961c",
+    "juice-sbtc-autoswap": "fe12208c32a005e47924c4026553fe1be50898bea04df40d703254af19e04ec0",
+    "juice-pool-sbtc-signer": "935265f5e6f7d974a711d114b8ab59f0a7ee978466adbf88e70733484c2e2699"
+  },
+  "fixtures": [
+    "live oracle fee var-set to u10 by Eval",
+    "PoX earned rewards and 1:3 shares seeded with Eval",
+    "vault clock aged by 288 blocks"
+  ],
+  "checks": [
+    {
+      "label": "deploy exact jing-core-v6",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact jing-ladder-v1",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact markets-sbtc-stx-jing-v6-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact swap-router-sbtc-stx-jing-v5-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing sync-seat-count",
+      "passed": true,
+      "actual": "(ok u10)"
+    },
+    {
+      "label": "Jing set-verified-contract",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing initialize",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-sbtc-autoswap (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-pool-sbtc-signer (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "vault config starts with pyth-fee-budget u0",
+      "passed": true,
+      "actual": "(tuple (dia-band-bps u1000) (last-router-swap u0) (leeway-bps u500) (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (max-chunk-sats u1000000) (no-pyth-slippage-bps u1000) (pool SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (pyth-fee-budget u0) (recovery-delay-blocks u432) (router SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.swap-router-sbtc-stx-jing-v5-3) (router-cooldown-blocks u1) (slippage-bps u100) (window-blocks u288))"
+    },
+    {
+      "label": "outsider cannot set the budget on the vault",
+      "passed": true,
+      "actual": "(err u16000)"
+    },
+    {
+      "label": "non-admin cannot set the budget through the pool",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "budget above 10 STX refused",
+      "passed": true,
+      "actual": "(err u16033)"
+    },
+    {
+      "label": "fund real PoX sBTC balance (fork only)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: crystallized PoX rewards and 1:3 shares",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "real PoX claim flows to vault",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))"
+    },
+    {
+      "label": "fixture: patience clock elapsed",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "real STX maker bid so the router fills on Jing",
+      "passed": true,
+      "actual": "(ok u286324561)"
+    },
+    {
+      "label": "fixture: live oracle fee set to u10 (Eval in oracle context)",
+      "passed": true,
+      "actual": "u10"
+    },
+    {
+      "label": "caller holds STX for its own refresh-mid fee",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "vault STX float 1000 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "budget 0: router-swap aborts on the with-stx allowance",
+      "passed": true,
+      "actual": "(err u1)"
+    },
+    {
+      "label": "nothing sold under budget 0",
+      "passed": true,
+      "actual": "(ok u100000)"
+    },
+    {
+      "label": "set budget u10 (one fee)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "one-fee budget aborts too: a Jing fill verifies twice",
+      "passed": true,
+      "actual": "(err u1)"
+    },
+    {
+      "label": "admin sets budget u100 through the pool",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "config reads pyth-fee-budget u100",
+      "passed": true,
+      "actual": "(tuple (dia-band-bps u1000) (last-router-swap u0) (leeway-bps u500) (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (max-chunk-sats u1000000) (no-pyth-slippage-bps u1000) (pool SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (pyth-fee-budget u100) (recovery-delay-blocks u432) (router SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.swap-router-sbtc-stx-jing-v5-3) (router-cooldown-blocks u1) (slippage-bps u100) (window-blocks u288))"
+    },
+    {
+      "label": "vault STX before the sale",
+      "passed": true,
+      "actual": "u1000"
+    },
+    {
+      "label": "oracle fee recipient",
+      "passed": true,
+      "actual": "SPMV5HDZ4EMB8XY7HAYT3XW0DF7DZ4E8XEG2J1T8"
+    },
+    {
+      "label": "router-swap sells the whole batch with the budget set",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u18897421134421) (mid u19088304176183) (out u190310754) (unsold u0)))))"
+    },
+    {
+      "label": "vault STX after the sale",
+      "passed": true,
+      "actual": "u190311754"
+    },
+    {
+      "label": "vault sold out",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "finalize attributes the STX to the pool",
+      "passed": true,
+      "actual": "(ok u190311754)"
+    },
+    {
+      "label": "vault paid exactly 2 x 10 uSTX to the fee recipient",
+      "passed": true,
+      "actual": "vault fees [10,10] to SPMV5HDZ4EMB8XY7HAYT3XW0DF7DZ4E8XEG2J1T8"
+    },
+    {
+      "label": "caller paid its own refresh-mid fee (1 x 10)",
+      "passed": true,
+      "actual": "caller fees [10]"
+    },
+    {
+      "label": "router out is net of the vault fees (vault STX delta = out)",
+      "passed": true,
+      "actual": "delta 190310754, out 190310754"
+    },
+    {
+      "label": "finalize passes the whole STX balance (float + out)",
+      "passed": true,
+      "actual": "(ok u190311754) vs 190311754"
+    },
+    {
+      "label": "the sale went through the Jing leg (market verified inside the vault)",
+      "passed": true,
+      "actual": "jing-in 100000"
+    }
+  ]
+}

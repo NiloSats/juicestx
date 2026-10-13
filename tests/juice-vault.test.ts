@@ -1,10 +1,10 @@
 // juice-sbtc-autoswap: settings, batch clock, Jing book, router sales,
 // oracle guards and emergency recovery, driven through the pool.
 import { describe, expect, it } from "vitest";
-import { Cl } from "@stacks/transactions";
+import { Cl, cvToString } from "@stacks/transactions";
 import {
   MID, POOL, POOL_ID, REWARD_SATS, REWARD_STX, VAULT, VAULT_ID, admin, alice, batchOpen, bob,
-  call, claim, clock, cp, expectErr, expectOk, fundRouter, okValue, pool, read,
+  call, claim, clock, cp, deployFakeVault, expectErr, expectOk, fundRouter, okValue, pool, read,
   readStr, readyToFinish, sbtc, stake, stx, vault, UPDATE,
 } from "./helpers/juice";
 
@@ -32,6 +32,7 @@ describe("settings", function () {
     ["dia-band-bps", 1000, 5000, false],
     ["router-cooldown", 1, 144, false],
     ["no-pyth-slippage-bps", 1000, 5000, false],
+    ["pyth-fee-budget", 0, 10_000_000, false],
   ];
 
   for (const [name, value, max, positive] of SETTERS) {
@@ -56,6 +57,7 @@ describe("settings", function () {
   it("pool wrappers refuse an inactive vault (u119)", function () {
     // act + assert
     expectErr(pool("set-vault-window-blocks", [Cl.uint(1)], admin, "fastpool-swap-vault"), 119);
+    expectErr(pool("set-vault-pyth-fee-budget", [Cl.uint(1)], admin, deployFakeVault()), 119);
   });
 
   it("config and upgrade status read back", function () {
@@ -539,5 +541,96 @@ describe("emergency-recover (vault side)", function () {
     expectErr(r, 16043);
     expect(marketDeposit()).toBe(position);
     expect(batchOpen()).toBe(true);
+  });
+});
+
+// The live Lazer oracle charges its fee to tx-sender. Inside the vault's
+// as-contract? blocks that is the vault, so the fee must fit the STX
+// allowance (pyth-fee-budget) and the vault must hold the STX.
+// A Jing fill through the v6-3 market verifies twice (swap entry and
+// settle-with-refresh), so a router sale needs a budget of 2 x fee; the
+// v6-market fixture's swap verifies once, so jing-take needs 1 x fee here.
+// Both failures read (err u1): an over-allowance as-contract? names the
+// with-stx allowance (index 1); a short balance is stx-transfer?'s u1.
+describe("Pyth fee budget (oracle fee > 0)", function () {
+  const FEE = 10;
+  const split = [Cl.uint(500_000), Cl.uint(100_000), Cl.uint(100_000), Cl.uint(100_000), Cl.uint(200_000), UPDATE];
+
+  function feeOn(float = 1_000) {
+    expectOk(call("mock-lazer-oracle", "set-fee", [Cl.uint(FEE)]));
+    if (float > 0) expectOk({ result: simnet.transferSTX(float, VAULT_ID, admin).result });
+  }
+
+  it("set-pyth-fee-budget: pool only, bounded at 10 STX, read back in get-config", function () {
+    // act + assert
+    expectErr(vault("set-pyth-fee-budget", [Cl.uint(100)], admin), 16000);
+    expectErr(pool("set-vault-pyth-fee-budget", [Cl.uint(100)], alice), 100);
+    expectErr(pool("set-vault-pyth-fee-budget", [Cl.uint(10_000_001)]), 16033);
+    expect(readStr(VAULT, "get-config")).toContain("(pyth-fee-budget u0)");
+    const r = pool("set-vault-pyth-fee-budget", [Cl.uint(100)]);
+    expectOk(r);
+    expect(r.events.some(function (e: any) { return e.data?.value && cvToString(e.data.value).includes('"set-pyth-fee-budget"'); })).toBe(true);
+    expect(readStr(VAULT, "get-config")).toContain("(pyth-fee-budget u100)");
+  });
+
+  it("router-swap: budget 0 or under 2 x fee aborts, 2 x fee with an STX float sells", function () {
+    // arrange
+    fundRouter();
+    openBatch();
+    feeOn();
+    simnet.mineEmptyBurnBlocks(288);
+    // act + assert: under the budget nothing moves
+    expectErr(vault("router-swap", [UPDATE]), 1);
+    expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE - 1)]));
+    expectErr(vault("router-swap", [UPDATE]), 1);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE)]));
+    expectOk(vault("router-swap", [UPDATE]));
+    expect(sbtc(VAULT_ID)).toBe(0n);
+    expect(stx(VAULT_ID)).toBe(REWARD_STX + 1_000n - BigInt(2 * FEE));
+  });
+
+  it("router-swap: a budget without an STX float still aborts", function () {
+    // arrange
+    fundRouter();
+    openBatch();
+    feeOn(0);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(100)]));
+    simnet.mineEmptyBurnBlocks(288);
+    // act + assert
+    expectErr(vault("router-swap", [UPDATE]), 1);
+    expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
+  });
+
+  it("router-swap-split: budget 0 or one fee aborts, 2 x fee sells", function () {
+    // arrange
+    fundRouter();
+    openBatch();
+    feeOn();
+    simnet.mineEmptyBurnBlocks(288);
+    // act + assert
+    expectErr(pool("router-swap-split", split), 1);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
+    expectErr(pool("router-swap-split", split), 1);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE)]));
+    expectOk(pool("router-swap-split", split));
+    expect(sbtc(VAULT_ID)).toBe(500_000n);
+  });
+
+  it("jing-take: budget 0 aborts, budget >= fee fills on the book", function () {
+    // arrange: bob bids STX on the book (bob pays his own verify fee)
+    openBatch();
+    expectOk(call("v6-market", "deposit-token-y", [Cl.uint(4_000_000_000n), Cl.uint(MID), Cl.some(Cl.uint(0)), UPDATE, ...MOCK_FT], bob));
+    feeOn();
+    expectOk(pool("set-vault-max-chunk-sats", [Cl.uint(5_000_000)]));
+    simnet.mineEmptyBurnBlocks(288);
+    // act + assert
+    expectErr(pool("jing-take", [Cl.uint(1), UPDATE]), 1);
+    expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
+    const before = stx(VAULT_ID);
+    const out = okValue(pool("jing-take", [Cl.uint(1), UPDATE])).value.payload.value.out.value as bigint;
+    expect(stx(VAULT_ID) - before).toBe(out - BigInt(FEE));
+    expect(sbtc(VAULT_ID)).toBe(0n);
   });
 });

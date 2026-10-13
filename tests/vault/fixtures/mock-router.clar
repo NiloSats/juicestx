@@ -35,6 +35,18 @@
           (try! (stx-transfer? out current-contract taker))))
         (ok { out: out, unsold: u0 })))))
 
+;; The real router's Jing leg hands `update` to the v6-3 market, whose `swap`
+;; verifies it twice (at entry and again in settle-with-refresh), each time
+;; charging the oracle fee to the caller. Mirror that: a supplied update is
+;; verified twice through the mock oracle.
+(define-private (verify (update (optional (buff 8192))))
+  (match update
+    u (begin
+      (try! (contract-call? .mock-lazer-oracle verify-price-feeds u .mock-lazer-oracle none))
+      (try! (contract-call? .mock-lazer-oracle verify-price-feeds u .mock-lazer-oracle none))
+      (ok true))
+    (ok true)))
+
 (define-public (smart-swap-sbtc-for-stx
     (amount uint)
     (limit-price uint)
@@ -42,7 +54,7 @@
     (mid uint)
     (min-stx-out uint)
   )
-  (sell amount min-stx-out))
+  (begin (try! (verify update)) (sell amount min-stx-out)))
 
 (define-public (swap-sbtc-for-stx
     (amount uint)
@@ -54,4 +66,4 @@
     (amm-mins { dlmm: uint, xyk: uint, velar: uint })
     (min-stx-out uint)
   )
-  (sell amount min-stx-out))
+  (begin (try! (verify update)) (sell amount min-stx-out)))

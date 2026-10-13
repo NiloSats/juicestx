@@ -56,7 +56,7 @@ const eventChecks={
  [`${J}.withdraw-sbtc-fees`]:['withdraw-sbtc-fees'],
  [`${J}.refloor-vault`]:['jing-refloor'],
 };
-for(const setting of ['window-blocks','leeway-bps','slippage-bps','max-chunk-sats','dia-band-bps','router-cooldown']){
+for(const setting of ['window-blocks','leeway-bps','slippage-bps','max-chunk-sats','dia-band-bps','router-cooldown','pyth-fee-budget']){
  eventChecks[`${J}.set-vault-${setting}`]=[`set-${setting}`];
 }
 
@@ -65,7 +65,8 @@ ok(sim.transferSTX(Cl.uint(50000000000).value,`${admin}.mock-router`,admin));
 for(const [name,value,max,positive] of [
  ['window-blocks',288,288,false],['leeway-bps',500,1000,false],
  ['slippage-bps',100,1000,false],['max-chunk-sats',5000000,100000000,true],
- ['dia-band-bps',1000,5000,false],['router-cooldown',1,144,false]]){
+ ['dia-band-bps',1000,5000,false],['router-cooldown',1,144,false],
+ ['pyth-fee-budget',0,10000000,false]]){
  err(call(JV,`set-${name}`,[u(value)],admin),16000);
  err(call(J,`set-vault-${name}`,[u(value)]),100);
  err(call(J,`set-vault-${name}`,[u(max+1)],admin),16033);

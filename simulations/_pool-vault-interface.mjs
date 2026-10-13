@@ -4,6 +4,7 @@ export const POOL_VAULT_FUNCTIONS=new Set([
  'set-vault-window-blocks','set-vault-leeway-bps','set-vault-slippage-bps',
  'set-vault-max-chunk-sats','set-vault-dia-band-bps','set-vault-router-cooldown',
  'set-vault-no-pyth-slippage-bps','jing-take','router-swap-split','router-swap-split-dia',
+ 'set-vault-pyth-fee-budget',
 ]);
 export function withVaultArgument(poolId,vaultId,id,fn,args,Cl){
  return id===poolId&&/\.juice-pool-sbtc-signer(-v1)?$/.test(poolId)&&POOL_VAULT_FUNCTIONS.has(fn)

@@ -18,6 +18,13 @@
 )
 
 (use-trait swap-vault-interface .juice-swap-vault-trait.swap-vault-trait)
+;; juice-swap-vault-trait is already deployed and can not gain a method, so
+;; the Pyth fee budget setter has its own one-method trait. The wrapper still
+;; requires the active vault.
+(define-trait pyth-fee-vault-trait ((set-pyth-fee-budget
+  (uint)
+  (response bool uint)
+)))
 
 (define-constant SWAP_VAULT_COOLDOWN u4032)
 (define-constant ERR_NO_PENDING_SWAP_VAULT (err u118))
@@ -1374,6 +1381,21 @@
     (begin
       (try! (assert-admin))
       (contract-call? vault set-no-pyth-slippage-bps bps)
+    )
+  )
+)
+
+(define-public (set-vault-pyth-fee-budget
+    (ustx uint)
+    (vault <pyth-fee-vault-trait>)
+  )
+  (begin
+    (asserts! (is-eq (contract-of vault) (var-get swap-vault))
+      ERR_INVALID_SWAP_VAULT
+    )
+    (begin
+      (try! (assert-admin))
+      (contract-call? vault set-pyth-fee-budget ustx)
     )
   )
 )
