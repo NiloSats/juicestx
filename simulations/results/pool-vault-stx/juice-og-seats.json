@@ -1,0 +1,256 @@
+{
+  "id": "5e77bb7b00dfe081b6988f4d447552e5",
+  "url": "https://stxer.xyz/simulations/mainnet/5e77bb7b00dfe081b6988f4d447552e5",
+  "block": 9200102,
+  "cycle": 145,
+  "sourceHashes": {
+    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
+    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
+    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "swap-router-sbtc-stx-jing-v5-3": "0d2a39eaa8f83910e301bb3b2313cadb9595b551a9f814ad255aadad6cd3a637",
+    "juice-sbtc-autoswap": "754c0f97f308b810763bf76bd505ccf65e72d9c8118bfe9ba408809990fab4bc",
+    "juice-pool-sbtc-signer": "6102ef63116cc3d2fe660e083871d457d18844bc32d837598625220de1768d90"
+  },
+  "checks": [
+    {
+      "label": "deploy exact jing-core-v6",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact jing-ladder-v1",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact markets-sbtc-stx-jing-v6-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact swap-router-sbtc-stx-jing-v5-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing sync-seat-count",
+      "passed": true,
+      "actual": "(ok u10)"
+    },
+    {
+      "label": "Jing set-verified-contract",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing initialize",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-sbtc-autoswap (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-pool-sbtc-signer (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "register the pool as a pox-5 signer (real grant path)",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0289ae98ef160dabee896a413f41e2d0529ed6535cb49ab30d625012b22e670c9e)))"
+    },
+    {
+      "label": "OG status starts empty",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u0) (seats u0))"
+    },
+    {
+      "label": "fund SP3Y74M5… 700 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fund SP19H4R5… 800 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fund SPXW53BD… 600 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "499 STX stake with ?ref=telegram goes through",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u499000000) (first-reward-cycle u146) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP3Y74M5227FDVHREWPH773F5Y1W1ED8WXY3RAVG4) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "499 STX takes a seat: no minimum",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "covers 499 STX",
+      "passed": true,
+      "actual": "u499000000"
+    },
+    {
+      "label": "top-up +100 STX (position 599)",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u100000000) (amount-ustx u599000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (prev-unlock-height u242) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP3Y74M5227FDVHREWPH773F5Y1W1ED8WXY3RAVG4) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "top-up grows the seat to 599 (pox-5 passes the new total)",
+      "passed": true,
+      "actual": "u599000000"
+    },
+    {
+      "label": "600 STX stake takes a seat",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u600000000) (first-reward-cycle u146) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP19H4R5A58CSW8MCADYZMGP85FN2RZ0Z9Q7AQ9Y1) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "600 STX staker is an OG",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "covers exactly 600 STX",
+      "passed": true,
+      "actual": "u600000000"
+    },
+    {
+      "label": "OG top-up +100 STX",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u100000000) (amount-ustx u700000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (prev-unlock-height u242) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP19H4R5A58CSW8MCADYZMGP85FN2RZ0Z9Q7AQ9Y1) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "top-up grows the seat to 700",
+      "passed": true,
+      "actual": "u700000000"
+    },
+    {
+      "label": "2 seats, 1,299 STX covered",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1299000000) (seats u2))"
+    },
+    {
+      "label": "propose 5% fee",
+      "passed": true,
+      "actual": "(ok u500)"
+    },
+    {
+      "label": "fee cooldown: advance 144 burn blocks -> cycle offset 904",
+      "passed": true,
+      "actual": "ok"
+    },
+    {
+      "label": "confirm 5% fee",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fund real PoX sBTC balance (fork only)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: earned rewards, shares OG1 1000 STX / PAYER 1000 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "pool claims the sBTC into the vault",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))"
+    },
+    {
+      "label": "vault rests the sBTC on Jing",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18685020612131)))))"
+    },
+    {
+      "label": "set chunk cap 50k",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: patience window elapsed",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "reclaim from Jing",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"jing-reclaim\") (payload (tuple (amount u100000)))))"
+    },
+    {
+      "label": "widen slippage to 10% for live AMM prices",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "router sells chunk 1",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17701598474650) (mid u19668442749612) (out u96425447) (unsold u0)))))"
+    },
+    {
+      "label": "router cooldown: advance 1 burn blocks -> cycle offset 905",
+      "passed": true,
+      "actual": "ok"
+    },
+    {
+      "label": "router sells chunk 2",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17701598474650) (mid u19668442749612) (out u95844357) (unsold u0)))))"
+    },
+    {
+      "label": "finalize: the STX pot",
+      "passed": true,
+      "actual": "(ok u192269804)"
+    },
+    {
+      "label": "OG1 owed (net view)",
+      "passed": true,
+      "actual": "u94692879"
+    },
+    {
+      "label": "PAYER owed (net view)",
+      "passed": true,
+      "actual": "u91328157"
+    },
+    {
+      "label": "pay-stx-stakers pays both",
+      "passed": true,
+      "actual": "(ok u186021036)"
+    },
+    {
+      "label": "earned fees",
+      "passed": true,
+      "actual": "u6248768"
+    },
+    {
+      "label": "?ref=telegram printed on-chain in validate-stake",
+      "passed": true,
+      "actual": "(tuple (added-ustx u499000000) (covered-ustx u499000000) (seats u1) (staker SP3Y74M5227FDVHREWPH773F5Y1W1ED8WXY3RAVG4) (topic \"og-seat\")) | (tuple (amount-sats u0) (amount-ustx u499000000) (first-index u146) (is-bond false) (num-indexes u96) (signer-calldata (some 0x74656c656772616d)) (staker SP3Y74"
+    },
+    {
+      "label": "OG1 pays 5% only on the 300 STX above its 700 cover (grown by top-up)",
+      "passed": true,
+      "actual": "u94692879 vs 94692879"
+    },
+    {
+      "label": "PAYER pays the full 5%",
+      "passed": true,
+      "actual": "u91328157 vs 91328157"
+    },
+    {
+      "label": "earned fees = both fees",
+      "passed": true,
+      "actual": "u6248768 vs 6248768"
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "id": "380092db2a5c678c1a7106e0345884dd",
+  "url": "https://stxer.xyz/simulations/mainnet/380092db2a5c678c1a7106e0345884dd",
+  "block": 9200094,
+  "cycle": 145,
+  "sourceHashes": {
+    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
+    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
+    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "swap-router-sbtc-stx-jing-v5-3": "0d2a39eaa8f83910e301bb3b2313cadb9595b551a9f814ad255aadad6cd3a637",
+    "juice-sbtc-autoswap": "754c0f97f308b810763bf76bd505ccf65e72d9c8118bfe9ba408809990fab4bc",
+    "juice-pool-sbtc-signer": "6102ef63116cc3d2fe660e083871d457d18844bc32d837598625220de1768d90"
+  },
+  "checks": [
+    {
+      "label": "deploy exact jing-core-v6",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact jing-ladder-v1",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact markets-sbtc-stx-jing-v6-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact swap-router-sbtc-stx-jing-v5-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing sync-seat-count",
+      "passed": true,
+      "actual": "(ok u10)"
+    },
+    {
+      "label": "Jing set-verified-contract",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing initialize",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-sbtc-autoswap",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-pool-sbtc-signer",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "register the pool as a pox-5 signer",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03b8d22ffedcf592cfdcad13e4d0a71c1ba8dd65824f0223bfb1cdd658ba0c05cb)))"
+    },
+    {
+      "label": "cycle 142 has nothing to claim: pox-5 refuses (u32)",
+      "passed": true,
+      "actual": "(err u32)"
+    },
+    {
+      "label": "cycle 142 untouched",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "fund real PoX sBTC for two cycles (fork only)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: cycle 144 earned 100000 sats over 2 stakers",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: cycle 143 earned 100000 sats over 2 stakers",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "claim 144",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))"
+    },
+    {
+      "label": "claim 143 while 144 is pending (u115)",
+      "passed": true,
+      "actual": "(err u115)"
+    },
+    {
+      "label": "143 claim reverted: no dist cycle recorded",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "143 tranche count still 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "143 rewards still in pox-5",
+      "passed": true,
+      "actual": "u100000"
+    },
+    {
+      "label": "pending swap is still the first claim",
+      "passed": true,
+      "actual": "(some (tuple (reward-cycle u144) (tranche u0)))"
+    },
+    {
+      "label": "settle on unknown stakers and an empty cycle still succeeds",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "settle on real stakers succeeds",
+      "passed": true,
+      "actual": "(ok u5760)"
+    }
+  ]
+}

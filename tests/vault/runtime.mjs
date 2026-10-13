@@ -77,6 +77,10 @@ const split=[u(500000),u(100000),u(100000),u(100000),u(200000),update];
 err(call(JV,'router-swap-split',split,admin),16000);
 err(call(J,'router-swap-split',split),100);
 
+// No OG minimum or deadline: any stake takes a seat while the 2.1M cap has
+// room. Fill the cap first (an unused cycle) so the fee scenarios below see
+// paying stakers; seats are tested on their own further down.
+ok(call('mock-pox','stake-test',[cp(J),cp('og-filler'),u(999),u(2100000000000)]));
 for(const [pool,vault,cycle] of [[J,JV,140],[F,FV,141]]){
  for(const [who,amount] of [[alice,1],[bob,3]])ok(call('mock-pox','stake-test',[cp(pool),Cl.principal(who),u(cycle),u(amount)]));
  err(call(vault,'fund',[u(1)]),16000);
@@ -120,7 +124,9 @@ for(const [pool,vault,cycle] of [[J,JV,140],[F,FV,141]]){
  const a=stx(alice),b=stx(bob);
  if(pool===J){ok(call(pool,'pay-stx-stakers',[Cl.list([Cl.principal(alice),Cl.principal(bob)]),u(cycle),u(0)]));}
  else{ok(call(pool,'distribute-rewards-many',[Cl.list([Cl.principal(alice),Cl.principal(bob)]),u(cycle)]));}
- assert.equal(stx(alice)-a,800000000n);assert.equal(stx(bob)-b,2400000000n);
+ // Juice launches at 4.5% (fee-bips u450): 3,200 STX pot 1:3 -> 764 / 2,292 net.
+ if(pool===J){assert.equal(stx(alice)-a,764000000n);assert.equal(stx(bob)-b,2292000000n);}
+ else{assert.equal(stx(alice)-a,800000000n);assert.equal(stx(bob)-b,2400000000n);}
  const paid=stx(alice);
  if(pool===J)ok(call(pool,'pay-stx-stakers',[Cl.list([Cl.principal(alice)]),u(cycle),u(0)]));
  else err(call(pool,'distribute-rewards',[Cl.principal(alice),u(cycle)]),1001);
@@ -130,7 +136,7 @@ for(const [pool,vault,cycle] of [[J,JV,140],[F,FV,141]]){
 }
 // Maker fill during patience, plus Juice OG exemption and native STX fees.
 for(const [who,amount] of [[alice,1],[bob,3]])ok(call('mock-pox','stake-test',[cp(J),Cl.principal(who),u(142),u(amount)]));
-ok(call(J,'propose-fee-bips',[u(500)],admin));sim.mineEmptyBurnBlocks(144);ok(call(J,'confirm-fee-bips',[],admin));ok(call(J,'set-og',[Cl.principal(alice),Cl.bool(true)],admin));
+ok(call(J,'propose-fee-bips',[u(500)],admin));sim.mineEmptyBurnBlocks(144);ok(call(J,'confirm-fee-bips',[],admin));ok(call(J,'raise-og-cap',[u(2100500000000)],admin));ok(call('mock-pox','stake-test',[cp(J),Cl.principal(alice),u(145),u(500000000)]));
 ok(call(J,'pox-claim-rewards',[Cl.list([]),u(142)]));ok(call(JV,'jing-place',[update]));
 err(call(JV,'jing-refloor',[update]),16000);err(call(J,'refloor-vault',[update]),100);ok(call(J,'refloor-vault',[update],admin));
 ok(call('v6-market','swap',[u(3206412825),u(32000000000000),update,cp('mock-ft'),Cl.stringAscii('mock-ft'),cp('mock-ft'),Cl.stringAscii('mock-ft'),Cl.bool(false)],bob));
@@ -141,8 +147,10 @@ const aliceMaker=makerOut/4n, bobMaker=makerOut*3n/4n, juiceFee=bobMaker/20n;
 let a=stx(alice),b=stx(bob);
 ok(call(J,'pay-stx-stakers',[Cl.list([Cl.principal(alice),Cl.principal(bob)]),u(142),u(0)]));
 assert.equal(stx(alice)-a,aliceMaker);assert.equal(stx(bob)-b,bobMaker-juiceFee);
-assert.equal(read(J,'get-earned-fees').value,juiceFee);
-err(call(J,'withdraw-fees',[u(juiceFee+1n),Cl.principal(admin)],admin),111);
+// Plus 144 STX of launch-rate (4.5%) fees from the first payout scenario.
+const juiceEarned=juiceFee+144000000n;
+assert.equal(read(J,'get-earned-fees').value,juiceEarned);
+err(call(J,'withdraw-fees',[u(juiceEarned+1n),Cl.principal(admin)],admin),111);
 ok(call(J,'withdraw-all-fees',[Cl.principal(admin)],admin));
 console.log('Juice: maker fill during patience, +10bps proceeds, OG exemption and native STX fee withdrawal passed');
 // FastPool fees snapshot survives rate change and late claims do not mix batches.
@@ -489,6 +497,39 @@ const upgradeStatus=ok({result:read(JV,'get-upgrade-status')}).value;
 assert.equal(upgradeStatus.empty.type,'true');
 assert.equal(cvToString(upgradeStatus.pool),cvToString(cp(J)));
 assert.equal(upgradeStatus['batch-start'].type,'none');
+// OG seats: no minimum, no seat limit and no deadline; the cap is the only
+// end. Only by staking in, no revoke. So far: og-filler 2,100,000 + alice 500 =
+// 2 seats filling the 2,100,500 cap; raise it by 20,000 to test seats.
+{
+ const STX=1000000n, w3=accounts.get('wallet_3'), w4=accounts.get('wallet_4'), w5=accounts.get('wallet_5'), w6=cp('og-late'), tiny=cp('og-tiny');
+ const isOg=w=>cvToString(read(J,'is-og',[w.type?w:Cl.principal(w)]))==='true';
+ const status=()=>cvToString(read(J,'get-og-status'));
+ const stake=(w,c,amt)=>ok(call('mock-pox','stake-test',[cp(J),w.type?w:Cl.principal(w),u(c),u(amt)]));
+ stake(w3,147,600n*STX);assert.equal(isOg(w3),false); // cap covered: no seat
+ err(call(J,'raise-og-cap',[u(2120500n*STX)],alice),100);err(call(J,'raise-og-cap',[u(2100500n*STX)],admin),127);
+ ok(call(J,'raise-og-cap',[u(2120500n*STX)],admin));
+ stake(w3,147,600n*STX);assert.equal(isOg(w3),true);
+ assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${600n*STX}`);
+ stake(w3,147,5000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${5000n*STX}`); // top-up grows the seat
+ stake(w3,147,4000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${5000n*STX}`); // never shrinks
+ stake(w6,400,600n*STX);assert.equal(isOg(w6),true); // no deadline
+ stake(tiny,147,1n*STX);assert.equal(isOg(tiny),true); // no minimum
+ for(let i=0;i<25;i++)stake(cp(`og-${i}`),147,500n*STX); // no seat limit
+ assert.ok(status().includes('(seats u30)')&&status().includes(`(covered-ustx u${(2100500n+18101n)*STX})`),status());
+ // The cap clamps the last seat: 250k staked, 1,899 left to cover.
+ stake(w4,147,250000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w4)])),`u${1899n*STX}`);
+ assert.ok(status().includes('(seats u31)')&&status().includes(`(covered-ustx u${2120500n*STX})`),status());
+ stake(w5,147,600n*STX);assert.equal(isOg(w5),false);
+ ok(call(J,'raise-og-cap',[u(2130500n*STX)],admin));
+ stake(w5,147,600n*STX);assert.equal(isOg(w5),true);
+ assert.ok(status().includes(`(cap-ustx u${2130500n*STX})`),status());
+ // Fee only on shares above the cover: 248,101 of 250,000 STX taxed at 500 bp.
+ assert.equal(cvToString(read(J,'get-staker-fee',[Cl.principal(w4),u(250000n*STX),u(1000000),u(500)])),'u49620');
+ assert.equal(cvToString(read(J,'get-staker-fee',[Cl.principal(w3),u(5000n*STX),u(1000000),u(500)])),'u0');
+ assert.equal(cvToString(read(J,'get-staker-fee',[Cl.principal(w5),u(600n*STX),u(1000000),u(500)])),'u0');
+ assert.equal(cvToString(read(J,'get-staker-fee',[cp('og-never'),u(600n*STX),u(1000000),u(500)])),'u50000');
+ console.log('Juice OG seats: stake-in only, no min, top-up grows, no deadline, no seat limit, raise-only cap, cap clamp, partial fee passed');
+}
 const directory=resolve(projectRoot,'tests/vault/results');mkdirSync(directory,{recursive:true});
 const report=sim.collectReport(false,'');
 const vaultRecord=report.coverage.split('end_of_record').find(r=>r.includes('/juice-sbtc-autoswap.clar'));

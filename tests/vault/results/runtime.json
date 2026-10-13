@@ -1,7 +1,7 @@
 {
   "sourceHashes": {
     "juice-swap-vault-trait": "4881086b2a235c8857362c76f265bf1627ea1997c49c2a89b8d85f8920b6bf08",
-    "juice-pool-sbtc-signer": "92b861beb696f1d09336640b086b092c1ca68c631560d50c956b52c699ebf79f",
+    "juice-pool-sbtc-signer": "6102ef63116cc3d2fe660e083871d457d18844bc32d837598625220de1768d90",
     "juice-sbtc-autoswap": "754c0f97f308b810763bf76bd505ccf65e72d9c8118bfe9ba408809990fab4bc"
   },
   "status": "passed",

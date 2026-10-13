@@ -31,10 +31,17 @@ export function juiceSource(repoName,path,sourceHashes={}){
  sourceHashes[repoName]=sha(source);sourceHashes[name]=sha(deployed);
  return {name,source:deployed,repoSha256:sha(source),deployedSha256:sha(deployed)};
 }
-// One fork height for a whole rerun set: JUICE_FORK_BLOCK, else the node tip.
+// One fork height for a whole rerun set: JUICE_FORK_BLOCK, else the newest
+// block at least JUICE_FORK_LAG_SECS (default 600) old. The lag keeps a freshly
+// fetched Lazer update inside the market's 80 s staleness limit after the sims
+// advance ~150 burn blocks (each moves block time 1 s forward).
 export async function juiceForkBlock(node){
  if(process.env.JUICE_FORK_BLOCK)return Number(process.env.JUICE_FORK_BLOCK);
- const r=await fetch(`${node}/extended/v1/block?limit=1`,{signal:AbortSignal.timeout(20000)});
- if(!r.ok)throw new Error(`tip HTTP ${r.status}`);
- return (await r.json()).results[0].height;
+ const get=async(path)=>{const r=await fetch(`${node}${path}`,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error(`${path} HTTP ${r.status}`);return r.json();};
+ const tip=(await get('/extended/v1/block?limit=1')).results[0];
+ const target=Math.floor(Date.now()/1000)-Number(process.env.JUICE_FORK_LAG_SECS??600);
+ if(tip.burn_block_time<=target)return tip.height;
+ let lo=tip.height-5000,hi=tip.height;
+ while(hi-lo>1){const mid=Math.floor((lo+hi)/2);((await get(`/extended/v2/blocks/${mid}`)).block_time<=target)?lo=mid:hi=mid;}
+ return lo;
 }

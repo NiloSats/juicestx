@@ -1,0 +1,641 @@
+{
+  "id": "b14aab7f8ea2936bf2c528e601618832",
+  "url": "https://stxer.xyz/simulations/mainnet/b14aab7f8ea2936bf2c528e601618832",
+  "block": 9200100,
+  "cycle": 145,
+  "sourceHashes": {
+    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
+    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
+    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "swap-router-sbtc-stx-jing-v5-3": "0d2a39eaa8f83910e301bb3b2313cadb9595b551a9f814ad255aadad6cd3a637",
+    "juice-sbtc-autoswap": "754c0f97f308b810763bf76bd505ccf65e72d9c8118bfe9ba408809990fab4bc",
+    "juice-pool-sbtc-signer": "6102ef63116cc3d2fe660e083871d457d18844bc32d837598625220de1768d90"
+  },
+  "checks": [
+    {
+      "label": "deploy exact jing-core-v6",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact jing-ladder-v1",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact markets-sbtc-stx-jing-v6-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact swap-router-sbtc-stx-jing-v5-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing sync-seat-count",
+      "passed": true,
+      "actual": "(ok u10)"
+    },
+    {
+      "label": "Jing set-verified-contract",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing initialize",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-sbtc-autoswap (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-pool-sbtc-signer (repo source)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "register the pool as a pox-5 signer",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0224e02525b99496912983bfa15d1b9b53db4df9f2ee4cb716be225e549ecdd5c0)))"
+    },
+    {
+      "label": "validate-stake! refuses any caller but pox-5 (u102)",
+      "passed": true,
+      "actual": "(err u102)"
+    },
+    {
+      "label": "fund a staker 600 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "outsider cannot pause",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "admin pauses",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "is-paused",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "a real stake into a paused pool is refused (u101)",
+      "passed": true,
+      "actual": "(err u101)"
+    },
+    {
+      "label": "admin resumes",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "the same stake goes through once resumed",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u500000000) (first-reward-cycle u146) (num-cycles u1) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP361P1W3HRW7VTPD1S935RF8PJFMRAF4GJWVT4W9) (unlock-burn-height u974750) (unlock-cycle u147)))"
+    },
+    {
+      "label": "fee starts at the 4.5% launch rate",
+      "passed": true,
+      "actual": "u450"
+    },
+    {
+      "label": "no pending fee",
+      "passed": true,
+      "actual": "(tuple (executable-at u144) (fee none) (proposed-at u0))"
+    },
+    {
+      "label": "fee above the 5% cap refused (u110)",
+      "passed": true,
+      "actual": "(err u110)"
+    },
+    {
+      "label": "outsider cannot propose a fee",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "confirm with nothing pending (u113)",
+      "passed": true,
+      "actual": "(err u113)"
+    },
+    {
+      "label": "propose 3%",
+      "passed": true,
+      "actual": "(ok u300)"
+    },
+    {
+      "label": "pending 3% is visible",
+      "passed": true,
+      "actual": "(tuple (executable-at u971449) (fee (some u300)) (proposed-at u971305))"
+    },
+    {
+      "label": "confirm before 144 blocks refused (u114)",
+      "passed": true,
+      "actual": "(err u114)"
+    },
+    {
+      "label": "outsider cannot cancel",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "admin cancels",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "cancelled fee cannot confirm (u113)",
+      "passed": true,
+      "actual": "(err u113)"
+    },
+    {
+      "label": "propose 5%",
+      "passed": true,
+      "actual": "(ok u500)"
+    },
+    {
+      "label": "fee cooldown: advance 144 burn blocks",
+      "passed": true,
+      "actual": "ok"
+    },
+    {
+      "label": "outsider cannot confirm",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "confirm 5% at 144 blocks",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fee is 5%",
+      "passed": true,
+      "actual": "u500"
+    },
+    {
+      "label": "effective rate for a non-OG",
+      "passed": true,
+      "actual": "u500"
+    },
+    {
+      "label": "fund A 600 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "A stakes 500 STX and takes an OG seat",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u500000000) (first-reward-cycle u146) (num-cycles u1) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP3Y74M5227FDVHREWPH773F5Y1W1ED8WXY3RAVG4) (unlock-burn-height u974750) (unlock-cycle u147)))"
+    },
+    {
+      "label": "A covers 500 STX",
+      "passed": true,
+      "actual": "u500000000"
+    },
+    {
+      "label": "get-staker-fee: A taxed on 500 of 1000 STX",
+      "passed": true,
+      "actual": "u25000"
+    },
+    {
+      "label": "get-staker-fee: B taxed on all",
+      "passed": true,
+      "actual": "u50000"
+    },
+    {
+      "label": "get-staker-fee: zero shares owe nothing",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "fund real PoX sBTC for two cycles (fork only)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: cycle 144 earned 100000 sats, shares A 1000000000 / B 1000000000 / C 7",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "no claim yet for R1",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "R1 tranche count 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "claim R1 into the vault",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))"
+    },
+    {
+      "label": "R1 claim recorded at the current distribution cycle",
+      "passed": true,
+      "actual": "(some u290)"
+    },
+    {
+      "label": "R1 tranche count 1",
+      "passed": true,
+      "actual": "u1"
+    },
+    {
+      "label": "pending swap is R1/0",
+      "passed": true,
+      "actual": "(some (tuple (reward-cycle u144) (tranche u0)))"
+    },
+    {
+      "label": "a second R1 claim in the same distribution cycle (u112)",
+      "passed": true,
+      "actual": "(err u112)"
+    },
+    {
+      "label": "unclaimed signer rewards drained",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "pay before finalize refused (u115)",
+      "passed": true,
+      "actual": "(err u115)"
+    },
+    {
+      "label": "sweep before finalize refused (u115)",
+      "passed": true,
+      "actual": "(err u115)"
+    },
+    {
+      "label": "vault rests the sBTC on Jing",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18664845245932)))))"
+    },
+    {
+      "label": "set chunk cap 50k",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture: patience window elapsed",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "reclaim from Jing",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"jing-reclaim\") (payload (tuple (amount u100000)))))"
+    },
+    {
+      "label": "DEBUG slippage 10%",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "router sells chunk 1",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17682484969830) (mid u19647205522034) (out u96425447) (unsold u0)))))"
+    },
+    {
+      "label": "router cooldown: advance 1 burn blocks",
+      "passed": true,
+      "actual": "ok"
+    },
+    {
+      "label": "router sells chunk 2",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17682484969830) (mid u19647205522034) (out u95844357) (unsold u0)))))"
+    },
+    {
+      "label": "finalize R1",
+      "passed": true,
+      "actual": "(ok u192269804)"
+    },
+    {
+      "label": "get-stx-pot R1/0",
+      "passed": true,
+      "actual": "u192269804"
+    },
+    {
+      "label": "cycle total shares",
+      "passed": true,
+      "actual": "u2000000007"
+    },
+    {
+      "label": "outsider cannot sweep",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "sweep while unpaid refused (u104)",
+      "passed": true,
+      "actual": "(err u104)"
+    },
+    {
+      "label": "pay A and B",
+      "passed": true,
+      "actual": "(ok u185059685)"
+    },
+    {
+      "label": "get-stx-paid A",
+      "passed": true,
+      "actual": "(some u93731529)"
+    },
+    {
+      "label": "paid shares 2000 STX",
+      "passed": true,
+      "actual": "u2000000000"
+    },
+    {
+      "label": "not fully paid while C is unpaid",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "label": "re-paying A and B pays nothing",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "get-stx-owed is 0 once paid",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "pay C (rounds to 0 STX, shares still counted)",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "fully paid",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "tranche paid (gross)",
+      "passed": true,
+      "actual": "u192269802"
+    },
+    {
+      "label": "tranche residue",
+      "passed": true,
+      "actual": "u2"
+    },
+    {
+      "label": "admin sweeps the dust",
+      "passed": true,
+      "actual": "(ok u2)"
+    },
+    {
+      "label": "residue now 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "second sweep refused (u105)",
+      "passed": true,
+      "actual": "(err u105)"
+    },
+    {
+      "label": "earned STX fees",
+      "passed": true,
+      "actual": "u7210117"
+    },
+    {
+      "label": "withdraw more than earned refused (u111)",
+      "passed": true,
+      "actual": "(err u111)"
+    },
+    {
+      "label": "outsider cannot withdraw fees",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "withdraw 1 uSTX of fees",
+      "passed": true,
+      "actual": "(ok u1)"
+    },
+    {
+      "label": "outsider cannot withdraw-all",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "withdraw the rest",
+      "passed": true,
+      "actual": "(ok u7210116)"
+    },
+    {
+      "label": "STX fees drained",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "pox-settle-stakers updates pox-5 bookkeeping only",
+      "passed": true,
+      "actual": "(ok u2880)"
+    },
+    {
+      "label": "entitlement read",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "fixture: cycle 143 earned 100000 sats, shares A 1000000000 / B 1000000000 / C 7",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "claim R2",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))"
+    },
+    {
+      "label": "vault rests R2 on Jing",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18664845245932)))))"
+    },
+    {
+      "label": "recovered payout on a normal tranche refused (u116)",
+      "passed": true,
+      "actual": "(err u116)"
+    },
+    {
+      "label": "fixture: batch aged 432 blocks",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "anyone triggers emergency-recover",
+      "passed": true,
+      "actual": "(ok (tuple (sbtc u100000) (stx u0)))"
+    },
+    {
+      "label": "R2/0 is a recovered tranche",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "recovered sBTC pot",
+      "passed": true,
+      "actual": "u100000"
+    },
+    {
+      "label": "recovered sweep while unpaid refused (u104)",
+      "passed": true,
+      "actual": "(err u104)"
+    },
+    {
+      "label": "pay recovered sBTC to A and B",
+      "passed": true,
+      "actual": "(ok u96250)"
+    },
+    {
+      "label": "A recovered net",
+      "passed": true,
+      "actual": "(some u48750)"
+    },
+    {
+      "label": "B recovered net",
+      "passed": true,
+      "actual": "(some u47500)"
+    },
+    {
+      "label": "re-paying recovered pays nothing",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "recovered not fully paid",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "label": "pay C recovered",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "recovered paid shares",
+      "passed": true,
+      "actual": "u2000000007"
+    },
+    {
+      "label": "recovered fully paid",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "recovered residue",
+      "passed": true,
+      "actual": "u2"
+    },
+    {
+      "label": "outsider cannot sweep recovered dust",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "admin sweeps recovered dust",
+      "passed": true,
+      "actual": "(ok u2)"
+    },
+    {
+      "label": "recovered residue now 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "earned sBTC fees",
+      "passed": true,
+      "actual": "u3748"
+    },
+    {
+      "label": "sBTC fee over-withdraw refused (u111)",
+      "passed": true,
+      "actual": "(err u111)"
+    },
+    {
+      "label": "outsider cannot withdraw sBTC fees",
+      "passed": true,
+      "actual": "(err u100)"
+    },
+    {
+      "label": "withdraw all sBTC fees",
+      "passed": true,
+      "actual": "(ok u3748)"
+    },
+    {
+      "label": "sBTC fees drained",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "R1 pot read matches finalize",
+      "passed": true,
+      "actual": "u192269804 vs 192269804"
+    },
+    {
+      "label": "R1 A paid owed minus 5% on its uncovered half",
+      "passed": true,
+      "actual": "(some u93731529) vs 93731529"
+    },
+    {
+      "label": "R1 pay A+B total = both nets",
+      "passed": true,
+      "actual": "(ok u185059685) vs 185059685"
+    },
+    {
+      "label": "R1 tranche paid = gross of all three",
+      "passed": true,
+      "actual": "u192269802 vs 192269802"
+    },
+    {
+      "label": "R1 residue = pot - gross paid, swept exactly",
+      "passed": true,
+      "actual": "u2 / (ok u2)"
+    },
+    {
+      "label": "R1 fees earned = A + B fees",
+      "passed": true,
+      "actual": "u7210117 vs 7210117"
+    },
+    {
+      "label": "R1 withdraw-all returns the rest",
+      "passed": true,
+      "actual": "(ok u7210116) vs 7210116"
+    },
+    {
+      "label": "R2 recovered pot is the whole claim",
+      "passed": true,
+      "actual": "100000 vs 100000"
+    },
+    {
+      "label": "R2 A sBTC net: 5% only on uncovered half",
+      "passed": true,
+      "actual": "(some u48750) vs 48750"
+    },
+    {
+      "label": "R2 B sBTC net: full 5%",
+      "passed": true,
+      "actual": "(some u47500) vs 47500"
+    },
+    {
+      "label": "R2 sBTC fees = A + B fees",
+      "passed": true,
+      "actual": "u3748 vs 3748"
+    }
+  ]
+}
