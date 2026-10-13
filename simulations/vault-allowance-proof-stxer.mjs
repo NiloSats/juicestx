@@ -7,10 +7,11 @@
 // contract names are rewritten; mapping them back gives the repo file).
 // Two vaults from the same source file:
 //   juice-sbtc-autoswap       the repo file, names rewritten (allowance:
-//                                  amount + min-x + JING_REBATE_DUST_SATS u51)
-//   juice-sbtc-autoswap-oldallow TEST-ONLY VARIANT: identical except
-//                                  JING_REBATE_DUST_SATS removed from the
-//                                  allowance (amount + min-x). Never deploy.
+//                                  amount + min-x + JING_REBATE_DUST_SATS u51
+//                                  + ceil(min-x * 70 / 1e4), F1)
+//   juice-sbtc-autoswap-oldallow TEST-ONLY VARIANT: identical except the
+//                                  dust and rebate-share terms removed from
+//                                  the allowance (amount + min-x). Never deploy.
 // Both vaults get the same state (funded through their real `fund` from the
 // pool, same chunk cap via their real pool-gated setter), and each case runs
 // `router-swap` on each against the same Jing book (rebuilt identically between
@@ -55,6 +56,7 @@ const MAKER_STX=3000000000000n;   // 3M STX per maker
 // 1.2x the chunk in value so the whole book leg fills across three makers
 const BOOK=[{bps:2n,share:50n},{bps:5n,share:40n},{bps:8n,share:30n}];
 const MIN_X=1000n,DUST=51n,BPS=10000n; // DUST = JING_REBATE_DUST_SATS
+const REST_REBATE=(MIN_X*70n+BPS-1n)/BPS; // ceil(min-x * JING_TAKER_REBATE_MAX_BPS / 1e4), F1
 const CASES=[
  {id:1,label:'control: 1M chunk, fresh print',chunk:1000000n,age:5},
  {id:3,label:'1 BTC chunk, fresh print',chunk:100000000n,age:5},
@@ -67,9 +69,9 @@ const sourceHashes={};
 const newVault=juiceSource('juice-sbtc-autoswap',resolve(directory,'../contracts/pox-5/juice-sbtc-autoswap.clar'),sourceHashes);
 const newPool=juiceSource('juice-pool-sbtc-signer',resolve(directory,'../contracts/pox-5/juice-pool-sbtc-signer.clar'),sourceHashes);
 const newSource=newVault.source;
-// the test copy: JING_REBATE_DUST_SATS taken out of the router-swap allowance
-const NEW_ALLOW=/\(\+ amount \(get min-token-x mins\)\s+JING_REBATE_DUST_SATS\s*\)/g;
-if((newSource.match(NEW_ALLOW)||[]).length!==1)throw new Error('allowance with JING_REBATE_DUST_SATS not found exactly once');
+// the test copy: the dust and rest-rebate terms taken out of the router-swap allowance
+const NEW_ALLOW=/\(\+ amount \(get min-token-x mins\)\s+JING_REBATE_DUST_SATS\s+\(\/ \(\+ \(\* \(get min-token-x mins\) JING_TAKER_REBATE_MAX_BPS\)\s+\(- BPS_PRECISION u1\)\s*\)\s+BPS_PRECISION\s*\)\s*\)/g;
+if((newSource.match(NEW_ALLOW)||[]).length!==1)throw new Error('F1 router-swap allowance not found exactly once');
 const oldSource=newSource.replace(NEW_ALLOW,'(+ amount (get min-token-x mins))');
 const sha=s=>createHash('sha256').update(s).digest('hex');
 console.log(`vault repo sha256 ${newVault.repoSha256}, deployed as ${newVault.name} sha256 ${newVault.deployedSha256}`);
@@ -189,7 +191,7 @@ function measure(r,vault,amount){
  const refunded=back.reduce((a,t)=>a+BigInt(t.amount),0n);
  return {events:raw.length,committed:committed.length,gross:out.reduce((a,t)=>a+BigInt(t.amount),0n),refunded,rest,crumbs:refunded-rest,
   rebateTransfer:toMarket.length>=2?toMarket[0]:0n,toMarket:toMarket.map(String),router,
-  allowOld:amount+MIN_X,allowNew:amount+MIN_X+DUST};
+  allowOld:amount+MIN_X,allowNew:amount+MIN_X+DUST+REST_REBATE};
 }
 
 const rows=[];

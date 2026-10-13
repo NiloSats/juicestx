@@ -31,6 +31,9 @@
 ;; Router v5-3 sizes the book leg at the market's gross-cap, so the leg
 ;; trades in full and only this rounding comes back.
 (define-constant JING_REBATE_DUST_SATS u51)
+;; the market's TAKER_REBATE_MAX_BPS: the swap pot grows with the price age
+;; up to this rate, and the share of it riding on a refunded rest comes back
+(define-constant JING_TAKER_REBATE_MAX_BPS u70)
 
 (define-constant POOL .juice-pool-sbtc-signer)
 (define-constant SBTC_TOKEN 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token)
@@ -415,11 +418,25 @@
     (try! (check-amount amount))
     (try! (cooldown-tick))
     (let ((result (try! (as-contract?
-        ;; the market refunds the unfilled rest (under min-x) and the unused
-        ;; rebate dust, and the router re-sells both: allow that on top of `amount`
+        ;; the market refunds the unfilled rest and the unused rebate, and the
+        ;; router re-sells both on the AMMs: allow that on top of `amount`.
+        ;; Market v6-3 `swap` takes a pot R = gross - net (net = gross / (1 +
+        ;; bps)), so R < net * bps + 1 + bps (bps as a fraction). The batch
+        ;; spends floor(R * cleared / total) and each walk fill (one per
+        ;; book maker, at most 50) floor(traded * bps), so what is left is
+        ;; under rest * bps + 2 + 2 * bps + fills. The rest is under min-x
+        ;; (else ERR_PARTIAL_FILL), so rest + left < min-x * (1 + bps) + 1.007
+        ;; + 50, an integer at most min-x + ceil(min-x * 70 / 1e4) + 51.
+        ;; F1 (Celestial Shark): the old min-x + 51 missed the rebate share
+        ;; of the rest (up to 70 bps of it).
         (
           (with-ft SBTC_TOKEN ASSET_SBTC
-            (+ amount (get min-token-x mins) JING_REBATE_DUST_SATS))
+            (+ amount (get min-token-x mins) JING_REBATE_DUST_SATS
+              (/ (+ (* (get min-token-x mins) JING_TAKER_REBATE_MAX_BPS)
+                  (- BPS_PRECISION u1)
+                )
+                BPS_PRECISION
+              )))
           (with-stx (var-get pyth-fee-budget))
         )
         (try! (contract-call? JING_ROUTER smart-swap-sbtc-for-stx amount limit

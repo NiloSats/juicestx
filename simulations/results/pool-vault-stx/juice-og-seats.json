@@ -1,15 +1,15 @@
 {
-  "id": "e79624762109100bd2d50d853ce93010",
-  "url": "https://stxer.xyz/simulations/mainnet/e79624762109100bd2d50d853ce93010",
-  "block": 9200897,
+  "id": "a6f502ce10453ae3578a3e30e111827c",
+  "url": "https://stxer.xyz/simulations/mainnet/a6f502ce10453ae3578a3e30e111827c",
+  "block": 9200925,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "markets-sbtc-stx-jing-v6-3": "65a8dc9aed179a3cc440306e31aff7da5bcecb99872423ca50b8ba417abbb6c0",
     "swap-router-sbtc-stx-jing-v5-3": "8eefe65bad4890400e09645d6f6c2c84b58897c00929e100a193c97faf0ffcd4",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "19d33c13b472dc2a3938af8f99bfa0a66350c271f3f8de5c71b9fcbf8ce1e22c",
+    "juice-sbtc-autoswap": "6d699fa4b424aaab6979e701404bf0003bb9d5762c99f9f0051db0a4ba97eaf3",
     "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39"
   },
   "checks": [
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer (real grant path)",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x023684d316f63812d7c7377447f6dc5dfe276d6e5c953e8b5058213b7fa6cce208)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02e16397e6ecc182fe3cf5dea07e7b9790d4db244f8ff555deb557d196c266af93)))"
     },
     {
       "label": "OG status starts empty",
@@ -176,7 +176,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18157621278260)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18154040942112)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -201,7 +201,7 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17201957000457) (mid u19113285556064) (out u94660491) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17198565103053) (mid u19109516781171) (out u94572135) (unsold u0)))))"
     },
     {
       "label": "router cooldown: advance 1 burn blocks -> cycle offset 911",
@@ -211,32 +211,32 @@
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17201957000457) (mid u19113285556064) (out u94635723) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17198565103053) (mid u19109516781171) (out u94184134) (unsold u0)))))"
     },
     {
       "label": "finalize: the STX pot",
       "passed": true,
-      "actual": "(ok u189296214)"
+      "actual": "(ok u188756269)"
     },
     {
       "label": "OG1 owed (net view)",
       "passed": true,
-      "actual": "u93228386"
+      "actual": "u92962462"
     },
     {
       "label": "PAYER owed (net view)",
       "passed": true,
-      "actual": "u89915702"
+      "actual": "u89659228"
     },
     {
       "label": "pay-stx-stakers pays both",
       "passed": true,
-      "actual": "(ok u183144088)"
+      "actual": "(ok u182621690)"
     },
     {
       "label": "earned fees",
       "passed": true,
-      "actual": "u6152126"
+      "actual": "u6134578"
     },
     {
       "label": "?ref=telegram printed on-chain in validate-stake",
@@ -246,17 +246,17 @@
     {
       "label": "OG1 pays 5% only on the 300 STX above its 700 cover (grown by top-up)",
       "passed": true,
-      "actual": "u93228386 vs 93228386"
+      "actual": "u92962462 vs 92962462"
     },
     {
       "label": "PAYER pays the full 5%",
       "passed": true,
-      "actual": "u89915702 vs 89915702"
+      "actual": "u89659228 vs 89659228"
     },
     {
       "label": "earned fees = both fees",
       "passed": true,
-      "actual": "u6152126 vs 6152126"
+      "actual": "u6134578 vs 6134578"
     }
   ]
 }

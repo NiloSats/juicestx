@@ -328,6 +328,24 @@ describe("router-swap (permissionless)", function () {
     expectErr(vault("router-swap", [UPDATE]), 16047);
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
   });
+  it("allows a re-sold refund up to min-x + 51 + ceil(min-x * 70 bps) (F1)", function () {
+    // arrange: chunk under the balance so the wallet holds the refund the
+    // router re-sells; v6-market min-x is 100, so the bound is 100 + 51 + 1
+    fundRouter();
+    openBatch();
+    expectOk(pool("set-vault-max-chunk-sats", [Cl.uint(600_000)]));
+    simnet.mineEmptyBurnBlocks(288);
+    // act: one sat over the bound breaks the sBTC allowance and rolls back
+    expectOk(call("mock-router", "set-extra", [Cl.uint(153)]));
+    const over = vault("router-swap", [UPDATE]);
+    // act: past the old min-x + 51, inside the new bound
+    expectOk(call("mock-router", "set-extra", [Cl.uint(152)]));
+    const inside = vault("router-swap", [UPDATE]);
+    // assert
+    expectErr(over, 0);
+    expectOk(inside);
+    expect(sbtc(VAULT_ID)).toBe(REWARD_SATS - 600_000n - 152n);
+  });
 });
 
 describe("router-swap-split (admin through the pool)", function () {

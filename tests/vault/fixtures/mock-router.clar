@@ -16,6 +16,11 @@
 (define-data-var haircut-bps uint u0)
 (define-public (set-refuse (b bool)) (ok (var-set refuse b)))
 (define-public (set-haircut-bps (b uint)) (ok (var-set haircut-bps b)))
+;; Test-only: sell `extra` sats on top of `amount`, as the real router does
+;; when the market refunds a sub-min rest plus the unused rebate and the AMM
+;; stages re-sell them out of the caller's wallet.
+(define-data-var extra uint u0)
+(define-public (set-extra (n uint)) (ok (var-set extra n)))
 
 (define-private (sell
     (amount uint)
@@ -54,7 +59,10 @@
     (mid uint)
     (min-stx-out uint)
   )
-  (begin (try! (verify update)) (sell amount min-stx-out)))
+  (begin
+    (try! (verify update))
+    (let ((r (try! (sell (+ amount (var-get extra)) min-stx-out))))
+      (ok { out: (get out r), unsold: (if (> (get unsold r) u0) amount u0) }))))
 
 (define-public (swap-sbtc-for-stx
     (amount uint)

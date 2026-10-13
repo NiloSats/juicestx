@@ -1,15 +1,15 @@
 {
-  "id": "1dd8e706abe913832a776e724c830176",
-  "url": "https://stxer.xyz/simulations/mainnet/1dd8e706abe913832a776e724c830176",
-  "block": 9200897,
+  "id": "1c58c25f7e1817b0372a224c36baffac",
+  "url": "https://stxer.xyz/simulations/mainnet/1c58c25f7e1817b0372a224c36baffac",
+  "block": 9200925,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
+    "markets-sbtc-stx-jing-v6-3": "65a8dc9aed179a3cc440306e31aff7da5bcecb99872423ca50b8ba417abbb6c0",
     "swap-router-sbtc-stx-jing-v5-3": "8eefe65bad4890400e09645d6f6c2c84b58897c00929e100a193c97faf0ffcd4",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "19d33c13b472dc2a3938af8f99bfa0a66350c271f3f8de5c71b9fcbf8ce1e22c",
+    "juice-sbtc-autoswap": "6d699fa4b424aaab6979e701404bf0003bb9d5762c99f9f0051db0a4ba97eaf3",
     "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39"
   },
   "checks": [
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03cb5ef611c14244e59304b4860fc57d008655e2c3a4698c123f43b46e2970b85d)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x027eecb51d2a23ed8611d3e73f33b13a2640c2275abfb14e9ee14974e0de62c23c)))"
     },
     {
       "label": "validate-stake! refuses any caller but pox-5 (u102)",
@@ -286,7 +286,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18165342177805)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18155031183014)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -311,7 +311,7 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17209271536868) (mid u19121412818743) (out u94660491) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17199503226013) (mid u19110559140015) (out u94572135) (unsold u0)))))"
     },
     {
       "label": "router cooldown: advance 1 burn blocks",
@@ -321,17 +321,17 @@
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17209271536868) (mid u19121412818743) (out u94635723) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17199503226013) (mid u19110559140015) (out u94184134) (unsold u0)))))"
     },
     {
       "label": "finalize R1",
       "passed": true,
-      "actual": "(ok u189296214)"
+      "actual": "(ok u188756269)"
     },
     {
       "label": "get-stx-pot R1/0",
       "passed": true,
-      "actual": "u189296214"
+      "actual": "u188756269"
     },
     {
       "label": "cycle total shares",
@@ -351,12 +351,12 @@
     {
       "label": "pay A and B",
       "passed": true,
-      "actual": "(ok u182197605)"
+      "actual": "(ok u181677909)"
     },
     {
       "label": "get-stx-paid A",
       "passed": true,
-      "actual": "(some u92281904)"
+      "actual": "(some u92018681)"
     },
     {
       "label": "paid shares 2000 STX",
@@ -391,17 +391,17 @@
     {
       "label": "tranche paid (gross)",
       "passed": true,
-      "actual": "u189296212"
+      "actual": "u188756268"
     },
     {
       "label": "tranche residue",
       "passed": true,
-      "actual": "u2"
+      "actual": "u1"
     },
     {
       "label": "admin sweeps the dust",
       "passed": true,
-      "actual": "(ok u2)"
+      "actual": "(ok u1)"
     },
     {
       "label": "residue now 0",
@@ -416,7 +416,7 @@
     {
       "label": "earned STX fees",
       "passed": true,
-      "actual": "u7098607"
+      "actual": "u7078359"
     },
     {
       "label": "withdraw more than earned refused (u111)",
@@ -441,7 +441,7 @@
     {
       "label": "withdraw the rest",
       "passed": true,
-      "actual": "(ok u7098606)"
+      "actual": "(ok u7078358)"
     },
     {
       "label": "STX fees drained",
@@ -471,7 +471,7 @@
     {
       "label": "vault rests R2 on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18165342177805)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18155031183014)))))"
     },
     {
       "label": "recovered payout on a normal tranche refused (u116)",
@@ -591,37 +591,37 @@
     {
       "label": "R1 pot read matches finalize",
       "passed": true,
-      "actual": "u189296214 vs 189296214"
+      "actual": "u188756269 vs 188756269"
     },
     {
       "label": "R1 A paid owed minus 5% on its uncovered half",
       "passed": true,
-      "actual": "(some u92281904) vs 92281904"
+      "actual": "(some u92018681) vs 92018681"
     },
     {
       "label": "R1 pay A+B total = both nets",
       "passed": true,
-      "actual": "(ok u182197605) vs 182197605"
+      "actual": "(ok u181677909) vs 181677909"
     },
     {
       "label": "R1 tranche paid = gross of all three",
       "passed": true,
-      "actual": "u189296212 vs 189296212"
+      "actual": "u188756268 vs 188756268"
     },
     {
       "label": "R1 residue = pot - gross paid, swept exactly",
       "passed": true,
-      "actual": "u2 / (ok u2)"
+      "actual": "u1 / (ok u1)"
     },
     {
       "label": "R1 fees earned = A + B fees",
       "passed": true,
-      "actual": "u7098607 vs 7098607"
+      "actual": "u7078359 vs 7078359"
     },
     {
       "label": "R1 withdraw-all returns the rest",
       "passed": true,
-      "actual": "(ok u7098606) vs 7098606"
+      "actual": "(ok u7078358) vs 7078358"
     },
     {
       "label": "R2 recovered pot is the whole claim",
