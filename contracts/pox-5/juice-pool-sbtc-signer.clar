@@ -24,6 +24,9 @@
 (define-constant ERR_INVALID_SWAP_VAULT (err u119))
 (define-constant ERR_SWAP_VAULT_BUSY (err u120))
 (define-constant ERR_VAULT_TRANSFER_MISMATCH (err u121))
+;; STX only. A bond member's STX is booked with zero `none` shares, so the
+;; payout (split by `none` shares) would hand their bond yield to STX stakers.
+(define-constant ERR_BOND_NOT_SUPPORTED (err u122))
 
 (define-data-var swap-vault principal .juice-sbtc-autoswap)
 (define-data-var pending-swap-vault (optional principal) none)
@@ -227,13 +230,33 @@
   )
 )
 
-(define-data-var fee-bips uint u0)
+(define-data-var fee-bips uint u450) ;; 4.5% at launch; never above MAX_FEE_BIPS (5%)
 (define-data-var earned-fees uint u0)
 
+;; OG seats: 0% fee for life on the OG's covered stake.
+;;
+;; The only way in: stake any amount while og-cap-ustx is not yet
+;; covered (permissionless, inside validate-stake!). Same rule for everyone;
+;; nobody can hand out a seat. No seat limit and no deadline: the offer ends
+;; when the cap is covered. A seat covers the stake up to what is left of the
+;; cap; a top-up grows it while the cap has room. A seat never shrinks and
+;; there is no function that removes it.
+;; Stake above the covered amount pays the standard rate.
+(define-constant ERR_OG_NOTHING_TO_ADD (err u123))
+(define-constant ERR_OG_CAP_FULL (err u126))
+(define-constant ERR_OG_NOT_RAISED (err u127))
+
+;; The cap only ever moves up (raise-og-cap), so an announced offer can get
+;; better for stakers but never worse.
+(define-data-var og-cap-ustx uint u2100000000000) ;; 2.1M STX = 42x the 50k signer minimum
+
+;; staker -> micro-STX covered at 0%
 (define-map og-stakers
   principal
-  bool
+  uint
 )
+(define-data-var og-seats uint u0)
+(define-data-var og-covered-ustx uint u0)
 
 (define-read-only (get-fee-bips)
   (var-get fee-bips)
@@ -243,13 +266,86 @@
 )
 
 (define-read-only (is-og (staker principal))
-  (default-to false (map-get? og-stakers staker))
+  (is-some (map-get? og-stakers staker))
 )
 
+(define-read-only (get-og-ustx (staker principal))
+  (default-to u0 (map-get? og-stakers staker))
+)
+
+(define-read-only (get-og-status)
+  {
+    seats: (var-get og-seats),
+    covered-ustx: (var-get og-covered-ustx),
+    cap-ustx: (var-get og-cap-ustx),
+  }
+)
+
+;; Rate on stake above the staker's OG cover. Use get-staker-fee for an
+;; amount that blends both.
 (define-read-only (get-effective-fee-bips (staker principal))
-  (if (is-og staker)
-    u0
-    (var-get fee-bips)
+  (var-get fee-bips)
+)
+
+;; Fee on `owed`, charged only on the shares above the staker's OG cover.
+;; pox-5 books STX-only shares in micro-STX, so cover and shares compare 1:1.
+(define-read-only (get-staker-fee
+    (staker principal)
+    (shares uint)
+    (owed uint)
+    (bips uint)
+  )
+  (let (
+      (covered (get-og-ustx staker))
+      (taxed (if (> shares covered)
+        (- shares covered)
+        u0
+      ))
+    )
+    (if (is-eq taxed u0)
+      u0
+      (/ (* (* owed bips) taxed) (* MAX_BIPS shares))
+    )
+  )
+)
+
+;; Grow `staker`'s cover toward `amount`, their whole position after this
+;; stake (pox-5 passes the new total on stake-update), clamped to the cap left.
+;; A first stake opens a seat; a top-up grows it. Cover never shrinks. Returns
+;; the new cover.
+(define-private (take-og-seat
+    (staker principal)
+    (amount uint)
+  )
+  (let (
+      (prev (get-og-ustx staker))
+      (left (- (var-get og-cap-ustx) (var-get og-covered-ustx)))
+      (want (if (> amount prev)
+        (- amount prev)
+        u0
+      ))
+      (add (if (> want left)
+        left
+        want
+      ))
+      (covered (+ prev add))
+    )
+    (asserts! (> want u0) ERR_OG_NOTHING_TO_ADD)
+    (asserts! (> add u0) ERR_OG_CAP_FULL)
+    (map-set og-stakers staker covered)
+    (if (is-eq prev u0)
+      (var-set og-seats (+ (var-get og-seats) u1))
+      true
+    )
+    (var-set og-covered-ustx (+ (var-get og-covered-ustx) add))
+    (print {
+      topic: "og-seat",
+      staker: staker,
+      covered-ustx: covered,
+      added-ustx: add,
+      seats: (var-get og-seats),
+    })
+    (ok covered)
   )
 )
 
@@ -310,22 +406,17 @@
   )
 )
 
-(define-public (set-og
-    (staker principal)
-    (og bool)
-  )
+;; Raise the OG cap. Raise-only.
+(define-public (raise-og-cap (cap-ustx uint))
   (begin
     (try! (assert-admin))
-    (if og
-      (map-set og-stakers staker true)
-      (map-delete og-stakers staker)
-    )
+    (asserts! (> cap-ustx (var-get og-cap-ustx)) ERR_OG_NOT_RAISED)
     (print {
-      topic: "set-og",
-      staker: staker,
-      og: og,
+      topic: "raise-og-cap",
+      old: (var-get og-cap-ustx),
+      new: cap-ustx,
     })
-    (ok og)
+    (ok (var-set og-cap-ustx cap-ustx))
   )
 )
 
@@ -377,6 +468,13 @@
   (begin
     (asserts! (is-eq contract-caller POX5) ERR_NOT_POX5)
     (asserts! (not (var-get paused)) ERR_PAUSED)
+    (asserts! (not is-bond) ERR_BOND_NOT_SUPPORTED)
+    ;; A stake opens or grows a free OG seat while the cap has room. Nothing to
+    ;; add or a covered cap is skipped, never an error: the offer must not block a stake.
+    (match (take-og-seat staker amount-ustx)
+      covered true
+      e true
+    )
     (print {
       topic: "validate-stake",
       staker: staker,
@@ -608,10 +706,7 @@
       u0
       (let (
           (gross (/ (* (get-stx-pot reward-cycle tranche) shares) total))
-          (fee (if (is-og staker)
-            u0
-            (/ (* gross (var-get fee-bips)) MAX_BIPS)
-          ))
+          (fee (get-staker-fee staker shares gross (var-get fee-bips)))
         )
         (- gross fee)
       )
@@ -641,10 +736,7 @@
         u0
         (/ (* (get pot acc) shares) (get total-shares acc))
       ))
-      (fee (if (is-og staker)
-        u0
-        (/ (* owed (get fee acc)) MAX_BIPS)
-      ))
+      (fee (get-staker-fee staker shares owed (get fee acc)))
       (net (- owed fee))
     )
     (if (or
@@ -1018,10 +1110,7 @@
         u0
         (/ (* (get pot acc) shares) (get total-shares acc))
       ))
-      (fee (if (is-og staker)
-        u0
-        (/ (* owed (get fee acc)) MAX_BIPS)
-      ))
+      (fee (get-staker-fee staker shares owed (get fee acc)))
       (net (- owed fee))
       (batch {
         reward-cycle: cycle,
