@@ -338,7 +338,14 @@
     ;; the cover to it and returns the rest to the cap (bounty mv7dfb)
     (if (< amount prev)
       (let ((freed (- prev amount)))
-        (map-set og-stakers staker amount)
+        ;; a 0 stake leaves no cover: drop the seat so it is not counted again
+        (if (is-eq amount u0)
+          (begin
+            (map-delete og-stakers staker)
+            (var-set og-seats (- (var-get og-seats) u1))
+          )
+          (map-set og-stakers staker amount)
+        )
         (var-set og-covered-ustx (- (var-get og-covered-ustx) freed))
         (print {
           topic: "og-shrink",

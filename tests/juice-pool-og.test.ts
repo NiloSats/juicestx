@@ -587,22 +587,22 @@ describe("og-shrink: fresh small stake after the lock ended", function () {
     expect(ogStatus()).toStrictEqual(status(0n, 0n));
   });
 
-  it("zero-amount stake over a seat: cover 0 but seat kept and not evictable (u128)", function () {
+  it("zero-amount stake over a seat: the seat is dropped, counted once on re-entry", function () {
     // arrange
     stake(alice, 1_000n * STX, 150n);
     setCycle(151n);
     // act
     const r = stake(alice, 0n, 152n);
-    // assert: documents the zero edge; pox-5 gating of a 0 stake decides if it is reachable
+    // assert: a 0 stake deletes the seat and frees its cover
     expect(r.result).toBeOk(Cl.bool(true));
     expect(ogUstx(alice)).toBeUint(0);
-    expect(isOg(alice)).toBeBool(true);
-    expect(ogStatus()).toStrictEqual(status(1n, 0n));
+    expect(isOg(alice)).toBeBool(false);
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
     setCycle(153n);
     expect(evict(alice).result).toBeErr(Cl.uint(128));
-    // act: a later stake re-enters through the grow path
+    // act: a later stake opens one new seat
     const again = stake(alice, 5n * STX, 153n);
     expect(again.result).toBeOk(Cl.bool(true));
-    expect(ogStatus()).toStrictEqual(status(2n, 5n * STX)); // seat counted twice
+    expect(ogStatus()).toStrictEqual(status(1n, 5n * STX));
   });
 });
