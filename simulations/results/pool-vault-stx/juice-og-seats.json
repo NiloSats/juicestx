@@ -1,7 +1,7 @@
 {
-  "id": "a8f0de5a469c0e705fb0449f99150591",
-  "url": "https://stxer.xyz/simulations/mainnet/a8f0de5a469c0e705fb0449f99150591",
-  "block": 9207288,
+  "id": "d5dfeaa36e865b5a73ab050e675b3b81",
+  "url": "https://stxer.xyz/simulations/mainnet/d5dfeaa36e865b5a73ab050e675b3b81",
+  "block": 9207370,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
@@ -10,7 +10,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
     "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
-    "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7"
+    "juice-pool-sbtc-signer": "ffc629e1d8f28611f7622c9518387db69adaa79cb312bc19d68f18885cd7e784"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer (real grant path)",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02c896857b278dfa5aaf5e9dc4c31d204511c5a834676c1fcce5e0b417e5cb5c58)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x022ffbc0f4960fa3937dc3da8e92a9dd4977af39bb45d0dc5f375050bd5eb73064)))"
     },
     {
       "label": "OG status starts empty",
@@ -149,7 +149,7 @@
       "actual": "(ok u500)"
     },
     {
-      "label": "fee cooldown: advance 144 burn blocks -> cycle offset 1008",
+      "label": "fee cooldown: advance 144 burn blocks -> cycle offset 1009",
       "passed": true,
       "actual": "ok"
     },
@@ -176,7 +176,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18315430432669)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18177120976189)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -201,17 +201,17 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17351460409897) (mid u19279400455442) (out u96433315) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17220430398495) (mid u19133811553884) (out u96433315) (unsold u0)))))"
     },
     {
-      "label": "router cooldown: advance 1 burn blocks -> cycle offset 1009",
+      "label": "router cooldown: advance 1 burn blocks -> cycle offset 1010",
       "passed": true,
       "actual": "ok"
     },
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17351460409897) (mid u19279400455442) (out u95853502) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17220430398495) (mid u19133811553884) (out u95853502) (unsold u0)))))"
     },
     {
       "label": "finalize: the STX pot",

@@ -1,7 +1,7 @@
 {
-  "id": "fec1c71d4e374f8b7b74d23a072d5214",
-  "url": "https://stxer.xyz/simulations/mainnet/fec1c71d4e374f8b7b74d23a072d5214",
-  "block": 9207288,
+  "id": "778153ea61fa87e69521b47790345e61",
+  "url": "https://stxer.xyz/simulations/mainnet/778153ea61fa87e69521b47790345e61",
+  "block": 9207370,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
@@ -10,7 +10,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
     "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
-    "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7"
+    "juice-pool-sbtc-signer": "ffc629e1d8f28611f7622c9518387db69adaa79cb312bc19d68f18885cd7e784"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03c4c9a12180bd0e89482aad6919a290088cfa850cbc1e218b18ee748b9640a52e)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03a792a11e763a2fcfd7f25c6ec7334ee58349cbeccdade266a9a2c000103fe635)))"
     },
     {
       "label": "validate-stake! refuses any caller but pox-5 (u102)",
@@ -141,7 +141,7 @@
     {
       "label": "pending 3% is visible",
       "passed": true,
-      "actual": "(tuple (executable-at u971556) (fee (some u300)) (proposed-at u971412))"
+      "actual": "(tuple (executable-at u971558) (fee (some u300)) (proposed-at u971414))"
     },
     {
       "label": "confirm before 144 blocks refused (u114)",
@@ -286,7 +286,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18315430432669)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18172999653728)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -311,7 +311,7 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17351460409897) (mid u19279400455442) (out u96433315) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17216525987742) (mid u19129473319714) (out u96433315) (unsold u0)))))"
     },
     {
       "label": "router cooldown: advance 1 burn blocks",
@@ -321,7 +321,7 @@
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17351460409897) (mid u19279400455442) (out u95853502) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17216525987742) (mid u19129473319714) (out u95853502) (unsold u0)))))"
     },
     {
       "label": "finalize R1",
@@ -471,7 +471,7 @@
     {
       "label": "vault rests R2 on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18315430432669)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18172999653728)))))"
     },
     {
       "label": "recovered payout on a normal tranche refused (u116)",

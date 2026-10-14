@@ -1,16 +1,16 @@
 {
-  "id": "a4ab995b7ede4440d0dd27a23b6b09e4",
-  "url": "https://stxer.xyz/simulations/mainnet/a4ab995b7ede4440d0dd27a23b6b09e4",
-  "block": 9207290,
+  "id": "693d59d89d4ff150cb2890c014d98574",
+  "url": "https://stxer.xyz/simulations/mainnet/693d59d89d4ff150cb2890c014d98574",
+  "block": 9207370,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "943927cc5067d21d50c87e3f7464d379c3d704cb2ed8dcbfb5c88205a68c5a67",
+    "markets-sbtc-stx-jing-v6-3": "5b795d0ed469b8d8fcbafd9d6456efaf54ee41b060ae2775efd659741f6c519e",
     "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
     "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
-    "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7"
+    "juice-pool-sbtc-signer": "ffc629e1d8f28611f7622c9518387db69adaa79cb312bc19d68f18885cd7e784"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x039a985112413627c3107b52fcb849b6463a78cae544af36733508ffdc980656b4)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02d14219aef687b44ef962ce89e1b03e54bc0c2b11c00b16902133c3b6fb400dfc)))"
     },
     {
       "label": "cycle 142 has nothing to claim: pox-5 refuses (u32)",

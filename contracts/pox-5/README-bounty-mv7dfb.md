@@ -9,6 +9,7 @@ citycoins-protocol `8bb69aa`. Submissions are reviewed one at a time below.
 |---|---|---|---|---|---|
 | 1 | Patient Reed | Patient Reed | OG seat without stake | Holds, Medium | Fixed (uncommitted): seat lasts while the staker stays, `evict-og` |
 | 2 | Rare Io I1 | Rare Io | `pay-one` writes tranche totals per staker | Holds, gas | Adopted `e425a4c`: totals summed in the fold, written once per batch. Fork proof NEW vs `e8ad9b1` side by side 166/166 https://stxer.xyz/simulations/mainnet/3b073415ed6f7c5ff0814ceef0cdbb44, accounting 126/126 https://stxer.xyz/simulations/mainnet/fec1c71d4e374f8b7b74d23a072d5214 |
+| 3 | Rare Io I2 | Rare Io | `pay-one` / `pay-recovered-sbtc-one` write earned-fees / earned-sbtc-fees per staker (sBTC even at fee 0) | Holds, gas | Adopted `da7913d`: fees summed in the fold, added once per batch. Fork proof NEW vs `e425a4c` side by side (STX + recovered-sBTC paths, fee changes between batches, partial fee withdraws) 299/299 https://stxer.xyz/simulations/mainnet/cdff423729665a87980eaf114b6d975c, pay-batches on `da7913d` 166/166 https://stxer.xyz/simulations/mainnet/0335b48163067ae8b747d8b31413d047, accounting 126/126 https://stxer.xyz/simulations/mainnet/778153ea61fa87e69521b47790345e61, recovery-continuity 190/190 https://stxer.xyz/simulations/mainnet/b5aa91981c64577233e8a57446924eed |
 
 ## 1. Patient Reed: OG seat without stake
 
