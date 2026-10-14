@@ -40,7 +40,10 @@ const update=Cl.buffer(Buffer.from(proof.hex.replace(/^0x/,''),'hex'));
 const tipResponse=await fetch(`${NODE}/extended/v1/block?limit=1`,{signal:AbortSignal.timeout(20000)});
 if(!tipResponse.ok)throw new Error(`tip HTTP ${tipResponse.status}`);
 const tip=(await tipResponse.json()).results[0];
-const forkBlock=await juiceForkBlock(NODE);
+// Pinned: at the tip (9207793) the live DLMM/XYK depth is too thin for the 50k-sat
+// chunks (router err u16047). 9207370 has the depth; checks unchanged. JUICE_FORK_BLOCK overrides.
+const RECOVERY_FORK_BLOCK=9207370;
+const forkBlock=process.env.JUICE_FORK_BLOCK?await juiceForkBlock(NODE):RECOVERY_FORK_BLOCK;
 const cycle=Number((await read(POX,'current-pox-reward-cycle')).value)-1;
 const sellers={value:[]},buyers={value:[]},operator=DEP; // Fresh fork market.
 const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);

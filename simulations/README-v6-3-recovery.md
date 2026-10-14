@@ -32,7 +32,7 @@ The actual pool calls `emergency-recover` with the vault trait. Its dynamic call
 | juice-jing-take | 38/38 | [stxer](https://stxer.xyz/simulations/mainnet/2c862a8bc904ae0fdb884c5ba16479b9) | [JSON](results/pool-vault-stx/juice-jing-take.json) |
 | juice-liquidation | 38/38 | [stxer](https://stxer.xyz/simulations/mainnet/d47a6196c6bdf6210bae52971d013a3c) | [JSON](results/pool-vault-stx/juice-liquidation.json) |
 | juice-maker | 34/34 | [stxer](https://stxer.xyz/simulations/mainnet/f2f80a8f08b0c2f1ef15743f620b711e) | [JSON](results/pool-vault-stx/juice-maker.json) |
-| juice-recovery-continuity | 189/189 | [stxer](https://stxer.xyz/simulations/mainnet/326a5d1d623170f6feb9caf79ac72220) | [JSON](results/pool-vault-stx/juice-recovery-continuity.json) |
+| juice-recovery-continuity (fa8c48a, pinned block 9207370) | 190/190 | [stxer](https://stxer.xyz/simulations/mainnet/3ff0cb467726e1fb9968315cf7f6bfca) | [JSON](results/pool-vault-stx/juice-recovery-continuity.json) |
 | juice-split-pyth | 39/39 | [stxer](https://stxer.xyz/simulations/mainnet/806ce8d26ed0cd9817ef696e415ee8ed) | [JSON](results/pool-vault-stx/juice-split-pyth.json) |
 | juice-vault-upgrade | 95/95 | [stxer](https://stxer.xyz/simulations/mainnet/139557e02ca5f0585a25c78c6a36cdf3) | [JSON](results/pool-vault-stx/juice-vault-upgrade.json) |
 

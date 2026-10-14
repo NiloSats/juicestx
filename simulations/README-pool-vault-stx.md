@@ -21,7 +21,7 @@ The local migration suite passes **97 checks**. Current local vault coverage rea
 | Smart-router Jing fills | 40/40 | [simulation](https://stxer.xyz/simulations/mainnet/0a2efbe80b3936672dce8c6be4e042a8) | [juice-jing-router.json](results/pool-vault-stx/juice-jing-router.json) |
 | Admin direct Jing take | 35/35 | [simulation](https://stxer.xyz/simulations/mainnet/caa0a8749794c515cee4b16372eb58fd) | [juice-jing-take.json](results/pool-vault-stx/juice-jing-take.json) |
 | Required-Pyth manual split | 36/36 | [simulation](https://stxer.xyz/simulations/mainnet/acd282c4b730fa9ee454824bcdb5772f) | [juice-split-pyth.json](results/pool-vault-stx/juice-split-pyth.json) |
-| Four-batch recovery continuity | 186/186 | [simulation](https://stxer.xyz/simulations/mainnet/b9107092fc2f1c74bac94a5dae9b9306) | [juice-recovery-continuity.json](results/pool-vault-stx/juice-recovery-continuity.json) |
+| Four-batch recovery continuity (fa8c48a, block 9207370) | 190/190 | [simulation](https://stxer.xyz/simulations/mainnet/3ff0cb467726e1fb9968315cf7f6bfca) | [juice-recovery-continuity.json](results/pool-vault-stx/juice-recovery-continuity.json) |
 | Timed admin handover | 53/53 | [simulation](https://stxer.xyz/simulations/mainnet/423cbe080c8335e611ee87f2809f5df4) | [juice-admin-handover.json](results/pool-vault-stx/juice-admin-handover.json) |
 | Emergency DIA swap | 20/20 | [simulation](https://stxer.xyz/simulations/mainnet/b14d5ed91cf95e2e0995f460dbd775e5) | [juice-emergency-dia.json](results/pool-vault-stx/juice-emergency-dia.json) |
 | Emergency native fallback | 30/30 | [simulation](https://stxer.xyz/simulations/mainnet/02d37affb122566fff0de32e0cb628c5) | [juice-emergency-native.json](results/pool-vault-stx/juice-emergency-native.json) |
