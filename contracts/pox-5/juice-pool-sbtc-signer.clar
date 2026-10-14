@@ -239,12 +239,16 @@
 ;; covered (permissionless, inside validate-stake!). Same rule for everyone;
 ;; nobody can hand out a seat. No seat limit and no deadline: the offer ends
 ;; when the cap is covered. A seat covers the stake up to what is left of the
-;; cap; a top-up grows it while the cap has room. A seat never shrinks and
-;; there is no function that removes it.
+;; cap; a top-up grows it while the cap has room. A seat lasts while the
+;; staker stays: once pox-5 no longer lists them as locked with this pool
+;; (they moved to another signer, or their lock ended), anyone can call
+;; evict-og and the cover goes back to the cap for others.
 ;; Stake above the covered amount pays the standard rate.
 (define-constant ERR_OG_NOTHING_TO_ADD (err u123))
 (define-constant ERR_OG_CAP_FULL (err u126))
 (define-constant ERR_OG_NOT_RAISED (err u127))
+(define-constant ERR_OG_NOT_SEATED (err u128))
+(define-constant ERR_OG_STILL_STAKED (err u129))
 
 ;; The cap only ever moves up (raise-og-cap), so an announced offer can get
 ;; better for stakers but never worse.
@@ -403,6 +407,35 @@
       cancelled: (var-get pending-fee),
     })
     (ok (var-set pending-fee none))
+  )
+)
+
+;; True while pox-5 lists `staker` as locked with this pool. pox-5 returns
+;; none once the lock has ended, and names the new signer right after a move,
+;; so an unstaker keeps the seat through their last cycle.
+(define-read-only (og-staying (staker principal))
+  (match (contract-call? 'SP000000000000000000002Q6VF78.pox-5 get-staker-info staker)
+    info (is-eq (get signer info) current-contract)
+    false
+  )
+)
+
+;; Free the seat of a staker who left. Permissionless: the check is pox-5
+;; state only. The cover goes back to the cap; a later stake can take it.
+(define-public (evict-og (staker principal))
+  (let ((covered (get-og-ustx staker)))
+    (asserts! (> covered u0) ERR_OG_NOT_SEATED)
+    (asserts! (not (og-staying staker)) ERR_OG_STILL_STAKED)
+    (map-delete og-stakers staker)
+    (var-set og-seats (- (var-get og-seats) u1))
+    (var-set og-covered-ustx (- (var-get og-covered-ustx) covered))
+    (print {
+      topic: "og-evict",
+      staker: staker,
+      freed-ustx: covered,
+      seats: (var-get og-seats),
+    })
+    (ok covered)
   )
 )
 
