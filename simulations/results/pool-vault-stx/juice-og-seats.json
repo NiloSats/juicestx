@@ -1,7 +1,7 @@
 {
-  "id": "b64c771b2637e68a93e644f5c482348f",
-  "url": "https://stxer.xyz/simulations/mainnet/b64c771b2637e68a93e644f5c482348f",
-  "block": 9208570,
+  "id": "2fd82a2e809e8c81c31dd5ab5e0330d0",
+  "url": "https://stxer.xyz/simulations/mainnet/2fd82a2e809e8c81c31dd5ab5e0330d0",
+  "block": 9208940,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer (real grant path)",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x034dade9abae8d97a2243ecc0a93449f8574e4e50c060d6146d132eee189d1757b)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03465bf17eba5a41ea87da71ec4e2f530c39a36620793a2b6c59258d928fc9e559)))"
     },
     {
       "label": "OG status starts empty",
@@ -149,7 +149,7 @@
       "actual": "(ok u500)"
     },
     {
-      "label": "fee cooldown: advance 144 burn blocks -> cycle offset 1042",
+      "label": "fee cooldown: advance 144 burn blocks -> cycle offset 1045",
       "passed": true,
       "actual": "ok"
     },
@@ -176,7 +176,7 @@
     {
       "label": "vault rests the sBTC on Jing",
       "passed": true,
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18571220746246)))))"
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18589611068792)))))"
     },
     {
       "label": "set chunk cap 50k",
@@ -201,42 +201,42 @@
     {
       "label": "router sells chunk 1",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17593788075391) (mid u19548653417102) (out u96704746) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17611210486224) (mid u19568011651361) (out u96710633) (unsold u0)))))"
     },
     {
-      "label": "router cooldown: advance 1 burn blocks -> cycle offset 1043",
+      "label": "router cooldown: advance 1 burn blocks -> cycle offset 1046",
       "passed": true,
       "actual": "ok"
     },
     {
       "label": "router sells chunk 2",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17593788075391) (mid u19548653417102) (out u96113858) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u50000) (limit-price u17611210486224) (mid u19568011651361) (out u96117851) (unsold u0)))))"
     },
     {
       "label": "finalize: the STX pot",
       "passed": true,
-      "actual": "(ok u192818604)"
+      "actual": "(ok u192828484)"
     },
     {
       "label": "OG1 owed (net view)",
       "passed": true,
-      "actual": "u94963163"
+      "actual": "u94968029"
     },
     {
       "label": "PAYER owed (net view)",
       "passed": true,
-      "actual": "u91588837"
+      "actual": "u91593530"
     },
     {
       "label": "pay-stx-stakers pays both",
       "passed": true,
-      "actual": "(ok u186552000)"
+      "actual": "(ok u186561559)"
     },
     {
       "label": "earned fees",
       "passed": true,
-      "actual": "u6266604"
+      "actual": "u6266925"
     },
     {
       "label": "?ref=telegram printed on-chain in validate-stake",
@@ -246,17 +246,17 @@
     {
       "label": "OG1 pays 5% only on the 300 STX above its 700 cover (grown by top-up)",
       "passed": true,
-      "actual": "u94963163 vs 94963163"
+      "actual": "u94968029 vs 94968029"
     },
     {
       "label": "PAYER pays the full 5%",
       "passed": true,
-      "actual": "u91588837 vs 91588837"
+      "actual": "u91593530 vs 91593530"
     },
     {
       "label": "earned fees = both fees",
       "passed": true,
-      "actual": "u6266604 vs 6266604"
+      "actual": "u6266925 vs 6266925"
     }
   ]
 }

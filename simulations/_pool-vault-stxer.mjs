@@ -99,7 +99,11 @@ export async function runPoolVaultLifecycle({kind,poolSource,vaultSource,resultD
  const proof=await fetchLazerUpdateAny();
  const update=Cl.buffer(Buffer.from(proof.hex.replace(/^0x/,''),'hex'));
  const tip=(await (await fetch(`${NODE}/extended/v1/block?limit=1`)).json()).results[0];
- const forkBlock=await juiceForkBlock(NODE);
+ // Pinned (juice liquidation only): at tip 9208879 the live DLMM depth fills 330 of the 50k-sat
+ // first chunk and the second chunk hits router err u16047. 9208593 has the depth; checks unchanged.
+ // JUICE_FORK_BLOCK overrides.
+ const LIQUIDATION_FORK_BLOCK=9208593;
+ const forkBlock=(kind==='juice'&&profile==='liquidation'&&!process.env.JUICE_FORK_BLOCK)?LIQUIDATION_FORK_BLOCK:await juiceForkBlock(NODE);
  const read=async(id,fn,args=[])=>{
   const [address,name]=id.split('.');
   const r=await fetch(`${NODE}/v2/contracts/call-read/${address}/${name}/${fn}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sender:DEP,arguments:args.map(cv=>'0x'+serializeCV(cv).replace(/^0x/,''))})});

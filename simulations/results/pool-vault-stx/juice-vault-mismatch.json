@@ -1,7 +1,7 @@
 {
-  "id": "e4e792cf9707099940417445f203d98c",
-  "url": "https://stxer.xyz/simulations/mainnet/e4e792cf9707099940417445f203d98c",
-  "block": 9208575,
+  "id": "e547999db6655cfec2f88e7f178364c7",
+  "url": "https://stxer.xyz/simulations/mainnet/e547999db6655cfec2f88e7f178364c7",
+  "block": 9208943,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02fef0b414f5c70846a46b262665b56706b52a1c7e6e64bc112e4be40ba5c0c507)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02d11445904ea1429aa80ab8f3744956ea68317169d2592058482d7f8ed9c0fbf8)))"
     },
     {
       "label": "deploy juice-fake-vault",

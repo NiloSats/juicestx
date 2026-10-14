@@ -1,7 +1,7 @@
 {
-  "id": "d48af34d78b398f9e37f6024f763fbea",
-  "url": "https://stxer.xyz/simulations/mainnet/d48af34d78b398f9e37f6024f763fbea",
-  "block": 9208566,
+  "id": "4783a1b8e96d7293f8a5f2eab58e6a63",
+  "url": "https://stxer.xyz/simulations/mainnet/4783a1b8e96d7293f8a5f2eab58e6a63",
+  "block": 9208937,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03702ad6f3f190461c5d4513b855de566cd3d4f99f7f1579327b5dd6e1a3590b7d)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0295819183be97be2bf2931dcf28c33b5d6355a87db4ad05740c86da6ad5373314)))"
     },
     {
       "label": "fund SP3Y74M5… 410 STX",
@@ -114,7 +114,7 @@
       "actual": "true"
     },
     {
-      "label": "cycle 145 prepare phase: advance 1102 burn blocks -> offset 2000",
+      "label": "cycle 145 prepare phase: advance 1099 burn blocks -> offset 2000",
       "passed": true,
       "actual": "ok"
     },

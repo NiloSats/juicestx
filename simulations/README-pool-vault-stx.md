@@ -17,7 +17,7 @@ The local migration suite passes **97 checks**. Current local vault coverage rea
 | Vault rotation and post-switch rewards | 89/89 | [simulation](https://stxer.xyz/simulations/mainnet/dbd028618b2a89291b43a66069b62d23) | [juice-vault-upgrade.json](results/pool-vault-stx/juice-vault-upgrade.json) |
 | Deployment and guards | 15/15 | [simulation](https://stxer.xyz/simulations/mainnet/2274b02948e1381360d12f2a0b6d53b6) | [juice-deployment-guards.json](results/pool-vault-stx/juice-deployment-guards.json) |
 | Maker fill during patience | 31/31 | [simulation](https://stxer.xyz/simulations/mainnet/a773f4a7d6d7dff8554b476832dbb9bc) | [juice-maker.json](results/pool-vault-stx/juice-maker.json) |
-| Smart-router AMM liquidation | 35/35 | [simulation](https://stxer.xyz/simulations/mainnet/d3b40e8a7c10664eb3d6e0e4e10f7ac9) | [juice-liquidation.json](results/pool-vault-stx/juice-liquidation.json) |
+| Smart-router AMM liquidation (block 9208593) | 41/41 | [simulation](https://stxer.xyz/simulations/mainnet/29fd3d1682888b452101f075947810ec) | [juice-liquidation.json](results/pool-vault-stx/juice-liquidation.json) |
 | Smart-router Jing fills | 40/40 | [simulation](https://stxer.xyz/simulations/mainnet/0a2efbe80b3936672dce8c6be4e042a8) | [juice-jing-router.json](results/pool-vault-stx/juice-jing-router.json) |
 | Admin direct Jing take | 35/35 | [simulation](https://stxer.xyz/simulations/mainnet/caa0a8749794c515cee4b16372eb58fd) | [juice-jing-take.json](results/pool-vault-stx/juice-jing-take.json) |
 | Required-Pyth manual split | 36/36 | [simulation](https://stxer.xyz/simulations/mainnet/acd282c4b730fa9ee454824bcdb5772f) | [juice-split-pyth.json](results/pool-vault-stx/juice-split-pyth.json) |

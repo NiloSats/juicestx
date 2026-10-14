@@ -1,7 +1,7 @@
 {
-  "id": "62c90d33fd1c7b5180639d1cdc7e5dbe",
-  "url": "https://stxer.xyz/simulations/mainnet/62c90d33fd1c7b5180639d1cdc7e5dbe",
-  "block": 9208568,
+  "id": "7158b1ba82eb56ab8ed39132669f6f8f",
+  "url": "https://stxer.xyz/simulations/mainnet/7158b1ba82eb56ab8ed39132669f6f8f",
+  "block": 9208938,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02010b155e5f216dd61857d5867c6906564ee98836cf558b8f5802c45ec1f84087)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03d015df9e219d74969aadc959da7543c30ccb0d8b7505faf58a32fbc7396efd0c)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -244,7 +244,7 @@
       "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u201009726243) (seats u3))"
     },
     {
-      "label": "(f) into the cycle 145 prepare phase: advance 1132 burn blocks -> offset 2030",
+      "label": "(f) into the cycle 145 prepare phase: advance 1129 burn blocks -> offset 2030",
       "passed": true,
       "actual": "ok"
     },

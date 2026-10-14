@@ -1,7 +1,7 @@
 {
-  "id": "5647c8880effe574c18d1ccb102a01a2",
-  "url": "https://stxer.xyz/simulations/mainnet/5647c8880effe574c18d1ccb102a01a2",
-  "block": 9208566,
+  "id": "46edf261a74e3f617594b81b82317f06",
+  "url": "https://stxer.xyz/simulations/mainnet/46edf261a74e3f617594b81b82317f06",
+  "block": 9208937,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x035bdea6ed780388028501175f5e311e9a70d874eebec9f69fb152856553cb441a)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03a84ea27ce7b5a8a26644acfdd02ea5d129d4e15dc39c040e0221fd1291befe56)))"
     },
     {
       "label": "cycle 142 has nothing to claim: pox-5 refuses (u32)",

@@ -1,7 +1,7 @@
 {
-  "id": "13f9afbc633b19d3cde0091490f657d2",
-  "url": "https://stxer.xyz/simulations/mainnet/13f9afbc633b19d3cde0091490f657d2",
-  "block": 9208571,
+  "id": "0b130236b9c903c9be1bcd7826071b6c",
+  "url": "https://stxer.xyz/simulations/mainnet/0b130236b9c903c9be1bcd7826071b6c",
+  "block": 9208941,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02577e996e1b39ebe542bab521335a6b3d5e782662bab950e9a055d853186e8d2d)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02eeda3763af2b01b329e70f3bc2caba18c60aa0ee9101dbe5314ec984591b0dae)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -129,7 +129,7 @@
       "actual": "(err u129)"
     },
     {
-      "label": "into cycle 146, HOP lock ended: advance 1222 burn blocks -> offset 20",
+      "label": "into cycle 146, HOP lock ended: advance 1219 burn blocks -> offset 20",
       "passed": true,
       "actual": "ok"
     },
