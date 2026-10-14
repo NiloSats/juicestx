@@ -19,6 +19,17 @@ for n,s in files.items():
  if n=='juice-pool-sbtc-signer':
   if '(define-public (router-swap-split-dia' not in s:s+='\n'+(here/'fixtures/pool-emergency-wrappers.clar').read_text()
   s+='\n(define-public (test-fund (amount uint) (vault <swap-vault-interface>)) (begin (try! (assert-admin)) (try! (assert-active-vault vault)) (as-contract? ((with-ft .mock-ft "mock-ft" amount)) (try! (contract-call? vault fund amount)))))\n(define-public (test-finish (vault <swap-vault-interface>)) (begin (try! (assert-admin)) (try! (assert-active-vault vault)) (contract-call? vault finish)))\n'
+ if n=='mock-pox':
+  # pox-5 get-staker-info: none when unknown or once first + num <= current
+  # cycle. stake-test now also records the pool as signer for 1 cycle;
+  # set-staker-info models a move to another signer, a longer lock or an exit.
+  s=s.replace('(begin\n  (try! (seed staker c (contract-of pool) amount))','(begin\n  (try! (seed staker c (contract-of pool) amount))\n  (map-set staker-info staker { signer: (contract-of pool), first-reward-cycle: c, num-cycles: u1 })',1)
+  s=('(define-map staker-info principal { signer: principal, first-reward-cycle: uint, num-cycles: uint })\n'
+     '(define-public (set-staker-info (staker principal) (info (optional { signer: principal, first-reward-cycle: uint, num-cycles: uint })))\n'
+     ' (ok (match info i (map-set staker-info staker i) (map-delete staker-info staker))))\n'
+     '(define-read-only (get-staker-info (staker principal))\n'
+     ' (match (map-get? staker-info staker) i (if (<= (+ (get first-reward-cycle i) (get num-cycles i)) (var-get cycle)) none (some i)) none))\n')+s
+  assert 'map-set staker-info staker {' in s
  if n=='fastpool-swap-vault':
   # historical v6 snapshot: keep it on the fixture's v6-shaped entry points
   for fn in ['deposit-token-x','set-token-x-limit','cancel-token-x-deposit']:

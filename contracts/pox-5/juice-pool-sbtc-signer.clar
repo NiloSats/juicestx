@@ -757,6 +757,8 @@
       fee: uint,
       total: uint,
       fees: uint,
+      paid: uint,
+      paid-shares: uint,
     })
   )
   (let (
@@ -799,21 +801,12 @@
         }
           net
         )
-        (map-set tranche-paid {
-          reward-cycle: cycle,
-          tranche: trn,
-        }
-          (+ (get-tranche-paid cycle trn) owed)
-        )
-        (map-set tranche-paid-shares {
-          reward-cycle: cycle,
-          tranche: trn,
-        }
-          (+ (get-tranche-paid-shares cycle trn) shares)
-        )
+        ;; tranche totals are summed here and written once after the fold
         (merge acc {
           total: (+ (get total acc) net),
           fees: (+ (get fees acc) fee),
+          paid: (+ (get paid acc) owed),
+          paid-shares: (+ (get paid-shares acc) shares),
         })
       )
     )
@@ -844,8 +837,23 @@
           fee: (var-get fee-bips),
           total: u0,
           fees: u0,
+          paid: u0,
+          paid-shares: u0,
         }))
         (totl (get total result))
+      )
+      ;; one write per tranche total for the whole batch (bounty mv7dfb I1)
+      (map-set tranche-paid {
+        reward-cycle: reward-cycle,
+        tranche: tranche,
+      }
+        (+ (get-tranche-paid reward-cycle tranche) (get paid result))
+      )
+      (map-set tranche-paid-shares {
+        reward-cycle: reward-cycle,
+        tranche: tranche,
+      }
+        (+ (get-tranche-paid-shares reward-cycle tranche) (get paid-shares result))
       )
       (print {
         topic: "pay-stx-stakers",

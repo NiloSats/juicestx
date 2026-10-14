@@ -340,3 +340,143 @@ describe("fee-bips timelock", function () {
     expect(stakerFee(bob, 1_000n, 1_000_000n, 500n)).toBeUint(50_000);
   });
 });
+
+// evict-og: mock-pox get-staker-info models pox-5 (none once first + num <=
+// current cycle). stake-test records this pool as signer for one cycle;
+// set-staker-info models a move to another signer, a longer lock or an exit.
+function setStakerInfo(staker: string, signer: string | null, first = 150n, num = 1n) {
+  const info =
+    signer === null
+      ? Cl.none()
+      : Cl.some(
+          Cl.tuple({
+            signer: Cl.principal(signer),
+            "first-reward-cycle": Cl.uint(first),
+            "num-cycles": Cl.uint(num),
+          }),
+        );
+  return simnet.callPublicFn(POX, "set-staker-info", [Cl.principal(staker), info], admin);
+}
+
+function setCycle(c: bigint) {
+  return simnet.callPublicFn(POX, "set-cycle", [Cl.uint(c)], admin);
+}
+
+function ogStaying(staker: string) {
+  return simnet.callReadOnlyFn(POOL, "og-staying", [Cl.principal(staker)], admin).result;
+}
+
+function evict(staker: string, sender = carol) {
+  return simnet.callPublicFn(POOL, "evict-og", [Cl.principal(staker)], sender);
+}
+
+function ogEvictEvents(events: { event: string; data: { value?: ClarityValue } }[]) {
+  return events.filter(function (e) {
+    return e.event === "print_event" && e.data.value && cvToString(e.data.value).includes('"og-evict"');
+  });
+}
+
+const OTHER_SIGNER = `${admin}.mock-signer-trait`;
+
+describe("og-staying / evict-og", function () {
+  it("bounty hop: other signer -> pool -> other signer in one cycle, evict frees the cover", function () {
+    // arrange
+    setStakerInfo(alice, OTHER_SIGNER);
+    expect(ogStaying(alice)).toBeBool(false);
+    stake(alice, 2_000_000n * STX);
+    expect(ogStaying(alice)).toBeBool(true);
+    expect(ogStatus()).toStrictEqual(status(1n, 2_000_000n * STX));
+    setStakerInfo(alice, OTHER_SIGNER);
+    // act
+    const r = evict(alice);
+    // assert
+    expect(r.result).toBeOk(Cl.uint(2_000_000n * STX));
+    const ev = ogEvictEvents(r.events);
+    expect(ev).toHaveLength(1);
+    expect(ev[0].data.value).toStrictEqual(
+      Cl.tuple({
+        topic: Cl.stringAscii("og-evict"),
+        staker: Cl.principal(alice),
+        "freed-ustx": Cl.uint(2_000_000n * STX),
+        seats: Cl.uint(0),
+      }),
+    );
+    expect(isOg(alice)).toBeBool(false);
+    expect(ogUstx(alice)).toBeUint(0);
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
+  });
+
+  it("still staked with the pool: u129, seat unchanged", function () {
+    // arrange
+    stake(alice, 1_000n * STX);
+    // act
+    const r = evict(alice);
+    // assert
+    expect(r.result).toBeErr(Cl.uint(129));
+    expect(ogUstx(alice)).toBeUint(1_000n * STX);
+    expect(ogStatus()).toStrictEqual(status(1n, 1_000n * STX));
+  });
+
+  it("no seat: u128 (also for a staker who is not staked anywhere)", function () {
+    // arrange
+    setStakerInfo(bob, OTHER_SIGNER);
+    // act
+    const r1 = evict(alice);
+    const r2 = evict(bob);
+    // assert
+    expect(r1.result).toBeErr(Cl.uint(128));
+    expect(r2.result).toBeErr(Cl.uint(128));
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
+  });
+
+  it("unstake: staying until the lock ends, then evictable", function () {
+    // arrange: locked cycles 150..152 with the pool; unstake keeps the lock
+    stake(alice, 1_000n * STX);
+    setStakerInfo(alice, `${admin}.${POOL}`, 150n, 3n);
+    setCycle(152n);
+    // act + assert: last locked cycle, still staying
+    expect(ogStaying(alice)).toBeBool(true);
+    expect(evict(alice).result).toBeErr(Cl.uint(129));
+    // act + assert: lock ended, pox-5 returns none
+    setCycle(153n);
+    expect(ogStaying(alice)).toBeBool(false);
+    expect(evict(alice).result).toBeOk(Cl.uint(1_000n * STX));
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
+  });
+
+  it("re-seat after eviction while the cap has room; freed cover goes to others", function () {
+    // arrange: alice fills the cap, bob gets nothing
+    stake(alice, CAP);
+    stake(bob, 1_000n * STX);
+    expect(isOg(bob)).toBeBool(false);
+    setStakerInfo(alice, OTHER_SIGNER);
+    expect(evict(alice).result).toBeOk(Cl.uint(CAP));
+    // act
+    const rb = stake(bob, 1_000n * STX);
+    const ra = stake(alice, 500n * STX);
+    // assert
+    expect(rb.result).toBeOk(Cl.bool(true));
+    expect(ra.result).toBeOk(Cl.bool(true));
+    expect(ogSeatEvents(ra.events)).toHaveLength(1);
+    expect(ogUstx(bob)).toBeUint(1_000n * STX);
+    expect(ogUstx(alice)).toBeUint(500n * STX);
+    expect(ogStatus()).toStrictEqual(status(2n, 1_500n * STX));
+  });
+
+  it("anyone can evict: the staker or a stranger, no admin needed", function () {
+    // arrange
+    stake(alice, 1_000n * STX);
+    stake(bob, 2_000n * STX);
+    setStakerInfo(alice, null);
+    setStakerInfo(bob, OTHER_SIGNER);
+    // act
+    const r1 = evict(alice, alice);
+    const r2 = evict(bob, carol);
+    // assert
+    expect(r1.result).toBeOk(Cl.uint(1_000n * STX));
+    expect(r2.result).toBeOk(Cl.uint(2_000n * STX));
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
+    // a second eviction of the same staker has no seat
+    expect(evict(alice, admin).result).toBeErr(Cl.uint(128));
+  });
+});
