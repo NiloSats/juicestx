@@ -1,7 +1,7 @@
 {
-  "id": "7158b1ba82eb56ab8ed39132669f6f8f",
-  "url": "https://stxer.xyz/simulations/mainnet/7158b1ba82eb56ab8ed39132669f6f8f",
-  "block": 9208938,
+  "id": "a25807fb09d6e81b5b1597e2c4f91b8c",
+  "url": "https://stxer.xyz/simulations/mainnet/a25807fb09d6e81b5b1597e2c4f91b8c",
+  "block": 9210117,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -10,7 +10,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
     "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
     "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
-    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
+    "juice-pool-sbtc-signer": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03d015df9e219d74969aadc959da7543c30ccb0d8b7505faf58a32fbc7396efd0c)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03f4763371f4fa2bc33fe60a62f6d7a019517b83dffcbfdd651cc940ca3f0f65ba)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -244,7 +244,7 @@
       "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u201009726243) (seats u3))"
     },
     {
-      "label": "(f) into the cycle 145 prepare phase: advance 1129 burn blocks -> offset 2030",
+      "label": "(f) into the cycle 145 prepare phase: advance 1110 burn blocks -> offset 2030",
       "passed": true,
       "actual": "ok"
     },

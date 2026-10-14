@@ -10,12 +10,13 @@
 //        the pool (stake-update, no new STX) and takes a 200k seat, unstakes,
 //        the lock ends, then stakes 1 STX fresh before anyone evicts.
 //   ZERO: seated 10 STX, unstakes, lock ends, then tries a 0-STX fresh stake
-//         (probes whether pox-5 lets a 0 stake reach validate-stake!)
+//         (records whether pox-5 lets a 0 stake reach validate-stake!; if it
+//         does, the 570226c guard must delete the seat and decrement og-seats)
 //   LATE: stakes 1,000 STX after the shrink and takes a normal seat
 //
 // Run: node simulations/pool-og-shrink-stxer.mjs
 import { createRequire } from 'node:module';
-import { poolSim, PID, POX, STRANGER, STX, acct, ok } from './_juice-pool-sim.mjs';
+import { poolSim, PID, POX, STRANGER, STX, acct, num, ok } from './_juice-pool-sim.mjs';
 const { Cl, cvToString, deserializeCV } = createRequire(import.meta.url)('@stacks/transactions');
 
 const HOP = 'SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ';
@@ -87,11 +88,43 @@ cover('top-up: HOP cover grew to 6 STX', HOP, 6n * STX);
 status('3 seats: 6 + 10 + 1,000', 3, LATE_USTX + 16n * STX);
 
 // -- zero-amount probe -----------------------------------------------------------
+// 570226c: a 0 stake that reaches take-og-seat deletes the seat and decrements
+// og-seats. Whether pox-5 lets a 0 lock through is recorded, then the branch
+// that happened is asserted (refused: seat untouched; accepted: seat dropped).
 staying('ZERO lock ended', ZERO, false);
 const zero = s.stake('PROBE: ZERO stakes 0 STX fresh (pox-5 lock of 0)', ZERO, 0n, () => true);
-cover('PROBE: ZERO cover unchanged at 10 STX', ZERO, 10n * STX);
-const evictZero = evict('ZERO evictable as before', ZERO, `(ok u${10n * STX})`);
-status('final: 2 seats (HOP 6, LATE 1,000)', 2, LATE_USTX + 6n * STX);
+const zeroIsOg = s.rd('PROBE: ZERO is-og after the 0 stake (recorded)', `(is-og '${ZERO})`, () => true);
+const zeroCover = s.rd('PROBE: ZERO cover after the 0 stake (recorded)', `(get-og-ustx '${ZERO})`, () => true);
+const zeroStatus = s.rd('PROBE: og status after the 0 stake (recorded)', '(get-og-status)', () => true);
+const evictZero = evict('ZERO evict-og after the probe (recorded)', ZERO, () => true);
+const final = s.rd('final og status (recorded)', '(get-og-status)', () => true);
+
+const seatsCov = (v) => [num(v.match(/\(seats u\d+\)/)?.[0] ?? ''), num(v.match(/\(covered-ustx u\d+\)/)?.[0] ?? '')];
+function zeroChecks(a, topic) {
+  const accepted = a(zero).startsWith('(ok');
+  const refused = a(zero).includes('PoxInvalidLockAmount');
+  const head = [['RECORD: 0-uSTX fresh stake after the lock ended: '
+    + (accepted ? 'ACCEPTED by pox-5 (reached validate-stake!)' : refused ? 'REFUSED by the node (PoxInvalidLockAmount)' : 'other'),
+    accepted || refused, a(zero).slice(0, 200)]];
+  if (accepted) {
+    const shr = topic(zero, 'og-shrink');
+    return [...head,
+      ['accepted: og-shrink print frees all 10 STX', shr.length === 1 && shr[0].includes(`(freed-ustx u${10n * STX})`), shr.join(' | ').slice(0, 200)],
+      ['accepted: ZERO seat deleted (is-og false)', a(zeroIsOg) === 'false', a(zeroIsOg)],
+      ['accepted: ZERO cover u0', a(zeroCover) === 'u0', a(zeroCover)],
+      ['accepted: og-seats 3 -> 2, covered 1,006 STX', String(seatsCov(a(zeroStatus))) === String([2n, LATE_USTX + 6n * STX]), a(zeroStatus)],
+      ['accepted: evict-og on the dropped seat does not free anything', !a(evictZero).startsWith('(ok') && topic(evictZero, 'og-evict').length === 0, a(evictZero).slice(0, 160)],
+      ['accepted: final 2 seats (HOP 6, LATE 1,000)', String(seatsCov(a(final))) === String([2n, LATE_USTX + 6n * STX]), a(final)],
+    ];
+  }
+  return [...head,
+    ['refused: ZERO still holds the seat (is-og true)', a(zeroIsOg) === 'true', a(zeroIsOg)],
+    ['refused: ZERO cover unchanged at 10 STX', a(zeroCover) === `u${10n * STX}`, a(zeroCover)],
+    ['refused: og-seats still 3', String(seatsCov(a(zeroStatus))) === String([3n, LATE_USTX + 16n * STX]), a(zeroStatus)],
+    ['refused: ZERO evictable, og-evict print 10 STX', a(evictZero) === `(ok u${10n * STX})` && topic(evictZero, 'og-evict').length === 1, topic(evictZero, 'og-evict').join('').slice(0, 160)],
+    ['refused: final 2 seats (HOP 6, LATE 1,000)', String(seatsCov(a(final))) === String([2n, LATE_USTX + 6n * STX]), a(final)],
+  ];
+}
 
 await s.run('juice-og-shrink', (a, result) => {
   const prints = (slot) => (result.steps[slot]?.Result?.Transaction?.Ok?.events ?? [])
@@ -106,7 +139,6 @@ await s.run('juice-og-shrink', (a, result) => {
     ['equal update: no og-shrink and no og-seat print',
       topic(same, 'og-shrink').length === 0 && topic(same, 'og-seat').length === 0, prints(same).join(' | ').slice(0, 160)],
     [`unstake unlock cycle = ${C + 1}`, a(uns).includes(`(unlock-cycle u${C + 1})`), a(uns).slice(0, 160)],
-    ['zero stake never reaches the pool (node refuses a 0 lock)', a(zero).includes('PoxInvalidLockAmount'), a(zero).slice(0, 200)],
-    ['og-evict print for ZERO: 10 STX', topic(evictZero, 'og-evict').length === 1, topic(evictZero, 'og-evict').join('').slice(0, 160)],
+    ...zeroChecks(a, topic),
   ];
 });

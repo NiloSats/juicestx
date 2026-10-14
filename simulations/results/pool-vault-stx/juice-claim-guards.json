@@ -1,7 +1,7 @@
 {
-  "id": "46edf261a74e3f617594b81b82317f06",
-  "url": "https://stxer.xyz/simulations/mainnet/46edf261a74e3f617594b81b82317f06",
-  "block": 9208937,
+  "id": "161efa05e04d48e79b09e3382542b231",
+  "url": "https://stxer.xyz/simulations/mainnet/161efa05e04d48e79b09e3382542b231",
+  "block": 9210118,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -10,7 +10,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
     "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
     "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
-    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
+    "juice-pool-sbtc-signer": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03a84ea27ce7b5a8a26644acfdd02ea5d129d4e15dc39c040e0221fd1291befe56)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03592c0ce3d5ebcaceb6cef4f1cd3cf0ad6ae096238f7e9bb5cb2d5fa122d46f0d)))"
     },
     {
       "label": "cycle 142 has nothing to claim: pox-5 refuses (u32)",

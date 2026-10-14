@@ -1,8 +1,8 @@
 {
-  "id": "8063c1dab9dc5ae6b5aadc4da479a9aa",
-  "url": "https://stxer.xyz/simulations/mainnet/8063c1dab9dc5ae6b5aadc4da479a9aa",
-  "block": 9208944,
-  "proofTimestamp": 1792003420,
+  "id": "2c27e137d606fa8cae1ee3c2b0672b63",
+  "url": "https://stxer.xyz/simulations/mainnet/2c27e137d606fa8cae1ee3c2b0672b63",
+  "block": 9210119,
+  "proofTimestamp": 1792013911,
   "verifiesPerFill": 1,
   "vaultFeesPerRouterSwap": 2,
   "sourceHashes": {
@@ -12,7 +12,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
     "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
     "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
-    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
+    "juice-pool-sbtc-signer": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a"
   },
   "fixtures": [
     "live oracle fee var-set to u10 by Eval",
@@ -114,7 +114,7 @@
     {
       "label": "real STX maker bid so the router fills on Jing",
       "passed": true,
-      "actual": "(ok u293315068)"
+      "actual": "(ok u287405919)"
     },
     {
       "label": "fixture: live oracle fee set to u10 (Eval in oracle context)",
@@ -179,12 +179,12 @@
     {
       "label": "0-STX caller: router-swap sells the whole batch with the budget set",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19358794589926) (mid u19554337969623) (out u194957130) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u18968790722557) (mid u19160394669250) (out u191029508) (unsold u0)))))"
     },
     {
       "label": "vault STX after the sale",
       "passed": true,
-      "actual": "u194958120"
+      "actual": "u191030498"
     },
     {
       "label": "caller still holds 0 STX after the sale",
@@ -199,7 +199,7 @@
     {
       "label": "finalize attributes the STX to the pool",
       "passed": true,
-      "actual": "(ok u194958020)"
+      "actual": "(ok u191030398)"
     },
     {
       "label": "F2: vault keeps exactly the budget u100 after finalize",
@@ -234,7 +234,7 @@
     {
       "label": "batch 2: real STX maker bid",
       "passed": true,
-      "actual": "(ok u293315068)"
+      "actual": "(ok u287405919)"
     },
     {
       "label": "batch 2: vault STX before the sale (reserve only)",
@@ -244,12 +244,12 @@
     {
       "label": "batch 2: 0-STX caller sells; the kept reserve pays the verifies",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19358794589926) (mid u19554337969623) (out u194957130) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u18968790722557) (mid u19160394669250) (out u191029508) (unsold u0)))))"
     },
     {
       "label": "batch 2: vault STX after the sale",
       "passed": true,
-      "actual": "u194957220"
+      "actual": "u191029598"
     },
     {
       "label": "batch 2: caller still holds 0 STX",
@@ -259,7 +259,7 @@
     {
       "label": "batch 2: finalize sends balance - budget",
       "passed": true,
-      "actual": "(ok u194957120)"
+      "actual": "(ok u191029498)"
     },
     {
       "label": "batch 2: vault again keeps u100",
@@ -279,12 +279,12 @@
     {
       "label": "vault STX delta = out - 1 x 10 (refresh-mid, outside the router)",
       "passed": true,
-      "actual": "delta 194957120, out 194957130"
+      "actual": "delta 191029498, out 191029508"
     },
     {
       "label": "F2: finalize passes float + out - refresh-mid fee - budget u100",
       "passed": true,
-      "actual": "(ok u194958020) vs 194958020"
+      "actual": "(ok u191030398) vs 191030398"
     },
     {
       "label": "the sale went through the Jing leg (market verified inside the vault)",
@@ -304,12 +304,12 @@
     {
       "label": "F2 batch 2: vault delta = out - refresh-mid fee",
       "passed": true,
-      "actual": "out 194957130"
+      "actual": "out 191029508"
     },
     {
       "label": "F2 batch 2: finalize = out - refresh-mid fee (reserve refilled)",
       "passed": true,
-      "actual": "(ok u194957120) vs 194957120"
+      "actual": "(ok u191029498) vs 191029498"
     }
   ]
 }

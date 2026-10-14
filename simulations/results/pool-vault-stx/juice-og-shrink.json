@@ -1,7 +1,7 @@
 {
-  "id": "0b130236b9c903c9be1bcd7826071b6c",
-  "url": "https://stxer.xyz/simulations/mainnet/0b130236b9c903c9be1bcd7826071b6c",
-  "block": 9208941,
+  "id": "3abedcde880eb6ca558039f937950cd5",
+  "url": "https://stxer.xyz/simulations/mainnet/3abedcde880eb6ca558039f937950cd5",
+  "block": 9210117,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
@@ -10,7 +10,7 @@
     "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
     "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
     "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
-    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
+    "juice-pool-sbtc-signer": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02eeda3763af2b01b329e70f3bc2caba18c60aa0ee9101dbe5314ec984591b0dae)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x028a77689c395de0e10b8012375acb8116a00cce9ff9ea9fc48eada48c9f013cbc)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -129,7 +129,7 @@
       "actual": "(err u129)"
     },
     {
-      "label": "into cycle 146, HOP lock ended: advance 1219 burn blocks -> offset 20",
+      "label": "into cycle 146, HOP lock ended: advance 1200 burn blocks -> offset 20",
       "passed": true,
       "actual": "ok"
     },
@@ -234,17 +234,27 @@
       "actual": "ENGINE {\"Transaction\":{\"Err\":\"Internal(Expect(\\\"pox-5 stake: failed to lock 0 from SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N until 1176350: pox-5 invariant violated: PoxInvalidLockAmount\\\"))\"}}"
     },
     {
-      "label": "PROBE: ZERO cover unchanged at 10 STX",
+      "label": "PROBE: ZERO is-og after the 0 stake (recorded)",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "PROBE: ZERO cover after the 0 stake (recorded)",
       "passed": true,
       "actual": "u10000000"
     },
     {
-      "label": "ZERO evictable as before",
+      "label": "PROBE: og status after the 0 stake (recorded)",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1016000000) (seats u3))"
+    },
+    {
+      "label": "ZERO evict-og after the probe (recorded)",
       "passed": true,
       "actual": "(ok u10000000)"
     },
     {
-      "label": "final: 2 seats (HOP 6, LATE 1,000)",
+      "label": "final og status (recorded)",
       "passed": true,
       "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1006000000) (seats u2))"
     },
@@ -264,14 +274,34 @@
       "actual": "(ok (tuple (amount-ustx u200000000000) (first-reward-cycle u146) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B"
     },
     {
-      "label": "zero stake never reaches the pool (node refuses a 0 lock)",
+      "label": "RECORD: 0-uSTX fresh stake after the lock ended: REFUSED by the node (PoxInvalidLockAmount)",
       "passed": true,
       "actual": "ENGINE {\"Transaction\":{\"Err\":\"Internal(Expect(\\\"pox-5 stake: failed to lock 0 from SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N until 1176350: pox-5 invariant violated: PoxInvalidLockAmount\\\"))\"}}"
     },
     {
-      "label": "og-evict print for ZERO: 10 STX",
+      "label": "refused: ZERO still holds the seat (is-og true)",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "refused: ZERO cover unchanged at 10 STX",
+      "passed": true,
+      "actual": "u10000000"
+    },
+    {
+      "label": "refused: og-seats still 3",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1016000000) (seats u3))"
+    },
+    {
+      "label": "refused: ZERO evictable, og-evict print 10 STX",
       "passed": true,
       "actual": "(tuple (freed-ustx u10000000) (seats u2) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (topic \"og-evict\"))"
+    },
+    {
+      "label": "refused: final 2 seats (HOP 6, LATE 1,000)",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1006000000) (seats u2))"
     }
   ]
 }
