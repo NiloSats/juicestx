@@ -2,8 +2,8 @@
 
 Rendezvous (RV, `@stacks/rendezvous` 1.0.0-rc.1) invariant fuzzing of the final
 sources `contracts/pox-5/juice-pool-sbtc-signer.clar` and
-`contracts/pox-5/juice-sbtc-autoswap.clar` (commit `fa8c48a`, unchanged up to the
-commit that adds this folder; `source-hashes.json` holds the sha256 of both).
+`contracts/pox-5/juice-sbtc-autoswap.clar` (pool `570226c`, vault `fa8c48a`;
+`source-hashes.json` holds the sha256 of both repo files).
 Production `contracts/` and `Clarinet.toml` are only read.
 
 ```sh
@@ -114,7 +114,18 @@ router haircut; each one most of the time), `rv-haircut`, `rv-open` (POOL mints
 and funds), and `rv-maker` (an STX maker on the market; POOL only, so fills
 land on an address that is already in every sum).
 
-## Results (2026-10-14, RV 1.0.0-rc.1, Clarinet SDK 3.21)
+## Results on pool 570226c (2026-10-14, RV 1.0.0-rc.1, Clarinet SDK 3.21)
+
+Pool `570226c` (zero-seat guard: a 0 stake over an OG seat drops the seat),
+repo sha256 `f8217080...85a3`. The vault is unchanged (`fa8c48a`, `1cd93089...a8c7`).
+
+| suite | seeds | runs | result |
+| --- | --- | --- | --- |
+| pool (zero stakes on) | 20261014, 20261015 | 2000 each | 0 failures, 13 invariants (`og-seats-is-count` now holds) |
+| pool `--no-zero-stake` | 20261014, 20261015 | 2000 each | 0 failures, 13 invariants |
+| vault extended | 20261014, 20261015 | 2000 each | 0 failures, 12 invariants |
+
+## History: results on pool fa8c48a (2026-10-14, RV 1.0.0-rc.1, Clarinet SDK 3.21)
 
 | suite | seeds | runs | result |
 | --- | --- | --- | --- |
@@ -136,6 +147,9 @@ Coverage that is not vacuous (successful calls per seed, 20261014 / 20261015):
   checked wrappers: 114 / 107.
 
 ## Finding: a zero-uSTX restake leaves a zero-cover OG seat
+
+Fixed in `570226c` (a 0 stake over an OG seat drops the seat). The text below
+describes the `fa8c48a` source.
 
 Repro: `tests/rv-repro-og-zero-seat.test.ts` (`npm run test:rv-repro`).
 
