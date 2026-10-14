@@ -1,16 +1,16 @@
 {
-  "id": "8fea0140abaa163798e31f38dc34f80e",
-  "url": "https://stxer.xyz/simulations/mainnet/8fea0140abaa163798e31f38dc34f80e",
-  "block": 9207787,
+  "id": "62c90d33fd1c7b5180639d1cdc7e5dbe",
+  "url": "https://stxer.xyz/simulations/mainnet/62c90d33fd1c7b5180639d1cdc7e5dbe",
+  "block": 9208568,
   "cycle": 145,
   "sourceHashes": {
-    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
-    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "943927cc5067d21d50c87e3f7464d379c3d704cb2ed8dcbfb5c88205a68c5a67",
-    "swap-router-sbtc-stx-jing-v5-3": "fb64c9a0c642bdf821cfb754900e58edc7d5b7f27aeab7348cc34a4645e43698",
-    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "1cd93089874a08f9e02b4c72c9b307bcfb4b3bcbb419394cf7cd9a5d14bca8c7",
-    "juice-pool-sbtc-signer": "603a7dca7cdcf0be9d11246aa5b81e12d3ab771f1f53d4bf6e1cf883e59a0c9c"
+    "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
+    "jing-ladder-v1": "6a5e204d47d865047fcb7d80d97e57d13b23fc1bf843958323c8c7d0d10d0dd7",
+    "markets-sbtc-stx-jing-v6-3": "7b2f0f44fca1feaf1e8c30f195d0a639a3daf102db4f4c84060c8062132f5f4c",
+    "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
+    "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
+    "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
+    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03bfa5c84227f55d518e18a224d1b32136841548741b3b01f6d74f0ae4f08fff20)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02010b155e5f216dd61857d5867c6906564ee98836cf558b8f5802c45ec1f84087)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -244,7 +244,7 @@
       "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u201009726243) (seats u3))"
     },
     {
-      "label": "(f) into the cycle 145 prepare phase: advance 1151 burn blocks -> offset 2030",
+      "label": "(f) into the cycle 145 prepare phase: advance 1132 burn blocks -> offset 2030",
       "passed": true,
       "actual": "ok"
     },

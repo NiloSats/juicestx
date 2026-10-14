@@ -1,7 +1,7 @@
 {
-  "id": "0fc943c442ac4e5c614297c83416c107",
-  "url": "https://stxer.xyz/simulations/mainnet/0fc943c442ac4e5c614297c83416c107",
-  "block": 9207782,
+  "id": "9a28245b73f5484cad4df7a73fa32a29",
+  "url": "https://stxer.xyz/simulations/mainnet/9a28245b73f5484cad4df7a73fa32a29",
+  "block": 9208572,
   "cycle": 145,
   "rewardCycle": 144,
   "newSource": {
@@ -14,7 +14,7 @@
     "sha256": "c777a45dc0025b11ddc0050c143b6e4be67ff3d118517cea7fb0073ecd841ad4"
   },
   "sourceHashes": {
-    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
     "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7",
     "juice-pool-sbtc-signer-e8ad9b1": "c777a45dc0025b11ddc0050c143b6e4be67ff3d118517cea7fb0073ecd841ad4"
   },

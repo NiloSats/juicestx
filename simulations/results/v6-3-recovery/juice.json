@@ -1,41 +1,41 @@
 {
   "kind": "juice",
-  "forkBlock": 9105882,
+  "forkBlock": 9208577,
   "reports": [
     {
       "shape": "pending",
       "route": "pool",
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "url": "https://stxer.xyz/simulations/mainnet/f83f469e53d3fc8db349cd1ea156fd8e",
-      "checks": 105
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "url": "https://stxer.xyz/simulations/mainnet/b0f9167b21a27645a4113e5bd374237b",
+      "checks": 106
     },
     {
       "shape": "resting",
       "route": "pool",
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "url": "https://stxer.xyz/simulations/mainnet/5cc92efc01479a708d260848ffca25c0",
-      "checks": 94
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "url": "https://stxer.xyz/simulations/mainnet/9f9dc717bd1ef9d0257f7b31009709e9",
+      "checks": 95
     },
     {
       "shape": "parked",
       "route": "pool",
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "url": "https://stxer.xyz/simulations/mainnet/8a800d1d1b16282fc8267e2fbe09641e",
-      "checks": 123
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "url": "https://stxer.xyz/simulations/mainnet/32311c703fe7b345ef72531d3611921b",
+      "checks": 124
     },
     {
       "shape": "pending+resting",
       "route": "pool",
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "url": "https://stxer.xyz/simulations/mainnet/b1c7046d58b3e68a2568af37bf5ffc5d",
-      "checks": 117
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "url": "https://stxer.xyz/simulations/mainnet/95bb3eacc5888382e17378e67f085907",
+      "checks": 118
     },
     {
       "shape": "none",
       "route": "pool",
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "url": "https://stxer.xyz/simulations/mainnet/2b02e9aeca3065d55615abdaa43a95db",
-      "checks": 90
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "url": "https://stxer.xyz/simulations/mainnet/1345e5df4764feac028b69242feaadfc",
+      "checks": 91
     }
   ],
   "checks": [
@@ -44,7 +44,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 1
     },
     {
@@ -52,7 +52,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 2
     },
     {
@@ -60,7 +60,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 3
     },
     {
@@ -68,7 +68,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 4
     },
     {
@@ -76,7 +76,7 @@
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 5
     },
     {
@@ -84,7 +84,7 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 6
     },
     {
@@ -92,799 +92,807 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
       "step": 7
+    },
+    {
+      "label": "juice/pending/pool: deploy juice-swap-vault-trait-v2",
+      "actual": "(ok true)",
+      "expected": "s=>s.startsWith('(ok')",
+      "passed": true,
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 8
     },
     {
       "label": "juice/pending/pool: deploy juice-sbtc-autoswap",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 8
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 9
     },
     {
       "label": "juice/pending/pool: deploy juice-pool-sbtc-signer",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 9
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 10
     },
     {
       "label": "juice/pending/pool/normal: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 12
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 13
     },
     {
       "label": "juice/pending/pool/normal: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 13
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 14
     },
     {
       "label": "juice/pending/pool/normal: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 14
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 15
     },
     {
       "label": "juice/pending/pool/normal: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 15
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 16
     },
     {
       "label": "juice/pending/pool/normal: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 16
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 17
     },
     {
       "label": "juice/pending/pool/normal: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21619121014454)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18547766211819)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 18
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 19
     },
     {
       "label": "juice/pending/pool/normal: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 19
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 20
     },
     {
       "label": "juice/pending/pool/normal: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 20
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 21
     },
     {
       "label": "juice/pending/pool/normal: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 21
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 22
     },
     {
       "label": "juice/pending/pool/normal: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 22
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 23
     },
     {
       "label": "juice/pending/pool/normal: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 23
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 24
     },
     {
       "label": "juice/pending/pool/normal: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 24
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 25
     },
     {
       "label": "juice/pending/pool/normal: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 26
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 27
     },
     {
       "label": "juice/pending/pool/normal: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 26
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 27
     },
     {
       "label": "juice/pending/pool/normal: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 27
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 28
     },
     {
       "label": "juice/pending/pool/normal: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 28
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 29
     },
     {
       "label": "juice/pending/pool/normal: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 29
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 30
     },
     {
       "label": "juice/pending/pool/normal: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 30
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 31
     },
     {
       "label": "juice/pending/pool/normal: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 31
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 32
     },
     {
       "label": "juice/pending/pool/normal: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 32
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 33
     },
     {
       "label": "juice/pending/pool/normal: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 33
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 34
     },
     {
       "label": "juice/pending/pool/normal: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 33
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 34
     },
     {
       "label": "juice/pending/pool/normal: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 34
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 35
     },
     {
       "label": "juice/pending/pool/no-update: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 37
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 38
     },
     {
       "label": "juice/pending/pool/no-update: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 38
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 39
     },
     {
       "label": "juice/pending/pool/no-update: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 39
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 40
     },
     {
       "label": "juice/pending/pool/no-update: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 40
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 41
     },
     {
       "label": "juice/pending/pool/no-update: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 41
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 42
     },
     {
       "label": "juice/pending/pool/no-update: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21620503838008)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18548887377961)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 43
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 44
     },
     {
       "label": "juice/pending/pool/no-update: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 44
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 45
     },
     {
       "label": "juice/pending/pool/no-update: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 45
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 46
     },
     {
       "label": "juice/pending/pool/no-update: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 46
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 47
     },
     {
       "label": "juice/pending/pool/no-update: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 47
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 48
     },
     {
       "label": "juice/pending/pool/no-update: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 48
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 49
     },
     {
       "label": "juice/pending/pool/no-update: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 49
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 50
     },
     {
       "label": "juice/pending/pool/no-update: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 51
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 52
     },
     {
       "label": "juice/pending/pool/no-update: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 51
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 52
     },
     {
       "label": "juice/pending/pool/no-update: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 52
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 53
     },
     {
       "label": "juice/pending/pool/no-update: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 53
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 54
     },
     {
       "label": "juice/pending/pool/no-update: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 54
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 55
     },
     {
       "label": "juice/pending/pool/no-update: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 55
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 56
     },
     {
       "label": "juice/pending/pool/no-update: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 56
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 57
     },
     {
       "label": "juice/pending/pool/no-update: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 57
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 58
     },
     {
       "label": "juice/pending/pool/no-update: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 58
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 59
     },
     {
       "label": "juice/pending/pool/no-update: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 58
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 59
     },
     {
       "label": "juice/pending/pool/no-update: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 59
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 60
     },
     {
       "label": "juice/pending/pool/market-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 62
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 63
     },
     {
       "label": "juice/pending/pool/market-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 63
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 64
     },
     {
       "label": "juice/pending/pool/market-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 64
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 65
     },
     {
       "label": "juice/pending/pool/market-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 65
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 66
     },
     {
       "label": "juice/pending/pool/market-paused: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 66
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 67
     },
     {
       "label": "juice/pending/pool/market-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21620752099779)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18530117550348)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 68
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 69
     },
     {
       "label": "juice/pending/pool/market-paused: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 69
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 70
     },
     {
       "label": "juice/pending/pool/market-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 70
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 71
     },
     {
       "label": "juice/pending/pool/market-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 71
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 72
     },
     {
       "label": "juice/pending/pool/market-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 72
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 73
     },
     {
       "label": "juice/pending/pool/market-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 73
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 74
     },
     {
       "label": "juice/pending/pool/market-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 74
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 75
     },
     {
       "label": "juice/pending/pool/market-paused: pause market",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 75
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 76
     },
     {
       "label": "juice/pending/pool/market-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 77
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 78
     },
     {
       "label": "juice/pending/pool/market-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 77
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 78
     },
     {
       "label": "juice/pending/pool/market-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 78
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 79
     },
     {
       "label": "juice/pending/pool/market-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 79
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 80
     },
     {
       "label": "juice/pending/pool/market-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 80
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 81
     },
     {
       "label": "juice/pending/pool/market-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 81
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 82
     },
     {
       "label": "juice/pending/pool/market-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 82
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 83
     },
     {
       "label": "juice/pending/pool/market-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 83
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 84
     },
     {
       "label": "juice/pending/pool/market-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 84
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 85
     },
     {
       "label": "juice/pending/pool/market-paused: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 84
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 85
     },
     {
       "label": "juice/pending/pool/market-paused: recovery leaves market paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 85
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 86
     },
     {
       "label": "juice/pending/pool/market-paused: unpause for next setup",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 86
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 87
     },
     {
       "label": "juice/pending/pool/market-paused: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 87
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 88
     },
     {
       "label": "juice/pending/pool/core-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 90
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 91
     },
     {
       "label": "juice/pending/pool/core-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 91
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 92
     },
     {
       "label": "juice/pending/pool/core-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u0))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 92
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 93
     },
     {
       "label": "juice/pending/pool/core-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 93
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 94
     },
     {
       "label": "juice/pending/pool/core-paused: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 94
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 95
     },
     {
       "label": "juice/pending/pool/core-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21612022365386)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18530665785684)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 96
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 97
     },
     {
       "label": "juice/pending/pool/core-paused: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 97
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 98
     },
     {
       "label": "juice/pending/pool/core-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 98
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 99
     },
     {
       "label": "juice/pending/pool/core-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 99
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 100
     },
     {
       "label": "juice/pending/pool/core-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 100
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 101
     },
     {
       "label": "juice/pending/pool/core-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 101
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 102
     },
     {
       "label": "juice/pending/pool/core-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 102
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 103
     },
     {
       "label": "juice/pending/pool/core-paused: pause core-v6",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 103
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 104
     },
     {
       "label": "juice/pending/pool/core-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 105
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 106
     },
     {
       "label": "juice/pending/pool/core-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 105
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 106
     },
     {
       "label": "juice/pending/pool/core-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 106
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 107
     },
     {
       "label": "juice/pending/pool/core-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 107
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 108
     },
     {
       "label": "juice/pending/pool/core-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 108
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 109
     },
     {
       "label": "juice/pending/pool/core-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 109
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 110
     },
     {
       "label": "juice/pending/pool/core-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 110
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 111
     },
     {
       "label": "juice/pending/pool/core-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 111
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 112
     },
     {
       "label": "juice/pending/pool/core-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 112
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 113
     },
     {
       "label": "juice/pending/pool/core-paused: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 112
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 113
     },
     {
       "label": "juice/pending/pool/core-paused: recovery leaves core paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "f83f469e53d3fc8db349cd1ea156fd8e",
-      "step": 113
+      "sid": "b0f9167b21a27645a4113e5bd374237b",
+      "step": 114
     },
     {
       "label": "juice/resting/pool: deploy exact jing-core-v6",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 1
     },
     {
@@ -892,7 +900,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 2
     },
     {
@@ -900,7 +908,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 3
     },
     {
@@ -908,7 +916,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 4
     },
     {
@@ -916,7 +924,7 @@
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 5
     },
     {
@@ -924,7 +932,7 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 6
     },
     {
@@ -932,711 +940,719 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
       "step": 7
+    },
+    {
+      "label": "juice/resting/pool: deploy juice-swap-vault-trait-v2",
+      "actual": "(ok true)",
+      "expected": "s=>s.startsWith('(ok')",
+      "passed": true,
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 8
     },
     {
       "label": "juice/resting/pool: deploy juice-sbtc-autoswap",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 8
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 9
     },
     {
       "label": "juice/resting/pool: deploy juice-pool-sbtc-signer",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 9
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 10
     },
     {
       "label": "juice/resting/pool/normal: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 12
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 13
     },
     {
       "label": "juice/resting/pool/normal: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 13
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 14
     },
     {
       "label": "juice/resting/pool/normal: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 14
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 15
     },
     {
       "label": "juice/resting/pool/normal: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 15
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 16
     },
     {
       "label": "juice/resting/pool/normal: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21617338100217)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18530858568906)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 16
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 17
     },
     {
       "label": "juice/resting/pool/normal: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 17
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 18
     },
     {
       "label": "juice/resting/pool/normal: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 18
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 19
     },
     {
       "label": "juice/resting/pool/normal: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 19
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 20
     },
     {
       "label": "juice/resting/pool/normal: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 20
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 21
     },
     {
       "label": "juice/resting/pool/normal: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 21
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 22
     },
     {
       "label": "juice/resting/pool/normal: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 22
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 23
     },
     {
       "label": "juice/resting/pool/normal: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 24
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 25
     },
     {
       "label": "juice/resting/pool/normal: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 24
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 25
     },
     {
       "label": "juice/resting/pool/normal: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 25
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 26
     },
     {
       "label": "juice/resting/pool/normal: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 26
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 27
     },
     {
       "label": "juice/resting/pool/normal: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 27
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 28
     },
     {
       "label": "juice/resting/pool/normal: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 28
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 29
     },
     {
       "label": "juice/resting/pool/normal: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 29
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 30
     },
     {
       "label": "juice/resting/pool/normal: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 30
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 31
     },
     {
       "label": "juice/resting/pool/normal: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 31
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 32
     },
     {
       "label": "juice/resting/pool/no-update: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 34
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 35
     },
     {
       "label": "juice/resting/pool/no-update: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 35
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 36
     },
     {
       "label": "juice/resting/pool/no-update: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 36
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 37
     },
     {
       "label": "juice/resting/pool/no-update: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 37
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 38
     },
     {
       "label": "juice/resting/pool/no-update: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21617482545675)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18534129167816)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 38
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 39
     },
     {
       "label": "juice/resting/pool/no-update: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 39
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 40
     },
     {
       "label": "juice/resting/pool/no-update: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 40
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 41
     },
     {
       "label": "juice/resting/pool/no-update: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 41
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 42
     },
     {
       "label": "juice/resting/pool/no-update: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 42
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 43
     },
     {
       "label": "juice/resting/pool/no-update: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 43
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 44
     },
     {
       "label": "juice/resting/pool/no-update: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 44
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 45
     },
     {
       "label": "juice/resting/pool/no-update: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 46
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 47
     },
     {
       "label": "juice/resting/pool/no-update: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 46
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 47
     },
     {
       "label": "juice/resting/pool/no-update: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 47
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 48
     },
     {
       "label": "juice/resting/pool/no-update: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 48
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 49
     },
     {
       "label": "juice/resting/pool/no-update: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 49
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 50
     },
     {
       "label": "juice/resting/pool/no-update: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 50
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 51
     },
     {
       "label": "juice/resting/pool/no-update: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 51
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 52
     },
     {
       "label": "juice/resting/pool/no-update: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 52
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 53
     },
     {
       "label": "juice/resting/pool/no-update: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 53
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 54
     },
     {
       "label": "juice/resting/pool/market-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 56
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 57
     },
     {
       "label": "juice/resting/pool/market-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 57
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 58
     },
     {
       "label": "juice/resting/pool/market-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 58
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 59
     },
     {
       "label": "juice/resting/pool/market-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 59
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 60
     },
     {
       "label": "juice/resting/pool/market-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21617325965378)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18539922471294)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 60
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 61
     },
     {
       "label": "juice/resting/pool/market-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 61
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 62
     },
     {
       "label": "juice/resting/pool/market-paused: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 62
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 63
     },
     {
       "label": "juice/resting/pool/market-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 63
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 64
     },
     {
       "label": "juice/resting/pool/market-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 64
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 65
     },
     {
       "label": "juice/resting/pool/market-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 65
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 66
     },
     {
       "label": "juice/resting/pool/market-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 66
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 67
     },
     {
       "label": "juice/resting/pool/market-paused: pause market",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 67
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 68
     },
     {
       "label": "juice/resting/pool/market-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 69
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 70
     },
     {
       "label": "juice/resting/pool/market-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 69
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 70
     },
     {
       "label": "juice/resting/pool/market-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 70
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 71
     },
     {
       "label": "juice/resting/pool/market-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 71
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 72
     },
     {
       "label": "juice/resting/pool/market-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 72
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 73
     },
     {
       "label": "juice/resting/pool/market-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 73
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 74
     },
     {
       "label": "juice/resting/pool/market-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 74
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 75
     },
     {
       "label": "juice/resting/pool/market-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 75
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 76
     },
     {
       "label": "juice/resting/pool/market-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 76
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 77
     },
     {
       "label": "juice/resting/pool/market-paused: recovery leaves market paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 77
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 78
     },
     {
       "label": "juice/resting/pool/market-paused: unpause for next setup",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 78
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 79
     },
     {
       "label": "juice/resting/pool/core-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 81
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 82
     },
     {
       "label": "juice/resting/pool/core-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 82
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 83
     },
     {
       "label": "juice/resting/pool/core-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u0))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 83
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 84
     },
     {
       "label": "juice/resting/pool/core-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 84
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 85
     },
     {
       "label": "juice/resting/pool/core-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21617505370862)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18539998028948)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 85
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 86
     },
     {
       "label": "juice/resting/pool/core-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 86
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 87
     },
     {
       "label": "juice/resting/pool/core-paused: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 87
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 88
     },
     {
       "label": "juice/resting/pool/core-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 88
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 89
     },
     {
       "label": "juice/resting/pool/core-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 89
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 90
     },
     {
       "label": "juice/resting/pool/core-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 90
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 91
     },
     {
       "label": "juice/resting/pool/core-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 91
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 92
     },
     {
       "label": "juice/resting/pool/core-paused: pause core-v6",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 92
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 93
     },
     {
       "label": "juice/resting/pool/core-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 94
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 95
     },
     {
       "label": "juice/resting/pool/core-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 94
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 95
     },
     {
       "label": "juice/resting/pool/core-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 95
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 96
     },
     {
       "label": "juice/resting/pool/core-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 96
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 97
     },
     {
       "label": "juice/resting/pool/core-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 97
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 98
     },
     {
       "label": "juice/resting/pool/core-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 98
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 99
     },
     {
       "label": "juice/resting/pool/core-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 99
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 100
     },
     {
       "label": "juice/resting/pool/core-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 100
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 101
     },
     {
       "label": "juice/resting/pool/core-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 101
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 102
     },
     {
       "label": "juice/resting/pool/core-paused: recovery leaves core paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "5cc92efc01479a708d260848ffca25c0",
-      "step": 102
+      "sid": "9f9dc717bd1ef9d0257f7b31009709e9",
+      "step": 103
     },
     {
       "label": "juice/parked/pool: deploy exact jing-core-v6",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 1
     },
     {
@@ -1644,7 +1660,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 2
     },
     {
@@ -1652,7 +1668,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 3
     },
     {
@@ -1660,7 +1676,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 4
     },
     {
@@ -1668,7 +1684,7 @@
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 5
     },
     {
@@ -1676,7 +1692,7 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 6
     },
     {
@@ -1684,943 +1700,951 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
+      "sid": "32311c703fe7b345ef72531d3611921b",
       "step": 7
+    },
+    {
+      "label": "juice/parked/pool: deploy juice-swap-vault-trait-v2",
+      "actual": "(ok true)",
+      "expected": "s=>s.startsWith('(ok')",
+      "passed": true,
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 8
     },
     {
       "label": "juice/parked/pool: deploy juice-sbtc-autoswap",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 8
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 9
     },
     {
       "label": "juice/parked/pool: deploy juice-pool-sbtc-signer",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 9
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 10
     },
     {
       "label": "juice/parked/pool/normal: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 12
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 13
     },
     {
       "label": "juice/parked/pool/normal: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 13
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 14
     },
     {
       "label": "juice/parked/pool/normal: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 14
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 15
     },
     {
       "label": "juice/parked/pool/normal: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 15
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 16
     },
     {
       "label": "juice/parked/pool/normal: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21613031784249)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18541357072883)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 16
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 17
     },
     {
       "label": "juice/parked/pool/normal: reserve 49 seats using public ladder setter",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 17
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 18
     },
     {
       "label": "juice/parked/pool/normal: sync reservation",
       "actual": "(ok u49)",
       "expected": "(ok u49)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 18
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 19
     },
     {
       "label": "juice/parked/pool/normal: larger entrant submits for occupied seat",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 19
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 20
     },
     {
       "label": "juice/parked/pool/normal: settle entrant and park incumbent",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 20
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 21
     },
     {
       "label": "juice/parked/pool/normal: vault is really parked",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 21
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 22
     },
     {
       "label": "juice/parked/pool/normal: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 22
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 23
     },
     {
       "label": "juice/parked/pool/normal: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 23
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 24
     },
     {
       "label": "juice/parked/pool/normal: parked amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 24
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 25
     },
     {
       "label": "juice/parked/pool/normal: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 25
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 26
     },
     {
       "label": "juice/parked/pool/normal: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 26
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 27
     },
     {
       "label": "juice/parked/pool/normal: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 27
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 28
     },
     {
       "label": "juice/parked/pool/normal: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 29
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 30
     },
     {
       "label": "juice/parked/pool/normal: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 29
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 30
     },
     {
       "label": "juice/parked/pool/normal: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 30
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 31
     },
     {
       "label": "juice/parked/pool/normal: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 31
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 32
     },
     {
       "label": "juice/parked/pool/normal: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 32
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 33
     },
     {
       "label": "juice/parked/pool/normal: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 33
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 34
     },
     {
       "label": "juice/parked/pool/normal: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 34
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 35
     },
     {
       "label": "juice/parked/pool/normal: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 35
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 36
     },
     {
       "label": "juice/parked/pool/normal: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 36
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 37
     },
     {
       "label": "juice/parked/pool/normal: remove larger entrant",
       "actual": "(ok u200000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 37
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 38
     },
     {
       "label": "juice/parked/pool/normal: restore reservation",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 38
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 39
     },
     {
       "label": "juice/parked/pool/normal: sync restored reservation",
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 39
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 40
     },
     {
       "label": "juice/parked/pool/no-update: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 42
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 43
     },
     {
       "label": "juice/parked/pool/no-update: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 43
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 44
     },
     {
       "label": "juice/parked/pool/no-update: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 44
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 45
     },
     {
       "label": "juice/parked/pool/no-update: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 45
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 46
     },
     {
       "label": "juice/parked/pool/no-update: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21611463697284)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18537925958634)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 46
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 47
     },
     {
       "label": "juice/parked/pool/no-update: reserve 49 seats using public ladder setter",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 47
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 48
     },
     {
       "label": "juice/parked/pool/no-update: sync reservation",
       "actual": "(ok u49)",
       "expected": "(ok u49)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 48
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 49
     },
     {
       "label": "juice/parked/pool/no-update: larger entrant submits for occupied seat",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 49
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 50
     },
     {
       "label": "juice/parked/pool/no-update: settle entrant and park incumbent",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 50
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 51
     },
     {
       "label": "juice/parked/pool/no-update: vault is really parked",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 51
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 52
     },
     {
       "label": "juice/parked/pool/no-update: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 52
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 53
     },
     {
       "label": "juice/parked/pool/no-update: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 53
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 54
     },
     {
       "label": "juice/parked/pool/no-update: parked amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 54
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 55
     },
     {
       "label": "juice/parked/pool/no-update: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 55
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 56
     },
     {
       "label": "juice/parked/pool/no-update: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 56
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 57
     },
     {
       "label": "juice/parked/pool/no-update: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 57
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 58
     },
     {
       "label": "juice/parked/pool/no-update: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 59
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 60
     },
     {
       "label": "juice/parked/pool/no-update: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 59
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 60
     },
     {
       "label": "juice/parked/pool/no-update: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 60
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 61
     },
     {
       "label": "juice/parked/pool/no-update: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 61
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 62
     },
     {
       "label": "juice/parked/pool/no-update: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 62
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 63
     },
     {
       "label": "juice/parked/pool/no-update: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 63
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 64
     },
     {
       "label": "juice/parked/pool/no-update: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 64
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 65
     },
     {
       "label": "juice/parked/pool/no-update: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 65
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 66
     },
     {
       "label": "juice/parked/pool/no-update: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 66
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 67
     },
     {
       "label": "juice/parked/pool/no-update: remove larger entrant",
       "actual": "(ok u200000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 67
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 68
     },
     {
       "label": "juice/parked/pool/no-update: restore reservation",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 68
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 69
     },
     {
       "label": "juice/parked/pool/no-update: sync restored reservation",
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 69
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 70
     },
     {
       "label": "juice/parked/pool/market-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 72
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 73
     },
     {
       "label": "juice/parked/pool/market-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 73
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 74
     },
     {
       "label": "juice/parked/pool/market-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 74
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 75
     },
     {
       "label": "juice/parked/pool/market-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 75
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 76
     },
     {
       "label": "juice/parked/pool/market-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21610578042573)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18525326144196)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 76
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 77
     },
     {
       "label": "juice/parked/pool/market-paused: reserve 49 seats using public ladder setter",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 77
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 78
     },
     {
       "label": "juice/parked/pool/market-paused: sync reservation",
       "actual": "(ok u49)",
       "expected": "(ok u49)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 78
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 79
     },
     {
       "label": "juice/parked/pool/market-paused: larger entrant submits for occupied seat",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 79
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 80
     },
     {
       "label": "juice/parked/pool/market-paused: settle entrant and park incumbent",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 80
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 81
     },
     {
       "label": "juice/parked/pool/market-paused: vault is really parked",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 81
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 82
     },
     {
       "label": "juice/parked/pool/market-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 82
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 83
     },
     {
       "label": "juice/parked/pool/market-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 83
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 84
     },
     {
       "label": "juice/parked/pool/market-paused: parked amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 84
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 85
     },
     {
       "label": "juice/parked/pool/market-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 85
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 86
     },
     {
       "label": "juice/parked/pool/market-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 86
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 87
     },
     {
       "label": "juice/parked/pool/market-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 87
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 88
     },
     {
       "label": "juice/parked/pool/market-paused: pause market",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 88
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 89
     },
     {
       "label": "juice/parked/pool/market-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 90
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 91
     },
     {
       "label": "juice/parked/pool/market-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 90
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 91
     },
     {
       "label": "juice/parked/pool/market-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 91
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 92
     },
     {
       "label": "juice/parked/pool/market-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 92
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 93
     },
     {
       "label": "juice/parked/pool/market-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 93
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 94
     },
     {
       "label": "juice/parked/pool/market-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 94
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 95
     },
     {
       "label": "juice/parked/pool/market-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 95
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 96
     },
     {
       "label": "juice/parked/pool/market-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 96
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 97
     },
     {
       "label": "juice/parked/pool/market-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 97
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 98
     },
     {
       "label": "juice/parked/pool/market-paused: recovery leaves market paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 98
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 99
     },
     {
       "label": "juice/parked/pool/market-paused: unpause for next setup",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 99
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 100
     },
     {
       "label": "juice/parked/pool/market-paused: remove larger entrant",
       "actual": "(ok u200000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 100
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 101
     },
     {
       "label": "juice/parked/pool/market-paused: restore reservation",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 101
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 102
     },
     {
       "label": "juice/parked/pool/market-paused: sync restored reservation",
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 102
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 103
     },
     {
       "label": "juice/parked/pool/core-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 105
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 106
     },
     {
       "label": "juice/parked/pool/core-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 106
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 107
     },
     {
       "label": "juice/parked/pool/core-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u0))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 107
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 108
     },
     {
       "label": "juice/parked/pool/core-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 108
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 109
     },
     {
       "label": "juice/parked/pool/core-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21597826044171)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18525792310026)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 109
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 110
     },
     {
       "label": "juice/parked/pool/core-paused: reserve 49 seats using public ladder setter",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 110
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 111
     },
     {
       "label": "juice/parked/pool/core-paused: sync reservation",
       "actual": "(ok u49)",
       "expected": "(ok u49)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 111
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 112
     },
     {
       "label": "juice/parked/pool/core-paused: larger entrant submits for occupied seat",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 112
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 113
     },
     {
       "label": "juice/parked/pool/core-paused: settle entrant and park incumbent",
       "actual": "(ok u200000)",
       "expected": "(ok u200000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 113
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 114
     },
     {
       "label": "juice/parked/pool/core-paused: vault is really parked",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 114
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 115
     },
     {
       "label": "juice/parked/pool/core-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 115
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 116
     },
     {
       "label": "juice/parked/pool/core-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 116
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 117
     },
     {
       "label": "juice/parked/pool/core-paused: parked amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 117
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 118
     },
     {
       "label": "juice/parked/pool/core-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 118
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 119
     },
     {
       "label": "juice/parked/pool/core-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 119
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 120
     },
     {
       "label": "juice/parked/pool/core-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 120
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 121
     },
     {
       "label": "juice/parked/pool/core-paused: pause core-v6",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 121
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 122
     },
     {
       "label": "juice/parked/pool/core-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 123
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 124
     },
     {
       "label": "juice/parked/pool/core-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 123
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 124
     },
     {
       "label": "juice/parked/pool/core-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 124
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 125
     },
     {
       "label": "juice/parked/pool/core-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 125
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 126
     },
     {
       "label": "juice/parked/pool/core-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 126
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 127
     },
     {
       "label": "juice/parked/pool/core-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 127
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 128
     },
     {
       "label": "juice/parked/pool/core-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 128
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 129
     },
     {
       "label": "juice/parked/pool/core-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 129
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 130
     },
     {
       "label": "juice/parked/pool/core-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 130
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 131
     },
     {
       "label": "juice/parked/pool/core-paused: recovery leaves core paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "8a800d1d1b16282fc8267e2fbe09641e",
-      "step": 131
+      "sid": "32311c703fe7b345ef72531d3611921b",
+      "step": 132
     },
     {
       "label": "juice/pending+resting/pool: deploy exact jing-core-v6",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 1
     },
     {
@@ -2628,7 +2652,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 2
     },
     {
@@ -2636,7 +2660,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 3
     },
     {
@@ -2644,7 +2668,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 4
     },
     {
@@ -2652,7 +2676,7 @@
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 5
     },
     {
@@ -2660,7 +2684,7 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 6
     },
     {
@@ -2668,895 +2692,903 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
+      "sid": "95bb3eacc5888382e17378e67f085907",
       "step": 7
+    },
+    {
+      "label": "juice/pending+resting/pool: deploy juice-swap-vault-trait-v2",
+      "actual": "(ok true)",
+      "expected": "s=>s.startsWith('(ok')",
+      "passed": true,
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 8
     },
     {
       "label": "juice/pending+resting/pool: deploy juice-sbtc-autoswap",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 8
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 9
     },
     {
       "label": "juice/pending+resting/pool: deploy juice-pool-sbtc-signer",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 9
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 10
     },
     {
       "label": "juice/pending+resting/pool/normal: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 12
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 13
     },
     {
       "label": "juice/pending+resting/pool/normal: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 13
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 14
     },
     {
       "label": "juice/pending+resting/pool/normal: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 14
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 15
     },
     {
       "label": "juice/pending+resting/pool/normal: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 15
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 16
     },
     {
       "label": "juice/pending+resting/pool/normal: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21595823331150)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18525971822572)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 16
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 17
     },
     {
       "label": "juice/pending+resting/pool/normal: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 17
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 18
     },
     {
       "label": "juice/pending+resting/pool/normal: settle opposite seed",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 19
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 20
     },
     {
       "label": "juice/pending+resting/pool/normal: second funded portion",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 20
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 21
     },
     {
       "label": "juice/pending+resting/pool/normal: jing-place submits top-up",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21595823331150)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18525971822572)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 21
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 22
     },
     {
       "label": "juice/pending+resting/pool/normal: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 22
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 23
     },
     {
       "label": "juice/pending+resting/pool/normal: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 23
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 24
     },
     {
       "label": "juice/pending+resting/pool/normal: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 24
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 25
     },
     {
       "label": "juice/pending+resting/pool/normal: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 25
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 26
     },
     {
       "label": "juice/pending+resting/pool/normal: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 26
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 27
     },
     {
       "label": "juice/pending+resting/pool/normal: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 27
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 28
     },
     {
       "label": "juice/pending+resting/pool/normal: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u200000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 29
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 30
     },
     {
       "label": "juice/pending+resting/pool/normal: recovery response amount exact",
       "actual": "200000",
       "expected": "200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 29
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 30
     },
     {
       "label": "juice/pending+resting/pool/normal: pool or treasury receives exact total",
       "actual": "u200000",
       "expected": "u200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 30
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 31
     },
     {
       "label": "juice/pending+resting/pool/normal: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 31
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 32
     },
     {
       "label": "juice/pending+resting/pool/normal: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 32
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 33
     },
     {
       "label": "juice/pending+resting/pool/normal: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 33
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 34
     },
     {
       "label": "juice/pending+resting/pool/normal: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 34
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 35
     },
     {
       "label": "juice/pending+resting/pool/normal: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 35
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 36
     },
     {
       "label": "juice/pending+resting/pool/normal: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 36
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 37
     },
     {
       "label": "juice/pending+resting/pool/normal: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2)) | (tuple (amount u100000) (cycle u0) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (equity-x u0) (event \"refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 36
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 37
     },
     {
       "label": "juice/pending+resting/pool/normal: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 37
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 38
     },
     {
       "label": "juice/pending+resting/pool/no-update: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 40
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 41
     },
     {
       "label": "juice/pending+resting/pool/no-update: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 41
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 42
     },
     {
       "label": "juice/pending+resting/pool/no-update: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 42
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 43
     },
     {
       "label": "juice/pending+resting/pool/no-update: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 43
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 44
     },
     {
       "label": "juice/pending+resting/pool/no-update: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21598711004915)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18547537218897)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 44
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 45
     },
     {
       "label": "juice/pending+resting/pool/no-update: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 45
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 46
     },
     {
       "label": "juice/pending+resting/pool/no-update: settle opposite seed",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 47
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 48
     },
     {
       "label": "juice/pending+resting/pool/no-update: second funded portion",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 48
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 49
     },
     {
       "label": "juice/pending+resting/pool/no-update: jing-place submits top-up",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21598711004915)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18547537218897)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 49
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 50
     },
     {
       "label": "juice/pending+resting/pool/no-update: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 50
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 51
     },
     {
       "label": "juice/pending+resting/pool/no-update: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 51
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 52
     },
     {
       "label": "juice/pending+resting/pool/no-update: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 52
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 53
     },
     {
       "label": "juice/pending+resting/pool/no-update: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 53
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 54
     },
     {
       "label": "juice/pending+resting/pool/no-update: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 54
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 55
     },
     {
       "label": "juice/pending+resting/pool/no-update: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 55
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 56
     },
     {
       "label": "juice/pending+resting/pool/no-update: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u200000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 57
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 58
     },
     {
       "label": "juice/pending+resting/pool/no-update: recovery response amount exact",
       "actual": "200000",
       "expected": "200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 57
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 58
     },
     {
       "label": "juice/pending+resting/pool/no-update: pool or treasury receives exact total",
       "actual": "u200000",
       "expected": "u200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 58
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 59
     },
     {
       "label": "juice/pending+resting/pool/no-update: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 59
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 60
     },
     {
       "label": "juice/pending+resting/pool/no-update: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 60
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 61
     },
     {
       "label": "juice/pending+resting/pool/no-update: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 61
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 62
     },
     {
       "label": "juice/pending+resting/pool/no-update: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 62
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 63
     },
     {
       "label": "juice/pending+resting/pool/no-update: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 63
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 64
     },
     {
       "label": "juice/pending+resting/pool/no-update: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 64
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 65
     },
     {
       "label": "juice/pending+resting/pool/no-update: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2)) | (tuple (amount u100000) (cycle u0) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (equity-x u0) (event \"refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 64
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 65
     },
     {
       "label": "juice/pending+resting/pool/no-update: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 65
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 66
     },
     {
       "label": "juice/pending+resting/pool/market-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 68
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 69
     },
     {
       "label": "juice/pending+resting/pool/market-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 69
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 70
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 70
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 71
     },
     {
       "label": "juice/pending+resting/pool/market-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 71
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 72
     },
     {
       "label": "juice/pending+resting/pool/market-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21599202580806)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18551664536320)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 72
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 73
     },
     {
       "label": "juice/pending+resting/pool/market-paused: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 73
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 74
     },
     {
       "label": "juice/pending+resting/pool/market-paused: settle opposite seed",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 75
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 76
     },
     {
       "label": "juice/pending+resting/pool/market-paused: second funded portion",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 76
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 77
     },
     {
       "label": "juice/pending+resting/pool/market-paused: jing-place submits top-up",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21599202580806)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18551664536320)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 77
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 78
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 78
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 79
     },
     {
       "label": "juice/pending+resting/pool/market-paused: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 79
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 80
     },
     {
       "label": "juice/pending+resting/pool/market-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 80
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 81
     },
     {
       "label": "juice/pending+resting/pool/market-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 81
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 82
     },
     {
       "label": "juice/pending+resting/pool/market-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 82
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 83
     },
     {
       "label": "juice/pending+resting/pool/market-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 83
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 84
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pause market",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 84
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 85
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u200000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 86
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 87
     },
     {
       "label": "juice/pending+resting/pool/market-paused: recovery response amount exact",
       "actual": "200000",
       "expected": "200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 86
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 87
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pool or treasury receives exact total",
       "actual": "u200000",
       "expected": "u200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 87
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 88
     },
     {
       "label": "juice/pending+resting/pool/market-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 88
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 89
     },
     {
       "label": "juice/pending+resting/pool/market-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 89
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 90
     },
     {
       "label": "juice/pending+resting/pool/market-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 90
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 91
     },
     {
       "label": "juice/pending+resting/pool/market-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 91
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 92
     },
     {
       "label": "juice/pending+resting/pool/market-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 92
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 93
     },
     {
       "label": "juice/pending+resting/pool/market-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 93
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 94
     },
     {
       "label": "juice/pending+resting/pool/market-paused: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2)) | (tuple (amount u100000) (cycle u0) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (equity-x u0) (event \"refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 93
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 94
     },
     {
       "label": "juice/pending+resting/pool/market-paused: recovery leaves market paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 94
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 95
     },
     {
       "label": "juice/pending+resting/pool/market-paused: unpause for next setup",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 95
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 96
     },
     {
       "label": "juice/pending+resting/pool/market-paused: remove opposite seed",
       "actual": "(ok u6000000)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 96
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 97
     },
     {
       "label": "juice/pending+resting/pool/core-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 99
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 100
     },
     {
       "label": "juice/pending+resting/pool/core-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 100
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 101
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u0))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 101
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 102
     },
     {
       "label": "juice/pending+resting/pool/core-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 102
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 103
     },
     {
       "label": "juice/pending+resting/pool/core-paused: jing-place creates requested inventory",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21603709081550)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18555815893025)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 103
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 104
     },
     {
       "label": "juice/pending+resting/pool/core-paused: noncrossing opposite book",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 104
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 105
     },
     {
       "label": "juice/pending+resting/pool/core-paused: settle opposite seed",
       "actual": "(ok u6000000)",
       "expected": "(ok u6000000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 106
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 107
     },
     {
       "label": "juice/pending+resting/pool/core-paused: second funded portion",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 107
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 108
     },
     {
       "label": "juice/pending+resting/pool/core-paused: jing-place submits top-up",
-      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u21603709081550)))))",
+      "actual": "(ok (tuple (notification \"jing-place\") (payload (tuple (amount u100000) (floor u18555815893025)))))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 108
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 109
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pending amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 109
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 110
     },
     {
       "label": "juice/pending+resting/pool/core-paused: live amount exact",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 110
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 111
     },
     {
       "label": "juice/pending+resting/pool/core-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 111
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 112
     },
     {
       "label": "juice/pending+resting/pool/core-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 112
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 113
     },
     {
       "label": "juice/pending+resting/pool/core-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 113
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 114
     },
     {
       "label": "juice/pending+resting/pool/core-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 114
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 115
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pause core-v6",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 115
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 116
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u200000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 117
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 118
     },
     {
       "label": "juice/pending+resting/pool/core-paused: recovery response amount exact",
       "actual": "200000",
       "expected": "200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 117
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 118
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pool or treasury receives exact total",
       "actual": "u200000",
       "expected": "u200000",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 118
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 119
     },
     {
       "label": "juice/pending+resting/pool/core-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 119
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 120
     },
     {
       "label": "juice/pending+resting/pool/core-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 120
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 121
     },
     {
       "label": "juice/pending+resting/pool/core-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 121
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 122
     },
     {
       "label": "juice/pending+resting/pool/core-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 122
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 123
     },
     {
       "label": "juice/pending+resting/pool/core-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 123
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 124
     },
     {
       "label": "juice/pending+resting/pool/core-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 124
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 125
     },
     {
       "label": "juice/pending+resting/pool/core-paused: cancel reason and exact pending refund event",
       "actual": "(tuple (amount u100000) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (event \"pending-refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (price u0) (reason \"cancel\") (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2)) | (tuple (amount u100000) (cycle u0) (depositor SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-sbtc-autoswap) (equity-x u0) (event \"refund-x\") (market SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.markets-sbtc-stx-jing-v6-3) (token-x SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token) (token-y SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.token-stx-v-1-2))",
       "expected": "s=>s.includes('(event \"pending-refund-x\")')&&s.includes('(reason \"cancel\")')&&s.includes(`(amount u${pendingAmount})`)",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 124
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 125
     },
     {
       "label": "juice/pending+resting/pool/core-paused: recovery leaves core paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "b1c7046d58b3e68a2568af37bf5ffc5d",
-      "step": 125
+      "sid": "95bb3eacc5888382e17378e67f085907",
+      "step": 126
     },
     {
       "label": "juice/none/pool: deploy exact jing-core-v6",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 1
     },
     {
@@ -3564,7 +3596,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 2
     },
     {
@@ -3572,7 +3604,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 3
     },
     {
@@ -3580,7 +3612,7 @@
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 4
     },
     {
@@ -3588,7 +3620,7 @@
       "actual": "(ok u10)",
       "expected": "(ok u10)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 5
     },
     {
@@ -3596,7 +3628,7 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 6
     },
     {
@@ -3604,676 +3636,684 @@
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
+      "sid": "1345e5df4764feac028b69242feaadfc",
       "step": 7
+    },
+    {
+      "label": "juice/none/pool: deploy juice-swap-vault-trait-v2",
+      "actual": "(ok true)",
+      "expected": "s=>s.startsWith('(ok')",
+      "passed": true,
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 8
     },
     {
       "label": "juice/none/pool: deploy juice-sbtc-autoswap",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 8
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 9
     },
     {
       "label": "juice/none/pool: deploy juice-pool-sbtc-signer",
       "actual": "(ok true)",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 9
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 10
     },
     {
       "label": "juice/none/pool/normal: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 12
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 13
     },
     {
       "label": "juice/none/pool/normal: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 13
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 14
     },
     {
       "label": "juice/none/pool/normal: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 14
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 15
     },
     {
       "label": "juice/none/pool/normal: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 15
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 16
     },
     {
       "label": "juice/none/pool/normal: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 16
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 17
     },
     {
       "label": "juice/none/pool/normal: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 17
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 18
     },
     {
       "label": "juice/none/pool/normal: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 18
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 19
     },
     {
       "label": "juice/none/pool/normal: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 19
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 20
     },
     {
       "label": "juice/none/pool/normal: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 20
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 21
     },
     {
       "label": "juice/none/pool/normal: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 21
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 22
     },
     {
       "label": "juice/none/pool/normal: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 23
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 24
     },
     {
       "label": "juice/none/pool/normal: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 23
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 24
     },
     {
       "label": "juice/none/pool/normal: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 24
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 25
     },
     {
       "label": "juice/none/pool/normal: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 25
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 26
     },
     {
       "label": "juice/none/pool/normal: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 26
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 27
     },
     {
       "label": "juice/none/pool/normal: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 27
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 28
     },
     {
       "label": "juice/none/pool/normal: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 28
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 29
     },
     {
       "label": "juice/none/pool/normal: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 29
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 30
     },
     {
       "label": "juice/none/pool/normal: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 30
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 31
     },
     {
       "label": "juice/none/pool/no-update: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 33
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 34
     },
     {
       "label": "juice/none/pool/no-update: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 34
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 35
     },
     {
       "label": "juice/none/pool/no-update: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u903631748280))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 35
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 36
     },
     {
       "label": "juice/none/pool/no-update: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 36
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 37
     },
     {
       "label": "juice/none/pool/no-update: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 37
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 38
     },
     {
       "label": "juice/none/pool/no-update: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 38
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 39
     },
     {
       "label": "juice/none/pool/no-update: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 39
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 40
     },
     {
       "label": "juice/none/pool/no-update: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 40
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 41
     },
     {
       "label": "juice/none/pool/no-update: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 41
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 42
     },
     {
       "label": "juice/none/pool/no-update: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 42
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 43
     },
     {
       "label": "juice/none/pool/no-update: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 44
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 45
     },
     {
       "label": "juice/none/pool/no-update: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 44
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 45
     },
     {
       "label": "juice/none/pool/no-update: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 45
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 46
     },
     {
       "label": "juice/none/pool/no-update: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 46
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 47
     },
     {
       "label": "juice/none/pool/no-update: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 47
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 48
     },
     {
       "label": "juice/none/pool/no-update: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 48
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 49
     },
     {
       "label": "juice/none/pool/no-update: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 49
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 50
     },
     {
       "label": "juice/none/pool/no-update: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 50
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 51
     },
     {
       "label": "juice/none/pool/no-update: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 51
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 52
     },
     {
       "label": "juice/none/pool/market-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 54
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 55
     },
     {
       "label": "juice/none/pool/market-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 55
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 56
     },
     {
       "label": "juice/none/pool/market-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u909456324512))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 56
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 57
     },
     {
       "label": "juice/none/pool/market-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 57
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 58
     },
     {
       "label": "juice/none/pool/market-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 58
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 59
     },
     {
       "label": "juice/none/pool/market-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 59
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 60
     },
     {
       "label": "juice/none/pool/market-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 60
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 61
     },
     {
       "label": "juice/none/pool/market-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 61
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 62
     },
     {
       "label": "juice/none/pool/market-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 62
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 63
     },
     {
       "label": "juice/none/pool/market-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 63
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 64
     },
     {
       "label": "juice/none/pool/market-paused: pause market",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 64
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 65
     },
     {
       "label": "juice/none/pool/market-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 66
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 67
     },
     {
       "label": "juice/none/pool/market-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 66
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 67
     },
     {
       "label": "juice/none/pool/market-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 67
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 68
     },
     {
       "label": "juice/none/pool/market-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 68
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 69
     },
     {
       "label": "juice/none/pool/market-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 69
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 70
     },
     {
       "label": "juice/none/pool/market-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 70
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 71
     },
     {
       "label": "juice/none/pool/market-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 71
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 72
     },
     {
       "label": "juice/none/pool/market-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 72
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 73
     },
     {
       "label": "juice/none/pool/market-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 73
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 74
     },
     {
       "label": "juice/none/pool/market-paused: recovery leaves market paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 74
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 75
     },
     {
       "label": "juice/none/pool/market-paused: unpause for next setup",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 75
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 76
     },
     {
       "label": "juice/none/pool/core-paused: real sBTC backs rewards",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 78
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 79
     },
     {
       "label": "juice/none/pool/core-paused: earned rewards + mirrored shares fixture",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 79
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 80
     },
     {
       "label": "juice/none/pool/core-paused: pool claims into vault",
-      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u0))) (total-rewards u100000)))",
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u758607677183))) (total-rewards u100000)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 80
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 81
     },
     {
       "label": "juice/none/pool/core-paused: exact funded vault balance",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 81
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 82
     },
     {
       "label": "juice/none/pool/core-paused: pending amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 82
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 83
     },
     {
       "label": "juice/none/pool/core-paused: live amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 83
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 84
     },
     {
       "label": "juice/none/pool/core-paused: parked amount exact",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 84
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 85
     },
     {
       "label": "juice/none/pool/core-paused: vault counts pending as nonempty",
       "actual": "false",
       "expected": "false",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 85
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 86
     },
     {
       "label": "juice/none/pool/core-paused: outsider cannot call emergency-recover directly",
       "actual": "(err u16000)",
       "expected": "(err u16000)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 86
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 87
     },
     {
       "label": "juice/none/pool/core-paused: fixture ages vault recovery clock",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 87
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 88
     },
     {
       "label": "juice/none/pool/core-paused: pause core-v6",
       "actual": "(ok true)",
       "expected": "(ok true)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 88
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 89
     },
     {
       "label": "juice/none/pool/core-paused: pool invokes zero-argument vault emergency-recover",
       "actual": "(ok (tuple (sbtc u100000) (stx u0)))",
       "expected": "s=>s.startsWith('(ok')",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 90
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 91
     },
     {
       "label": "juice/none/pool/core-paused: recovery response amount exact",
       "actual": "100000",
       "expected": "100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 90
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 91
     },
     {
       "label": "juice/none/pool/core-paused: pool or treasury receives exact total",
       "actual": "u100000",
       "expected": "u100000",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 91
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 92
     },
     {
       "label": "juice/none/pool/core-paused: pending cleared",
       "actual": "none",
       "expected": "none",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 92
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 93
     },
     {
       "label": "juice/none/pool/core-paused: live cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 93
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 94
     },
     {
       "label": "juice/none/pool/core-paused: parked cleared",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 94
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 95
     },
     {
       "label": "juice/none/pool/core-paused: vault balance zero",
       "actual": "u0",
       "expected": "u0",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 95
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 96
     },
     {
       "label": "juice/none/pool/core-paused: vault fully empty",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 96
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 97
     },
     {
       "label": "juice/none/pool/core-paused: settle after cancellation finds nothing",
       "actual": "(err u1030)",
       "expected": "(err u1030)",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 97
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 98
     },
     {
       "label": "juice/none/pool/core-paused: recovery leaves core paused",
       "actual": "true",
       "expected": "true",
       "passed": true,
-      "sid": "2b02e9aeca3065d55615abdaa43a95db",
-      "step": 98
+      "sid": "1345e5df4764feac028b69242feaadfc",
+      "step": 99
     }
   ],
-  "passed": 529,
-  "total": 529,
+  "passed": 534,
+  "total": 534,
   "fixtures": [
     "PoX earned reward/share fixtures backed by real fork token transfers; lock admission not exercised",
     "Vault batch-start and fastpool settlement deadline aged by explicit Eval to keep native and Lazer pricing on real fork data",
@@ -4281,11 +4321,12 @@
     "Public ladder reservation set to 49 to reach parking with one incumbent; public replacement, no market map writes"
   ],
   "sourceHashes": {
-    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
-    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "ed046155b017d6acad569c6769da050747f4c69db7f627e4767fe0cafea41848",
-    "swap-router-sbtc-stx-jing-v5-3": "0d2a39eaa8f83910e301bb3b2313cadb9595b551a9f814ad255aadad6cd3a637",
-    "juice-sbtc-autoswap": "754c0f97f308b810763bf76bd505ccf65e72d9c8118bfe9ba408809990fab4bc",
-    "juice-pool-sbtc-signer": "92b861beb696f1d09336640b086b092c1ca68c631560d50c956b52c699ebf79f"
+    "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
+    "jing-ladder-v1": "6a5e204d47d865047fcb7d80d97e57d13b23fc1bf843958323c8c7d0d10d0dd7",
+    "markets-sbtc-stx-jing-v6-3": "7b2f0f44fca1feaf1e8c30f195d0a639a3daf102db4f4c84060c8062132f5f4c",
+    "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
+    "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
+    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6",
+    "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657"
   }
 }

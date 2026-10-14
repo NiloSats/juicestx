@@ -1,16 +1,16 @@
 {
-  "id": "6ca72279ef3788776296192da0009cd2",
-  "url": "https://stxer.xyz/simulations/mainnet/6ca72279ef3788776296192da0009cd2",
-  "block": 9207489,
+  "id": "e4e792cf9707099940417445f203d98c",
+  "url": "https://stxer.xyz/simulations/mainnet/e4e792cf9707099940417445f203d98c",
+  "block": 9208575,
   "cycle": 145,
   "sourceHashes": {
-    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
-    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "5b795d0ed469b8d8fcbafd9d6456efaf54ee41b060ae2775efd659741f6c519e",
-    "swap-router-sbtc-stx-jing-v5-3": "9ea745f8feb05a326da07a67bb043ceda1b6794ed26328e1e7c9c6fee4f51543",
-    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "bc038c062beb94b225552ee73e987a0f31b59d9d763ca38c41b4b19f8d6484d1",
-    "juice-pool-sbtc-signer": "ffc629e1d8f28611f7622c9518387db69adaa79cb312bc19d68f18885cd7e784"
+    "jing-core-v6": "973482e429cf7d9110847227fdc701443d8d9884b448dce5273579e23ea7fdff",
+    "jing-ladder-v1": "6a5e204d47d865047fcb7d80d97e57d13b23fc1bf843958323c8c7d0d10d0dd7",
+    "markets-sbtc-stx-jing-v6-3": "7b2f0f44fca1feaf1e8c30f195d0a639a3daf102db4f4c84060c8062132f5f4c",
+    "swap-router-sbtc-stx-jing-v5-3": "3e457866be8d4f6216e5e17fd87c9aa6fb2285a23909e7957a354c4af8e3b9b4",
+    "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
+    "juice-sbtc-autoswap": "ff0a45868897397187106fe284ed72ab64f2d3718adb238addf8d7c1a5909033",
+    "juice-pool-sbtc-signer": "57d8c3d384f11d955574a0bce365dad788c4cac919708a70d03c2e10af1f9bd6"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0372a5bb4deb779be51687c602328ab085717db11b2508422353c18cfd7cc7a3f4)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x02fef0b414f5c70846a46b262665b56706b52a1c7e6e64bc112e4be40ba5c0c507)))"
     },
     {
       "label": "deploy juice-fake-vault",
