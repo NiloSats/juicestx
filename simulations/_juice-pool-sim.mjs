@@ -132,7 +132,7 @@ export async function poolSim({ lazer = false } = {}) {
       if (!/^(deploy|Jing )/.test(p.label)) console.log(`${passed ? 'PASS' : 'FAIL'} ${p.label}: ${actual.slice(0, 220)}`);
       return { label: p.label, passed, actual };
     });
-    for (const [label, passed, actual] of extra((i) => checks[i].actual)) {
+    for (const [label, passed, actual] of extra((i) => checks[i].actual, result)) {
       console.log(`${passed ? 'PASS' : 'FAIL'} ${label}: ${actual}`);
       checks.push({ label, passed, actual });
     }
