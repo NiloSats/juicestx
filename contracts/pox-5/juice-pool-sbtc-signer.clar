@@ -790,10 +790,6 @@
           ))
           true
         )
-        (if (> fee u0)
-          (var-set earned-fees (+ (var-get earned-fees) fee))
-          true
-        )
         (map-set stx-paid {
           reward-cycle: cycle,
           tranche: trn,
@@ -842,7 +838,8 @@
         }))
         (totl (get total result))
       )
-      ;; one write per tranche total for the whole batch (bounty mv7dfb I1)
+      ;; one write per total for the whole batch (bounty mv7dfb I1, I2)
+      (var-set earned-fees (+ (var-get earned-fees) (get fees result)))
       (map-set tranche-paid {
         reward-cycle: reward-cycle,
         tranche: tranche,
@@ -1171,7 +1168,6 @@
           ))
           true
         )
-        (var-set earned-sbtc-fees (+ (var-get earned-sbtc-fees) fee))
         (map-set recovered-sbtc-paid {
           reward-cycle: cycle,
           tranche: trn,
@@ -1213,6 +1209,8 @@
         }))
         (totl (get total result))
       )
+      ;; one write for the whole batch (bounty mv7dfb I2)
+      (var-set earned-sbtc-fees (+ (var-get earned-sbtc-fees) (get fees result)))
       (print {
         topic: "pay-recovered-sbtc-stakers",
         reward-cycle: reward-cycle,
