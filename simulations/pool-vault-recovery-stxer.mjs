@@ -162,8 +162,9 @@ const checks=plan.map((p,i)=>{
 const uint=slot=>BigInt(checks[slot].actual.match(/^u(\d+)$/)?.[1]??'-1');
 if(checks.every(c=>c.passed))for(const b of batches){
  for(const [name,shares] of [['Alice',1n],['Bob',3n]])for(const [asset,pot] of [['Stx',b.stxPot],['Sbtc',b.sbtcPot]]){
-  const key=`${name}${asset}`,paid=uint(b.after[key])-uint(b.before[key]),expected=uint(pot)*shares/4n;
-  checks.push({label:`${b.label}: ${name} ${asset} matches its own 1:3 batch pot`,passed:paid===expected,actual:`${paid}, expected ${expected}`});
+  // Net of the pool's 4.5% launch fee (fixture stakers hold no OG seat).
+  const key=`${name}${asset}`,paid=uint(b.after[key])-uint(b.before[key]),gross=uint(pot)*shares/4n,expected=gross-gross*450n/10000n;
+  checks.push({label:`${b.label}: ${name} ${asset} matches its own 1:3 batch pot net of the 4.5% fee`,passed:paid===expected,actual:`${paid}, expected ${expected}`});
   checks.push({label:`${b.label}: ${name} ${asset} unchanged on replay`,passed:uint(b.replay[key])===uint(b.after[key]),actual:`balance ${uint(b.replay[key])}`});
  }
 }

@@ -1,0 +1,853 @@
+{
+  "id": "3b073415ed6f7c5ff0814ceef0cdbb44",
+  "url": "https://stxer.xyz/simulations/mainnet/3b073415ed6f7c5ff0814ceef0cdbb44",
+  "block": 9207394,
+  "cycle": 145,
+  "rewardCycle": 144,
+  "newSource": {
+    "rev": "e425a4c",
+    "path": "contracts/pox-5/juice-pool-sbtc-signer.clar",
+    "sha256": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7"
+  },
+  "oldSource": {
+    "rev": "e8ad9b1",
+    "sha256": "c777a45dc0025b11ddc0050c143b6e4be67ff3d118517cea7fb0073ecd841ad4"
+  },
+  "sourceHashes": {
+    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7",
+    "juice-pool-sbtc-signer-e8ad9b1": "c777a45dc0025b11ddc0050c143b6e4be67ff3d118517cea7fb0073ecd841ad4"
+  },
+  "checks": [
+    {
+      "label": "deploy juice-swap-vault-trait-v2",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy NEW juice-pool-sbtc-signer (e425a4c file)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy OLD juice-pool-sbtc-signer-e8ad9b1 (e8ad9b1 file)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fixture NEW: pox-5 cycle 144 shares, total 4673456796",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fixture NEW: tranches 0/1 finalized with pots 800000003/150000011, OG covers",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fund NEW pool 950000014 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "NEW cycle total shares",
+      "passed": true,
+      "actual": "u4673456796"
+    },
+    {
+      "label": "NEW fee is 4.5%",
+      "passed": true,
+      "actual": "u450"
+    },
+    {
+      "label": "fixture OLD: pox-5 cycle 144 shares, total 4673456796",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fixture OLD: tranches 0/1 finalized with pots 800000003/150000011, OG covers",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fund OLD pool 950000014 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "OLD cycle total shares",
+      "passed": true,
+      "actual": "u4673456796"
+    },
+    {
+      "label": "OLD fee is 4.5%",
+      "passed": true,
+      "actual": "u450"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: staker balances before",
+      "passed": true,
+      "actual": "(list u0 u0 u0 u0 u0 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: pay-stx-stakers t0 [S1,S2,S2,S4]",
+      "passed": true,
+      "actual": "(ok u336966848)"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: staker balances after",
+      "passed": true,
+      "actual": "(list u171179501 u165787347 u0 u0 u0 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u613033166) (earned-fees u5392154) (fully-paid false) (paid u342359002) (paid-shares u2000000000) (residue u457641001))"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u342359002)) (shares (some u2000000000)))"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: staker balances before",
+      "passed": true,
+      "actual": "(list u171179501 u165787347 u0 u0 u0 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: pay-stx-stakers t0 [S1,S2,S2,S4]",
+      "passed": true,
+      "actual": "(ok u336966848)"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u0 u0 u0 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u613033166) (earned-fees u5392154) (fully-paid false) (paid u342359002) (paid-shares u2000000000) (residue u457641001))"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u342359002)) (shares (some u2000000000)))"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u0 u0 u0 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: pay-stx-stakers t0 [S2,S3,S1,S5,S3]",
+      "passed": true,
+      "actual": "(ok u81738213)"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u81738212 u0 u1 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250))"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u427948753)) (shares (some u2500000007)))"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u81738212 u0 u1 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: pay-stx-stakers t0 [S2,S3,S1,S5,S3]",
+      "passed": true,
+      "actual": "(ok u81738213)"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250))"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u427948753)) (shares (some u2500000007)))"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): pay-stx-stakers t0 [S4,S1]",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250))"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u427948753)) (shares (some u2500000007)))"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): pay-stx-stakers t0 [S4,S1]",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250))"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u427948753)) (shares (some u2500000007)))"
+    },
+    {
+      "label": "NEW sweep t0 while S6/S7/S8 unpaid refused (u104)",
+      "passed": true,
+      "actual": "(err u104)"
+    },
+    {
+      "label": "OLD sweep t0 while S6/S7/S8 unpaid refused (u104)",
+      "passed": true,
+      "actual": "(err u104)"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u0 u0 u0)"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): pay-stx-stakers t0 [S6,S7,S8]",
+      "passed": true,
+      "actual": "(ok u355694096)"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u20182274 u326952847 u8558975)"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u175600857) (earned-fees u25600844) (fully-paid true) (paid u800000001) (paid-shares u4673456796) (residue u2))"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u800000001)) (shares (some u4673456796)))"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u20182274 u326952847 u8558975)"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): pay-stx-stakers t0 [S6,S7,S8]",
+      "passed": true,
+      "actual": "(ok u355694096)"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): tranche 0 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u175600857) (earned-fees u25600844) (fully-paid true) (paid u800000001) (paid-shares u4673456796) (residue u2))"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): raw tranche 0 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u800000001)) (shares (some u4673456796)))"
+    },
+    {
+      "label": "NEW sweep t0 after the last batch",
+      "passed": true,
+      "actual": "(ok u2)"
+    },
+    {
+      "label": "OLD sweep t0 after the last batch",
+      "passed": true,
+      "actual": "(ok u2)"
+    },
+    {
+      "label": "NEW t0 after sweep",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid true) (paid u800000003) (paid-shares u4673456796) (residue u0))"
+    },
+    {
+      "label": "OLD t0 after sweep",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid true) (paid u800000003) (paid-shares u4673456796) (residue u0))"
+    },
+    {
+      "label": "NEW second t0 sweep refused (u105)",
+      "passed": true,
+      "actual": "(err u105)"
+    },
+    {
+      "label": "OLD second t0 sweep refused (u105)",
+      "passed": true,
+      "actual": "(err u105)"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: pay-stx-stakers t1 [S4]",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: tranche 1 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid false) (paid u0) (paid-shares u0) (residue u150000011))"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: raw tranche 1 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u0)) (shares (some u0)))"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: pay-stx-stakers t1 [S4]",
+      "passed": true,
+      "actual": "(ok u0)"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: staker balances after",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: tranche 1 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid false) (paid u0) (paid-shares u0) (residue u150000011))"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: raw tranche 1 map entries",
+      "passed": true,
+      "actual": "(tuple (paid none) (shares none))"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: staker balances before",
+      "passed": true,
+      "actual": "(list u342359002 u331574694 u163476424 u0 u2 u40364548 u653905694 u17117950)"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: pay-stx-stakers t1 [S8,S7,S6,S5,S4,S3,S2,S1,S1,S2]",
+      "passed": true,
+      "actual": "(ok u145199851)"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: staker balances after",
+      "passed": true,
+      "actual": "(list u374455160 u362659824 u178802340 u0 u2 u44148725 u715209357 u18722757)"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: tranche 1 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u30401004) (earned-fees u30401000) (fully-paid true) (paid u150000007) (paid-shares u4673456796) (residue u4))"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: raw tranche 1 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u150000007)) (shares (some u4673456796)))"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: staker balances before",
+      "passed": true,
+      "actual": "(list u374455160 u362659824 u178802340 u0 u2 u44148725 u715209357 u18722757)"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: pay-stx-stakers t1 [S8,S7,S6,S5,S4,S3,S2,S1,S1,S2]",
+      "passed": true,
+      "actual": "(ok u145199851)"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: staker balances after",
+      "passed": true,
+      "actual": "(list u406551318 u393744954 u194128256 u0 u2 u47932902 u776513020 u20327564)"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: tranche 1 snapshot",
+      "passed": true,
+      "actual": "(tuple (balance u30401004) (earned-fees u30401000) (fully-paid true) (paid u150000007) (paid-shares u4673456796) (residue u4))"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: raw tranche 1 map entries",
+      "passed": true,
+      "actual": "(tuple (paid (some u150000007)) (shares (some u4673456796)))"
+    },
+    {
+      "label": "NEW sweep t1 after its single batch",
+      "passed": true,
+      "actual": "(ok u4)"
+    },
+    {
+      "label": "OLD sweep t1 after its single batch",
+      "passed": true,
+      "actual": "(ok u4)"
+    },
+    {
+      "label": "NEW t1 after sweep",
+      "passed": true,
+      "actual": "(tuple (balance u30401000) (earned-fees u30401000) (fully-paid true) (paid u150000011) (paid-shares u4673456796) (residue u0))"
+    },
+    {
+      "label": "OLD t1 after sweep",
+      "passed": true,
+      "actual": "(tuple (balance u30401000) (earned-fees u30401000) (fully-paid true) (paid u150000011) (paid-shares u4673456796) (residue u0))"
+    },
+    {
+      "label": "NEW stx-paid rows",
+      "passed": true,
+      "actual": "(list (some u171179501) (some u165787347) (some u81738212) none (some u1) (some u20182274) (some u326952847) (some u8558975) (some u32096158) (some u31085130) (some u15325916) none (some u0) (some u3784177) (some u61303663) (some u1604807))"
+    },
+    {
+      "label": "OLD stx-paid rows",
+      "passed": true,
+      "actual": "(list (some u171179501) (some u165787347) (some u81738212) none (some u1) (some u20182274) (some u326952847) (some u8558975) (some u32096158) (some u31085130) (some u15325916) none (some u0) (some u3784177) (some u61303663) (some u1604807))"
+    },
+    {
+      "label": "NEW withdraw-all-fees drains exactly the earned fees",
+      "passed": true,
+      "actual": "(ok u30401000)"
+    },
+    {
+      "label": "NEW earned-fees 0 after withdraw",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW pool balance 0 after payouts, sweeps and fees",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "OLD withdraw-all-fees drains exactly the earned fees",
+      "passed": true,
+      "actual": "(ok u30401000)"
+    },
+    {
+      "label": "OLD earned-fees 0 after withdraw",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "OLD pool balance 0 after payouts, sweeps and fees",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u613033166) (earned-fees u5392154) (fully-paid false) (paid u342359002) (paid-shares u2000000000) (residue u457641001)) | model paid 342359002 shares 2000000000 residue 457641001 full false fees 5392154 bal 613033166"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "336966848 vs 336966848"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u613033166) (earned-fees u5392154) (fully-paid false) (paid u342359002) (paid-shares u2000000000) (residue u457641001)) | model paid 342359002 shares 2000000000 residue 457641001 full false fees 5392154 bal 613033166"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "336966848 vs 336966848"
+    },
+    {
+      "label": "NEW == OLD B1 S2 twice + zero-share S4: snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B1 S2 twice + zero-share S4: returned total identical",
+      "passed": true,
+      "actual": "(ok u336966848) / (ok u336966848)"
+    },
+    {
+      "label": "NEW == OLD B1 S2 twice + zero-share S4: per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [171179501,165787347,0,0,0,0,0,0] OLD [171179501,165787347,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW vs OLD B1 S2 twice + zero-share S4: raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250)) | model paid 427948753 shares 2500000007 residue 372051250 full false fees 9243692 bal 531294953"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "81738213 vs 81738213"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250)) | model paid 427948753 shares 2500000007 residue 372051250 full false fees 9243692 bal 531294953"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "81738213 vs 81738213"
+    },
+    {
+      "label": "NEW == OLD B2 S1/S2 again + S3 twice + dust S5: snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B2 S1/S2 again + S3 twice + dust S5: returned total identical",
+      "passed": true,
+      "actual": "(ok u81738213) / (ok u81738213)"
+    },
+    {
+      "label": "NEW == OLD B2 S1/S2 again + S3 twice + dust S5: per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [0,0,81738212,0,1,0,0,0] OLD [0,0,81738212,0,1,0,0,0]"
+    },
+    {
+      "label": "NEW vs OLD B2 S1/S2 again + S3 twice + dust S5: raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250)) | model paid 427948753 shares 2500000007 residue 372051250 full false fees 9243692 bal 531294953"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "0 vs 0"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u531294953) (earned-fees u9243692) (fully-paid false) (paid u427948753) (paid-shares u2500000007) (residue u372051250)) | model paid 427948753 shares 2500000007 residue 372051250 full false fees 9243692 bal 531294953"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "0 vs 0"
+    },
+    {
+      "label": "NEW == OLD B3 nobody owed (S4 zero, S1 paid): snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B3 nobody owed (S4 zero, S1 paid): returned total identical",
+      "passed": true,
+      "actual": "(ok u0) / (ok u0)"
+    },
+    {
+      "label": "NEW == OLD B3 nobody owed (S4 zero, S1 paid): per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [0,0,0,0,0,0,0,0] OLD [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW vs OLD B3 nobody owed (S4 zero, S1 paid): raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u175600857) (earned-fees u25600844) (fully-paid true) (paid u800000001) (paid-shares u4673456796) (residue u2)) | model paid 800000001 shares 4673456796 residue 2 full true fees 25600844 bal 175600857"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "355694096 vs 355694096"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u175600857) (earned-fees u25600844) (fully-paid true) (paid u800000001) (paid-shares u4673456796) (residue u2)) | model paid 800000001 shares 4673456796 residue 2 full true fees 25600844 bal 175600857"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "355694096 vs 355694096"
+    },
+    {
+      "label": "NEW == OLD B4 last: S6, S7, S8 (cover above shares): snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B4 last: S6, S7, S8 (cover above shares): returned total identical",
+      "passed": true,
+      "actual": "(ok u355694096) / (ok u355694096)"
+    },
+    {
+      "label": "NEW == OLD B4 last: S6, S7, S8 (cover above shares): per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [0,0,0,0,0,20182274,326952847,8558975] OLD [0,0,0,0,0,20182274,326952847,8558975]"
+    },
+    {
+      "label": "NEW vs OLD B4 last: S6, S7, S8 (cover above shares): raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid false) (paid u0) (paid-shares u0) (residue u150000011)) | model paid 0 shares 0 residue 150000011 full false fees 25600844 bal 175600855"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "0 vs 0"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid false) (paid u0) (paid-shares u0) (residue u150000011)) | model paid 0 shares 0 residue 150000011 full false fees 25600844 bal 175600855"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "0 vs 0"
+    },
+    {
+      "label": "NEW == OLD B5 fresh tranche, zero-share only: snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B5 fresh tranche, zero-share only: returned total identical",
+      "passed": true,
+      "actual": "(ok u0) / (ok u0)"
+    },
+    {
+      "label": "NEW == OLD B5 fresh tranche, zero-share only: per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [0,0,0,0,0,0,0,0] OLD [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW vs OLD B5 fresh tranche, zero-share only: raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "NEW (tuple (paid (some u0)) (shares (some u0))) | OLD (tuple (paid none) (shares none))"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u30401004) (earned-fees u30401000) (fully-paid true) (paid u150000007) (paid-shares u4673456796) (residue u4)) | model paid 150000007 shares 4673456796 residue 4 full true fees 30401000 bal 30401004"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "145199851 vs 145199851"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: tranche-paid / paid-shares / residue / fully-paid / earned-fees / balance match the model",
+      "passed": true,
+      "actual": "(tuple (balance u30401004) (earned-fees u30401000) (fully-paid true) (paid u150000007) (paid-shares u4673456796) (residue u4)) | model paid 150000007 shares 4673456796 residue 4 full true fees 30401000 bal 30401004"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: staker balance deltas sum to the returned total",
+      "passed": true,
+      "actual": "145199851 vs 145199851"
+    },
+    {
+      "label": "NEW == OLD B6 everyone, S1/S2 listed twice: snapshot identical",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW == OLD B6 everyone, S1/S2 listed twice: returned total identical",
+      "passed": true,
+      "actual": "(ok u145199851) / (ok u145199851)"
+    },
+    {
+      "label": "NEW == OLD B6 everyone, S1/S2 listed twice: per-staker transfers identical",
+      "passed": true,
+      "actual": "NEW [32096158,31085130,15325916,0,0,3784177,61303663,1604807] OLD [32096158,31085130,15325916,0,0,3784177,61303663,1604807]"
+    },
+    {
+      "label": "NEW vs OLD B6 everyone, S1/S2 listed twice: raw map entries equal, or NEW (some u0) where OLD none",
+      "passed": true,
+      "actual": "identical"
+    },
+    {
+      "label": "NEW B1 S2 twice + zero-share S4: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [171179501,165787347,0,0,0,0,0,0] want [171179501,165787347,0,0,0,0,0,0]"
+    },
+    {
+      "label": "OLD B1 S2 twice + zero-share S4: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [171179501,165787347,0,0,0,0,0,0] want [171179501,165787347,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW B2 S1/S2 again + S3 twice + dust S5: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,81738212,0,1,0,0,0] want [0,0,81738212,0,1,0,0,0]"
+    },
+    {
+      "label": "OLD B2 S1/S2 again + S3 twice + dust S5: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,81738212,0,1,0,0,0] want [0,0,81738212,0,1,0,0,0]"
+    },
+    {
+      "label": "NEW B3 nobody owed (S4 zero, S1 paid): each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,0,0,0] want [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "OLD B3 nobody owed (S4 zero, S1 paid): each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,0,0,0] want [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW B4 last: S6, S7, S8 (cover above shares): each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,20182274,326952847,8558975] want [0,0,0,0,0,20182274,326952847,8558975]"
+    },
+    {
+      "label": "OLD B4 last: S6, S7, S8 (cover above shares): each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,20182274,326952847,8558975] want [0,0,0,0,0,20182274,326952847,8558975]"
+    },
+    {
+      "label": "NEW B5 fresh tranche, zero-share only: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,0,0,0] want [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "OLD B5 fresh tranche, zero-share only: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [0,0,0,0,0,0,0,0] want [0,0,0,0,0,0,0,0]"
+    },
+    {
+      "label": "NEW B6 everyone, S1/S2 listed twice: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [32096158,31085130,15325916,0,0,3784177,61303663,1604807] want [32096158,31085130,15325916,0,0,3784177,61303663,1604807]"
+    },
+    {
+      "label": "OLD B6 everyone, S1/S2 listed twice: each staker received exactly its net",
+      "passed": true,
+      "actual": "got [32096158,31085130,15325916,0,0,3784177,61303663,1604807] want [32096158,31085130,15325916,0,0,3784177,61303663,1604807]"
+    },
+    {
+      "label": "NEW t0 after sweep matches model (residue 0)",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid true) (paid u800000003) (paid-shares u4673456796) (residue u0)) | model paid 800000003 shares 4673456796 residue 0 full true fees 25600844 bal 175600855"
+    },
+    {
+      "label": "NEW t1 after sweep matches model (residue 0)",
+      "passed": true,
+      "actual": "(tuple (balance u30401000) (earned-fees u30401000) (fully-paid true) (paid u150000011) (paid-shares u4673456796) (residue u0)) | model paid 150000011 shares 4673456796 residue 0 full true fees 30401000 bal 30401000"
+    },
+    {
+      "label": "NEW stx-paid rows = model nets, zero-share staker has no row",
+      "passed": true,
+      "actual": "[171179501,165787347,81738212,1,20182274,326952847,8558975,32096158,31085130,15325916,0,3784177,61303663,1604807] vs [171179501,165787347,81738212,1,20182274,326952847,8558975,32096158,31085130,15325916,0,3784177,61303663,1604807]"
+    },
+    {
+      "label": "OLD t0 after sweep matches model (residue 0)",
+      "passed": true,
+      "actual": "(tuple (balance u175600855) (earned-fees u25600844) (fully-paid true) (paid u800000003) (paid-shares u4673456796) (residue u0)) | model paid 800000003 shares 4673456796 residue 0 full true fees 25600844 bal 175600855"
+    },
+    {
+      "label": "OLD t1 after sweep matches model (residue 0)",
+      "passed": true,
+      "actual": "(tuple (balance u30401000) (earned-fees u30401000) (fully-paid true) (paid u150000011) (paid-shares u4673456796) (residue u0)) | model paid 150000011 shares 4673456796 residue 0 full true fees 30401000 bal 30401000"
+    },
+    {
+      "label": "OLD stx-paid rows = model nets, zero-share staker has no row",
+      "passed": true,
+      "actual": "[171179501,165787347,81738212,1,20182274,326952847,8558975,32096158,31085130,15325916,0,3784177,61303663,1604807] vs [171179501,165787347,81738212,1,20182274,326952847,8558975,32096158,31085130,15325916,0,3784177,61303663,1604807]"
+    },
+    {
+      "label": "NEW == OLD early sweep result",
+      "passed": true,
+      "actual": "(err u104) / (err u104)"
+    },
+    {
+      "label": "NEW == OLD t0 sweep amount",
+      "passed": true,
+      "actual": "(ok u2) / (ok u2)"
+    },
+    {
+      "label": "NEW == OLD t1 sweep amount",
+      "passed": true,
+      "actual": "(ok u4) / (ok u4)"
+    },
+    {
+      "label": "NEW == OLD t0/t1 final snapshots",
+      "passed": true,
+      "actual": "compared"
+    },
+    {
+      "label": "NEW == OLD stx-paid rows",
+      "passed": true,
+      "actual": "compared"
+    },
+    {
+      "label": "NEW == OLD fees withdrawn",
+      "passed": true,
+      "actual": "(ok u30401000) / (ok u30401000)"
+    },
+    {
+      "label": "model: OG fees exercised (S1 0, S2 partial, S8 0) and taxed fees > 0",
+      "passed": true,
+      "actual": "S1 0 S2 5392154 S3 3851538 S7 15406155 S8 0"
+    }
+  ]
+}

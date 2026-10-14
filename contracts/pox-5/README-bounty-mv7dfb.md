@@ -8,6 +8,7 @@ citycoins-protocol `8bb69aa`. Submissions are reviewed one at a time below.
 | # | Submission | Who | Claim | Verdict | Status |
 |---|---|---|---|---|---|
 | 1 | Patient Reed | Patient Reed | OG seat without stake | Holds, Medium | Fixed (uncommitted): seat lasts while the staker stays, `evict-og` |
+| 2 | Rare Io I1 | Rare Io | `pay-one` writes tranche totals per staker | Holds, gas | Adopted `e425a4c`: totals summed in the fold, written once per batch. Fork proof NEW vs `e8ad9b1` side by side 166/166 https://stxer.xyz/simulations/mainnet/3b073415ed6f7c5ff0814ceef0cdbb44, accounting 126/126 https://stxer.xyz/simulations/mainnet/fec1c71d4e374f8b7b74d23a072d5214 |
 
 ## 1. Patient Reed: OG seat without stake
 
