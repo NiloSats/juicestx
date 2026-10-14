@@ -108,7 +108,7 @@ export async function runPoolVaultLifecycle({kind,poolSource,vaultSource,resultD
  };
  const cycle=Number((await read(POX,'current-pox-reward-cycle')).value)-1;
  const sellers={value:[]},buyers={value:[]}; // Fresh v6-3 books are empty.
- const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+ const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
  const plan=[],sourceHashes={};
  appendJingStack(builder,plan,sourceHashes,forkBlock);
  const jingRouterSlots=[];

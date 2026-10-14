@@ -81,7 +81,7 @@ const info = await (await fetch(`${NODE}/v2/info`)).json();
 let burn = info.burn_block_height;
 const rewardCycle = Number(deserializeCV(await readOnly(POX, 'current-pox-reward-cycle')).value) - 1;
 
-const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: true })
+const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: !process.env.STXER_TRACE })
   .useBlockHeight(forkBlock).withSender(DEP);
 const plan = [], sourceHashes = {};
 appendJingStack(builder, plan, sourceHashes, forkBlock);

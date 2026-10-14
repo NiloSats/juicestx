@@ -46,7 +46,7 @@ const RECOVERY_FORK_BLOCK=9207370;
 const forkBlock=process.env.JUICE_FORK_BLOCK?await juiceForkBlock(NODE):RECOVERY_FORK_BLOCK;
 const cycle=Number((await read(POX,'current-pox-reward-cycle')).value)-1;
 const sellers={value:[]},buyers={value:[]},operator=DEP; // Fresh fork market.
-const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[],batches=[],sourceHashes={};
 appendJingStack(builder,plan,sourceHashes,forkBlock);
 const ok=v=>v.startsWith('(ok');

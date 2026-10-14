@@ -57,7 +57,7 @@ export async function poolSim({ lazer = false } = {}) {
     const { fetchLazerUpdateAny } = await import('./_pool-vault-lazer.mjs');
     update = Cl.buffer(Buffer.from((await fetchLazerUpdateAny()).hex.replace(/^0x/, ''), 'hex'));
   }
-  const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: true })
+  const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: !process.env.STXER_TRACE })
     .useBlockHeight(forkBlock).withSender(DEP);
   const plan = [], sourceHashes = {};
   const s = { builder, plan, forkBlock, cycleNow, burn: info.burn_block_height, update };

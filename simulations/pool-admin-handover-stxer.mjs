@@ -22,7 +22,7 @@ const tipResponse=await fetch(`${NODE}/extended/v1/block?limit=1`,{signal:AbortS
 if(!tipResponse.ok)throw new Error(`tip HTTP ${tipResponse.status}`);
 const tip=(await tipResponse.json()).results[0];
 const forkBlock=await juiceForkBlock(NODE);
-const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[],sourceHashes={};
 appendJingStack(builder,plan,sourceHashes,forkBlock);
 const ok=v=>v.startsWith('(ok');

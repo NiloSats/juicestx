@@ -67,7 +67,7 @@ const read=async(id,fn,args=[])=>{
  return deserializeCV(body.result);
 };
 const cycle=Number((await read(POX,'current-pox-reward-cycle')).value)-1;
-const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[],sourceHashes={};
 appendJingStack(builder,plan,sourceHashes,forkBlock);
 const ok=v=>v.startsWith('(ok');

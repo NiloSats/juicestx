@@ -86,7 +86,7 @@ async function retry(what,fn,n=5){for(let i=1;;i++){try{return await fn();}catch
 
 // ---- setup batch ----
 const forkBlock=await juiceForkBlock(NODE);
-const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[];
 appendJingStack(builder,plan,sourceHashes,forkBlock);
 const trait=traitSource(sourceHashes);

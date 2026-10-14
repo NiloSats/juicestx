@@ -75,7 +75,7 @@ const cycleNow = Number(deserializeCV((await (await fetch(`${NODE}/v2/contracts/
 })).json()).result).value);
 const R = cycleNow - 1;
 
-const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: true })
+const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: !process.env.STXER_TRACE })
   .useBlockHeight(forkBlock).withSender(DEP);
 const plan = [];
 const push = (p) => { plan.push(p); return plan.length - 1; };

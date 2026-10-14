@@ -57,7 +57,7 @@ const mid=proof.px*100000000n/proof.py;
 const tip=(await (await fetch(`${NODE}/extended/v1/block?limit=1`,{signal:AbortSignal.timeout(20000)})).json()).results[0];
 const cycle=Number((await read(POX,'current-pox-reward-cycle')).value)-1;
 const forkBlock=await juiceForkBlock(NODE);
-const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing:true}).useBlockHeight(forkBlock).withSender(DEP);
+const builder=SimulationBuilder.new({stacksNodeAPI:NODE,apiEndpoint:API,skipTracing: !process.env.STXER_TRACE}).useBlockHeight(forkBlock).withSender(DEP);
 const plan=[],sourceHashes={},post=[];
 appendJingStack(builder,plan,sourceHashes,forkBlock);
 const ok=v=>v.startsWith('(ok');

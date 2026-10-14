@@ -73,7 +73,7 @@ const cycleNow = Number(deserializeCV(await readOnly(POX, 'current-pox-reward-cy
 const rewardCycle = cycleNow - 1;
 
 
-const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: true })
+const builder = SimulationBuilder.new({ stacksNodeAPI: NODE, apiEndpoint: API, skipTracing: !process.env.STXER_TRACE })
   .useBlockHeight(forkBlock).withSender(DEP);
 const plan = [], sourceHashes = {};
 appendJingStack(builder, plan, sourceHashes, forkBlock);
