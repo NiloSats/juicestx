@@ -12,7 +12,12 @@
     "rv:vault:build": "python3 tests/vault/build.py --rv",
     "rv:vault": "rv tests/vault/.build-rv juice-sbtc-autoswap invariant --runs=1000",
     "test:vault:migration": "python3 tests/vault/build.py && node tests/vault/migration.mjs",
-    "coverage:summary": "node tests/coverage-summary.mjs --uncovered"
+    "coverage:summary": "node tests/coverage-summary.mjs --uncovered",
+    "rv:build": "python3 tests/rv/build.py",
+    "rv:pool": "python3 tests/rv/build.py pool && node tests/rv/run.mjs pool",
+    "rv:pool:no-zero": "python3 tests/rv/build.py pool --no-zero-stake && node tests/rv/run.mjs pool",
+    "rv:vault:ext": "python3 tests/rv/build.py vault && node tests/rv/run.mjs vault",
+    "test:rv-repro": "python3 tests/vault/build.py && vitest run tests/rv-repro-og-zero-seat.test.ts -- --manifest ./tests/vault/.build/Clarinet.toml"
   },
   "author": "",
   "license": "ISC",

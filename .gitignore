@@ -16,3 +16,6 @@ tests/vault/.build/
 .rendezvous-regressions/
 tests/vault/.build-rv/
 tests/vault/__pycache__/
+tests/rv/.build-pool/
+tests/rv/.build-vault/
+tests/rv/__pycache__/
