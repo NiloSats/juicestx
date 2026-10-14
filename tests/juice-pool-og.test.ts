@@ -31,6 +31,12 @@ function ogSeatEvents(events: { event: string; data: { value?: ClarityValue } }[
   });
 }
 
+function ogShrinkEvents(events: { event: string; data: { value?: ClarityValue } }[]) {
+  return events.filter(function (e) {
+    return e.event === "print_event" && e.data.value && cvToString(e.data.value).includes('"og-shrink"');
+  });
+}
+
 function ogUstx(staker: string) {
   return simnet.callReadOnlyFn(POOL, "get-og-ustx", [Cl.principal(staker)], admin).result;
 }
@@ -114,7 +120,7 @@ describe("take-og-seat via validate-stake!", function () {
     expect(ogStatus()).toStrictEqual(status(1n, 3_000n * STX));
   });
 
-  it("smaller update never shrinks the cover (nothing to add, swallowed)", function () {
+  it("smaller stake shrinks the cover to it, seat kept (bounty mv7dfb)", function () {
     // arrange
     stake(alice, 3_000n * STX);
     // act
@@ -122,8 +128,9 @@ describe("take-og-seat via validate-stake!", function () {
     // assert
     expect(r.result).toBeOk(Cl.bool(true));
     expect(ogSeatEvents(r.events)).toHaveLength(0);
-    expect(ogUstx(alice)).toBeUint(3_000n * STX);
-    expect(ogStatus()).toStrictEqual(status(1n, 3_000n * STX));
+    expect(ogShrinkEvents(r.events)).toHaveLength(1);
+    expect(ogUstx(alice)).toBeUint(500n * STX);
+    expect(ogStatus()).toStrictEqual(status(1n, 500n * STX));
   });
 
   it("cycles-only update (same total) adds nothing", function () {
@@ -478,5 +485,124 @@ describe("og-staying / evict-og", function () {
     expect(ogStatus()).toStrictEqual(status(0n, 0n));
     // a second eviction of the same staker has no seat
     expect(evict(alice, admin).result).toBeErr(Cl.uint(128));
+  });
+});
+
+// Patient Reed recheck (bounty mv7dfb): an OG unstakes, the lock ends and,
+// before anyone calls evict-og, they stake a small amount fresh. og-staying is
+// true again (evict u129), so the cover must shrink to the new stake.
+describe("og-shrink: fresh small stake after the lock ended", function () {
+  it("attack: 1M cover, lock ends, 1 STX fresh stake -> cover 1 STX, room freed for others", function () {
+    // arrange: alice holds the whole cap, bob gets nothing
+    stake(alice, CAP, 150n);
+    stake(bob, 1_000n * STX, 150n);
+    expect(isOg(bob)).toBeBool(false);
+    setCycle(151n); // lock 150..150 ended, pox-5 returns none
+    expect(ogStaying(alice)).toBeBool(false);
+    // act: fresh 1 STX stake before anyone evicts
+    const r = stake(alice, 1n * STX, 152n);
+    // assert
+    expect(r.result).toBeOk(Cl.bool(true));
+    expect(ogStaying(alice)).toBeBool(true);
+    expect(evict(alice).result).toBeErr(Cl.uint(129));
+    const ev = ogShrinkEvents(r.events);
+    expect(ev).toHaveLength(1);
+    expect(ev[0].data.value).toStrictEqual(
+      Cl.tuple({
+        topic: Cl.stringAscii("og-shrink"),
+        staker: Cl.principal(alice),
+        "covered-ustx": Cl.uint(1n * STX),
+        "freed-ustx": Cl.uint(CAP - 1n * STX),
+      }),
+    );
+    expect(ogSeatEvents(r.events)).toHaveLength(0);
+    expect(isOg(alice)).toBeBool(true);
+    expect(ogUstx(alice)).toBeUint(1n * STX);
+    expect(ogStatus()).toStrictEqual(status(1n, 1n * STX));
+    expect(stakerFee(alice, 1_000_000n * STX, 1_000_000n, 450n)).toBeUint(
+      (1_000_000n * 450n * (1_000_000n * STX - 1n * STX)) / (10_000n * 1_000_000n * STX),
+    );
+    // act + assert: the freed room goes to another staker
+    const rb = stake(bob, 1_000n * STX, 152n);
+    expect(rb.result).toBeOk(Cl.bool(true));
+    expect(ogUstx(bob)).toBeUint(1_000n * STX);
+    expect(ogStatus()).toStrictEqual(status(2n, 1_001n * STX));
+  });
+
+  it("stake equal to the cover: unchanged, no event", function () {
+    // arrange
+    stake(alice, 1_000n * STX, 150n);
+    setCycle(151n);
+    // act
+    const r = stake(alice, 1_000n * STX, 152n);
+    // assert
+    expect(r.result).toBeOk(Cl.bool(true));
+    expect(ogShrinkEvents(r.events)).toHaveLength(0);
+    expect(ogSeatEvents(r.events)).toHaveLength(0);
+    expect(ogUstx(alice)).toBeUint(1_000n * STX);
+    expect(ogStatus()).toStrictEqual(status(1n, 1_000n * STX));
+  });
+
+  it("top-up still grows the cover, no shrink event", function () {
+    // arrange
+    stake(alice, 1_000n * STX, 150n);
+    // act
+    const r = stake(alice, 2_500n * STX, 150n);
+    // assert
+    expect(r.result).toBeOk(Cl.bool(true));
+    expect(ogShrinkEvents(r.events)).toHaveLength(0);
+    expect(ogSeatEvents(r.events)).toHaveLength(1);
+    expect(ogUstx(alice)).toBeUint(2_500n * STX);
+    expect(ogStatus()).toStrictEqual(status(1n, 2_500n * STX));
+  });
+
+  it("shrink then a later top-up grows again, clamped to the cap left", function () {
+    // arrange: alice shrinks from the cap to 1 STX, bob takes 1M of the room
+    stake(alice, CAP, 150n);
+    setCycle(151n);
+    stake(alice, 1n * STX, 152n);
+    stake(bob, 1_000_000n * STX, 152n);
+    expect(ogStatus()).toStrictEqual(status(2n, 1_000_001n * STX));
+    // act: alice tops up to the whole cap again
+    const r = stake(alice, CAP, 152n);
+    // assert: grows only into the 1.1M left
+    expect(r.result).toBeOk(Cl.bool(true));
+    expect(ogSeatEvents(r.events)).toHaveLength(1);
+    expect(ogUstx(alice)).toBeUint(CAP - 1_000_000n * STX);
+    expect(ogUstx(bob)).toBeUint(1_000_000n * STX);
+    expect(ogStatus()).toStrictEqual(status(2n, CAP));
+  });
+
+  it("evict after a shrink frees only the shrunk cover", function () {
+    // arrange
+    stake(alice, 1_000n * STX, 150n);
+    setCycle(151n);
+    stake(alice, 10n * STX, 152n);
+    setCycle(153n);
+    // act
+    const r = evict(alice);
+    // assert
+    expect(r.result).toBeOk(Cl.uint(10n * STX));
+    expect(isOg(alice)).toBeBool(false);
+    expect(ogStatus()).toStrictEqual(status(0n, 0n));
+  });
+
+  it("zero-amount stake over a seat: cover 0 but seat kept and not evictable (u128)", function () {
+    // arrange
+    stake(alice, 1_000n * STX, 150n);
+    setCycle(151n);
+    // act
+    const r = stake(alice, 0n, 152n);
+    // assert: documents the zero edge; pox-5 gating of a 0 stake decides if it is reachable
+    expect(r.result).toBeOk(Cl.bool(true));
+    expect(ogUstx(alice)).toBeUint(0);
+    expect(isOg(alice)).toBeBool(true);
+    expect(ogStatus()).toStrictEqual(status(1n, 0n));
+    setCycle(153n);
+    expect(evict(alice).result).toBeErr(Cl.uint(128));
+    // act: a later stake re-enters through the grow path
+    const again = stake(alice, 5n * STX, 153n);
+    expect(again.result).toBeOk(Cl.bool(true));
+    expect(ogStatus()).toStrictEqual(status(2n, 5n * STX)); // seat counted twice
   });
 });

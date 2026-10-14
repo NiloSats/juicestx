@@ -315,8 +315,8 @@
 
 ;; Grow `staker`'s cover toward `amount`, their whole position after this
 ;; stake (pox-5 passes the new total on stake-update), clamped to the cap left.
-;; A first stake opens a seat; a top-up grows it. Cover never shrinks. Returns
-;; the new cover.
+;; A first stake opens a seat; a top-up grows it. A stake below the cover
+;; shrinks it to that stake. Returns the new cover.
 (define-private (take-og-seat
     (staker principal)
     (amount uint)
@@ -334,22 +334,39 @@
       ))
       (covered (+ prev add))
     )
-    (asserts! (> want u0) ERR_OG_NOTHING_TO_ADD)
-    (asserts! (> add u0) ERR_OG_CAP_FULL)
-    (map-set og-stakers staker covered)
-    (if (is-eq prev u0)
-      (var-set og-seats (+ (var-get og-seats) u1))
-      true
+    ;; a stake below the cover (a fresh stake after the lock ended) shrinks
+    ;; the cover to it and returns the rest to the cap (bounty mv7dfb)
+    (if (< amount prev)
+      (let ((freed (- prev amount)))
+        (map-set og-stakers staker amount)
+        (var-set og-covered-ustx (- (var-get og-covered-ustx) freed))
+        (print {
+          topic: "og-shrink",
+          staker: staker,
+          covered-ustx: amount,
+          freed-ustx: freed,
+        })
+        (ok amount)
+      )
+      (begin
+        (asserts! (> want u0) ERR_OG_NOTHING_TO_ADD)
+        (asserts! (> add u0) ERR_OG_CAP_FULL)
+        (map-set og-stakers staker covered)
+        (if (is-eq prev u0)
+          (var-set og-seats (+ (var-get og-seats) u1))
+          true
+        )
+        (var-set og-covered-ustx (+ (var-get og-covered-ustx) add))
+        (print {
+          topic: "og-seat",
+          staker: staker,
+          covered-ustx: covered,
+          added-ustx: add,
+          seats: (var-get og-seats),
+        })
+        (ok covered)
+      )
     )
-    (var-set og-covered-ustx (+ (var-get og-covered-ustx) add))
-    (print {
-      topic: "og-seat",
-      staker: staker,
-      covered-ustx: covered,
-      added-ustx: add,
-      seats: (var-get og-seats),
-    })
-    (ok covered)
   )
 )
 

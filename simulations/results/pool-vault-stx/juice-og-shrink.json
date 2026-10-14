@@ -1,0 +1,277 @@
+{
+  "id": "d0bc9566c6e0d58ddfc2011d318e9bb9",
+  "url": "https://stxer.xyz/simulations/mainnet/d0bc9566c6e0d58ddfc2011d318e9bb9",
+  "block": 9207787,
+  "cycle": 145,
+  "sourceHashes": {
+    "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
+    "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
+    "markets-sbtc-stx-jing-v6-3": "943927cc5067d21d50c87e3f7464d379c3d704cb2ed8dcbfb5c88205a68c5a67",
+    "swap-router-sbtc-stx-jing-v5-3": "fb64c9a0c642bdf821cfb754900e58edc7d5b7f27aeab7348cc34a4645e43698",
+    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-sbtc-autoswap": "1cd93089874a08f9e02b4c72c9b307bcfb4b3bcbb419394cf7cd9a5d14bca8c7",
+    "juice-pool-sbtc-signer": "603a7dca7cdcf0be9d11246aa5b81e12d3ab771f1f53d4bf6e1cf883e59a0c9c"
+  },
+  "checks": [
+    {
+      "label": "deploy exact jing-core-v6",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact jing-ladder-v1",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact markets-sbtc-stx-jing-v6-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy exact swap-router-sbtc-stx-jing-v5-3",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing sync-seat-count",
+      "passed": true,
+      "actual": "(ok u10)"
+    },
+    {
+      "label": "Jing set-verified-contract",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "Jing initialize",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-swap-vault-trait-v2",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-sbtc-autoswap",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy juice-pool-sbtc-signer",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "register the pool as a pox-5 signer",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x0248d9689e37ad2f9922a2ade43c67cf3e82d33bc1fcd39e5a2bc78fd07c03e4b1)))"
+    },
+    {
+      "label": "HOP is locked at fastpool on mainnet",
+      "passed": true,
+      "actual": "(some (tuple (amount-ustx u200000000000) (first-reward-cycle u146) (num-cycles u4) (signer SPMPMA1V6P430M8C91QS1G9XJ95S59JS1TZFZ4Q4.fastpool-max500-signer-manager)))"
+    },
+    {
+      "label": "no seats at start",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u0) (seats u0))"
+    },
+    {
+      "label": "HOP stake-updates fastpool -> pool, no new STX",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u0) (amount-ustx u200000000000) (cycles-to-extend u0) (num-cycles u4) (old-signer SPMPMA1V6P430M8C91QS1G9XJ95S59JS1TZFZ4Q4.fastpool-max500-signer-manager) (prev-unlock-height u150) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (unlock-burn-height u981050) (unlock-cycle u150)))"
+    },
+    {
+      "label": "HOP covers 200k",
+      "passed": true,
+      "actual": "u200000000000"
+    },
+    {
+      "label": "fund SP3MXDFN… 20 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "fund SP1BQ3WT… 1010 STX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "ZERO stakes 10 STX",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u10000000) (first-reward-cycle u146) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "2 seats, 200,010 STX covered",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u200010000000) (seats u2))"
+    },
+    {
+      "label": "HOP unstakes",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u200000000000) (first-reward-cycle u146) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (unlock-burn-height u972650) (unlock-cycle u146)))"
+    },
+    {
+      "label": "ZERO unstakes",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u10000000) (first-reward-cycle u146) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (unlock-burn-height u972650) (unlock-cycle u146)))"
+    },
+    {
+      "label": "HOP still staying until the lock ends",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "evict HOP right after unstake: u129",
+      "passed": true,
+      "actual": "(err u129)"
+    },
+    {
+      "label": "into cycle 146, HOP lock ended: advance 1241 burn blocks -> offset 20",
+      "passed": true,
+      "actual": "ok"
+    },
+    {
+      "label": "pox-5 get-staker-info HOP = none",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "HOP og-staying false once the lock ended",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "label": "HOP cover still 200k (not evicted yet)",
+      "passed": true,
+      "actual": "u200000000000"
+    },
+    {
+      "label": "ATTACK: HOP stakes 1 STX fresh before evict-og",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u1000000) (first-reward-cycle u147) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (unlock-burn-height u1176350) (unlock-cycle u243)))"
+    },
+    {
+      "label": "HOP og-staying true again",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "evict HOP after the fresh stake: u129 (still staying)",
+      "passed": true,
+      "actual": "(err u129)"
+    },
+    {
+      "label": "FIX: HOP cover shrank to 1 STX",
+      "passed": true,
+      "actual": "u1000000"
+    },
+    {
+      "label": "HOP keeps the seat",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "FIX: 2 seats, 11 STX covered (199,999 STX back to the cap)",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u11000000) (seats u2))"
+    },
+    {
+      "label": "HOP fee on a 200k share is charged above the 1 STX cover",
+      "passed": true,
+      "actual": "u44999"
+    },
+    {
+      "label": "LATE stakes 1,000 STX",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u1000000000) (first-reward-cycle u147) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP1BQ3WTXBYS15FW5B408GEZS5KKNRD0CJPHQF96F) (unlock-burn-height u1176350) (unlock-cycle u243)))"
+    },
+    {
+      "label": "LATE covered 1,000 STX",
+      "passed": true,
+      "actual": "u1000000000"
+    },
+    {
+      "label": "3 seats: HOP 1 + ZERO 10 + LATE 1,000",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1011000000) (seats u3))"
+    },
+    {
+      "label": "HOP stake-update same total (no extend, no increase)",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u0) (amount-ustx u1000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (prev-unlock-height u243) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (unlock-burn-height u1176350) (unlock-cycle u243)))"
+    },
+    {
+      "label": "equal: HOP cover still 1 STX",
+      "passed": true,
+      "actual": "u1000000"
+    },
+    {
+      "label": "HOP tops up +5 STX",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u5000000) (amount-ustx u6000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (prev-unlock-height u243) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (unlock-burn-height u1176350) (unlock-cycle u243)))"
+    },
+    {
+      "label": "top-up: HOP cover grew to 6 STX",
+      "passed": true,
+      "actual": "u6000000"
+    },
+    {
+      "label": "3 seats: 6 + 10 + 1,000",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1016000000) (seats u3))"
+    },
+    {
+      "label": "ZERO lock ended",
+      "passed": true,
+      "actual": "false"
+    },
+    {
+      "label": "PROBE: ZERO stakes 0 STX fresh (pox-5 lock of 0)",
+      "passed": true,
+      "actual": "ENGINE {\"Transaction\":{\"Err\":\"Internal(Expect(\\\"pox-5 stake: failed to lock 0 from SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N until 1176350: pox-5 invariant violated: PoxInvalidLockAmount\\\"))\"}}"
+    },
+    {
+      "label": "PROBE: ZERO cover unchanged at 10 STX",
+      "passed": true,
+      "actual": "u10000000"
+    },
+    {
+      "label": "ZERO evictable as before",
+      "passed": true,
+      "actual": "(ok u10000000)"
+    },
+    {
+      "label": "final: 2 seats (HOP 6, LATE 1,000)",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u1006000000) (seats u2))"
+    },
+    {
+      "label": "og-shrink print: covered 1 STX, freed 199,999 STX",
+      "passed": true,
+      "actual": "(tuple (covered-ustx u1000000) (freed-ustx u199999000000) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3YADPD1TJ27WZ) (topic \"og-shrink\"))"
+    },
+    {
+      "label": "equal update: no og-shrink and no og-seat print",
+      "passed": true,
+      "actual": "(tuple (amount-sats u0) (amount-ustx u1000000) (first-index u147) (is-bond false) (num-indexes u96) (signer-calldata none) (staker SP13CM9QN6J23B6T6415SC0T8JQZ3"
+    },
+    {
+      "label": "unstake unlock cycle = 146",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u200000000000) (first-reward-cycle u146) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP13CM9QN6J23B"
+    },
+    {
+      "label": "zero stake never reaches the pool (node refuses a 0 lock)",
+      "passed": true,
+      "actual": "ENGINE {\"Transaction\":{\"Err\":\"Internal(Expect(\\\"pox-5 stake: failed to lock 0 from SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N until 1176350: pox-5 invariant violated: PoxInvalidLockAmount\\\"))\"}}"
+    },
+    {
+      "label": "og-evict print for ZERO: 10 STX",
+      "passed": true,
+      "actual": "(tuple (freed-ustx u10000000) (seats u2) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (topic \"og-evict\"))"
+    }
+  ]
+}

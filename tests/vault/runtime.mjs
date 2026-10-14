@@ -177,6 +177,10 @@ assert.equal(ok(call(J,'sweep-tranche-dust',[u(142),u(0)],admin)).value,1n);
 // A third-party sBTC donation cannot strand the next funding before it starts.
 ok(call('mock-ft','mint',[u(7),cp(JV)]));
 ok(call('mock-pox','stake-test',[cp(J),Cl.principal(alice),u(143),u(1)]));
+// alice's fresh 1-uSTX stake shrinks her OG cover from 500 STX to 1 and
+// frees the rest of the cap; refill it so bob keeps paying the fee below.
+ok(call('mock-pox','stake-test',[cp(J),cp('og-filler'),u(999),u(2100499999999)]));
+assert.equal(read(J,'get-og-status').value['covered-ustx'].value,2100500000000n);
 ok(call(J,'pox-claim-rewards',[Cl.list([]),u(143)]));
 assert.equal(ok({result:read('mock-ft','get-balance',[cp(JV)])}).value,1000007n);
 ok(call('mock-pox','next-dist'));
@@ -393,6 +397,8 @@ for(const [who,amount]of [[alice,1],[bob,3]])ok(call('mock-pox','stake-test',[cp
 ok(call('mock-pox','next-dist'));ok(call(J,'pox-claim-rewards',[Cl.list([]),u(168)]));
 ok(call(JV,'jing-place',[update]));ok(call('v6-market','test-park-extra',[cp(JV),u(7)],admin));
 sim.mineEmptyBurnBlocks(4320);
+// refloor after the window takes the slippage-floor arm
+ok(call(J,'refloor-vault',[update],admin));
 const recoveryClock=cvToString(read(JV,'get-clock')),recoveryPosition=cvToString(read('v6-market','get-token-x-deposit',[read('v6-market','get-current-cycle'),cp(JV)]));
 // Withhold 3 units: above the vault's DUST_SATS (2) residue tolerance.
 ok(call('mock-ft','set-short-by',[u(3)],admin));
@@ -512,7 +518,7 @@ assert.equal(upgradeStatus['batch-start'].type,'none');
  stake(w3,147,600n*STX);assert.equal(isOg(w3),true);
  assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${600n*STX}`);
  stake(w3,147,5000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${5000n*STX}`); // top-up grows the seat
- stake(w3,147,4000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${5000n*STX}`); // never shrinks
+ stake(w3,147,5000n*STX);assert.equal(cvToString(read(J,'get-og-ustx',[Cl.principal(w3)])),`u${5000n*STX}`); // a live lock can only grow: pox-5 stake-update passes the total
  stake(w6,400,600n*STX);assert.equal(isOg(w6),true); // no deadline
  stake(tiny,147,1n*STX);assert.equal(isOg(tiny),true); // no minimum
  for(let i=0;i<25;i++)stake(cp(`og-${i}`),147,500n*STX); // no seat limit

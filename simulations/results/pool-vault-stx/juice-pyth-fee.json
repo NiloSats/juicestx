@@ -1,20 +1,22 @@
 {
-  "id": "e09b8aff1928b1b948d8d323a10f686d",
-  "url": "https://stxer.xyz/simulations/mainnet/e09b8aff1928b1b948d8d323a10f686d",
-  "block": 9201081,
-  "proofTimestamp": 1791936260,
+  "id": "e1a81bebcc5480a270db580cb8143767",
+  "url": "https://stxer.xyz/simulations/mainnet/e1a81bebcc5480a270db580cb8143767",
+  "block": 9207789,
+  "proofTimestamp": 1791993598,
   "verifiesPerFill": 1,
+  "vaultFeesPerRouterSwap": 2,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
-    "markets-sbtc-stx-jing-v6-3": "65a8dc9aed179a3cc440306e31aff7da5bcecb99872423ca50b8ba417abbb6c0",
-    "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
+    "markets-sbtc-stx-jing-v6-3": "943927cc5067d21d50c87e3f7464d379c3d704cb2ed8dcbfb5c88205a68c5a67",
+    "swap-router-sbtc-stx-jing-v5-3": "fb64c9a0c642bdf821cfb754900e58edc7d5b7f27aeab7348cc34a4645e43698",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
-    "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39"
+    "juice-sbtc-autoswap": "1cd93089874a08f9e02b4c72c9b307bcfb4b3bcbb419394cf7cd9a5d14bca8c7",
+    "juice-pool-sbtc-signer": "603a7dca7cdcf0be9d11246aa5b81e12d3ab771f1f53d4bf6e1cf883e59a0c9c"
   },
   "fixtures": [
     "live oracle fee var-set to u10 by Eval",
+    "batch 2: second reward tranche seeded and the pool tranche gate and vault router cooldown cleared with Eval",
     "PoX earned rewards and 1:3 shares seeded with Eval",
     "vault clock aged by 288 blocks"
   ],
@@ -112,7 +114,7 @@
     {
       "label": "real STX maker bid so the router fills on Jing",
       "passed": true,
-      "actual": "(ok u288075916)"
+      "actual": "(ok u295235299)"
     },
     {
       "label": "fixture: live oracle fee set to u10 (Eval in oracle context)",
@@ -120,19 +122,19 @@
       "actual": "u10"
     },
     {
-      "label": "caller holds STX for its own refresh-mid fee",
-      "passed": true,
-      "actual": "(ok true)"
-    },
-    {
       "label": "vault STX float 1000 uSTX",
       "passed": true,
       "actual": "(ok true)"
     },
     {
+      "label": "caller is a fresh account with 0 STX",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
       "label": "budget 0: router-swap aborts on the with-stx allowance",
       "passed": true,
-      "actual": "(err u1)"
+      "actual": "(err u0)"
     },
     {
       "label": "nothing sold under budget 0",
@@ -140,14 +142,14 @@
       "actual": "(ok u100000)"
     },
     {
-      "label": "set budget u9 (1 x fee - 1)",
+      "label": "set budget u9 (fee - 1)",
       "passed": true,
       "actual": "(ok true)"
     },
     {
-      "label": "budget 1 x fee - 1 aborts too: a Jing fill verifies 1x",
+      "label": "budget fee - 1 aborts too: vault-mid's scope cannot pay one verify",
       "passed": true,
-      "actual": "(err u1)"
+      "actual": "(err u0)"
     },
     {
       "label": "nothing sold under budget u9",
@@ -175,14 +177,19 @@
       "actual": "SPMV5HDZ4EMB8XY7HAYT3XW0DF7DZ4E8XEG2J1T8"
     },
     {
-      "label": "router-swap sells the whole batch with the budget set",
+      "label": "0-STX caller: router-swap sells the whole batch with the budget set",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19013010564619) (mid u19205061176383) (out u191474834) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19485529806918) (mid u19682353340322) (out u196233447) (unsold u0)))))"
     },
     {
       "label": "vault STX after the sale",
       "passed": true,
-      "actual": "u191475834"
+      "actual": "u196234437"
+    },
+    {
+      "label": "caller still holds 0 STX after the sale",
+      "passed": true,
+      "actual": "u0"
     },
     {
       "label": "vault sold out",
@@ -192,32 +199,117 @@
     {
       "label": "finalize attributes the STX to the pool",
       "passed": true,
-      "actual": "(ok u191475834)"
+      "actual": "(ok u196234337)"
     },
     {
-      "label": "vault paid exactly 1 x 10 uSTX to the fee recipient",
+      "label": "F2: vault keeps exactly the budget u100 after finalize",
       "passed": true,
-      "actual": "vault fees [10] to SPMV5HDZ4EMB8XY7HAYT3XW0DF7DZ4E8XEG2J1T8"
+      "actual": "u100"
     },
     {
-      "label": "caller paid its own refresh-mid fee (1 x 10)",
+      "label": "batch 2: fund real PoX sBTC balance again (fork only)",
       "passed": true,
-      "actual": "caller fees [10]"
+      "actual": "(ok true)"
     },
     {
-      "label": "router out is net of the vault fees (vault STX delta = out)",
+      "label": "batch 2 fixture: a second tranche of crystallized rewards",
       "passed": true,
-      "actual": "delta 191474834, out 191474834"
+      "actual": "(ok true)"
     },
     {
-      "label": "finalize passes the whole STX balance (float + out)",
+      "label": "batch 2 fixture: next distribution cycle (clear the tranche gate)",
       "passed": true,
-      "actual": "(ok u191475834) vs 191475834"
+      "actual": "true"
+    },
+    {
+      "label": "batch 2: PoX claim flows to the vault",
+      "passed": true,
+      "actual": "(ok (tuple (bond-rewards (list )) (bond-totals u0) (stx-rewards (tuple (earned u100000) (rewards-per-token u1440258939597))) (total-rewards u100000)))"
+    },
+    {
+      "label": "batch 2 fixture: patience clock elapsed, router cooldown passed",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "batch 2: real STX maker bid",
+      "passed": true,
+      "actual": "(ok u295235299)"
+    },
+    {
+      "label": "batch 2: vault STX before the sale (reserve only)",
+      "passed": true,
+      "actual": "u100"
+    },
+    {
+      "label": "batch 2: 0-STX caller sells; the kept reserve pays the verifies",
+      "passed": true,
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19485529806918) (mid u19682353340322) (out u196233447) (unsold u0)))))"
+    },
+    {
+      "label": "batch 2: vault STX after the sale",
+      "passed": true,
+      "actual": "u196233537"
+    },
+    {
+      "label": "batch 2: caller still holds 0 STX",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "batch 2: finalize sends balance - budget",
+      "passed": true,
+      "actual": "(ok u196233437)"
+    },
+    {
+      "label": "batch 2: vault again keeps u100",
+      "passed": true,
+      "actual": "u100"
+    },
+    {
+      "label": "vault paid exactly 2 x 10 uSTX to the fee recipient (refresh-mid + market)",
+      "passed": true,
+      "actual": "vault fees [10,10] to SPMV5HDZ4EMB8XY7HAYT3XW0DF7DZ4E8XEG2J1T8"
+    },
+    {
+      "label": "caller sent no STX at all (no Pyth fee)",
+      "passed": true,
+      "actual": "caller transfers []"
+    },
+    {
+      "label": "vault STX delta = out - 1 x 10 (refresh-mid, outside the router)",
+      "passed": true,
+      "actual": "delta 196233437, out 196233447"
+    },
+    {
+      "label": "F2: finalize passes float + out - refresh-mid fee - budget u100",
+      "passed": true,
+      "actual": "(ok u196234337) vs 196234337"
     },
     {
       "label": "the sale went through the Jing leg (market verified inside the vault)",
       "passed": true,
       "actual": "jing-in 100000"
+    },
+    {
+      "label": "F2 batch 2: started from the reserve u100 only",
+      "passed": true,
+      "actual": "u100"
+    },
+    {
+      "label": "F2 batch 2: vault paid 2 x 10 uSTX from the reserve",
+      "passed": true,
+      "actual": "vault fees [10,10]"
+    },
+    {
+      "label": "F2 batch 2: vault delta = out - refresh-mid fee",
+      "passed": true,
+      "actual": "out 196233447"
+    },
+    {
+      "label": "F2 batch 2: finalize = out - refresh-mid fee (reserve refilled)",
+      "passed": true,
+      "actual": "(ok u196233437) vs 196233437"
     }
   ]
 }

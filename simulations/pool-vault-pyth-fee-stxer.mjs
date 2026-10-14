@@ -9,10 +9,17 @@
 // source deployed below (JING_SRC): v6-3 since jing-contracts-v3 314aaba
 // verifies once and hands the feeds to settle-with-verified-feeds
 // (VERIFIES = 1); the older source verified twice (entry and
-// settle-with-refresh). So one fill costs the vault VERIFIES x fee.
-// Expected: router-swap aborts with budget 0 and with budget = VERIFIES x
-// fee - 1 (err u1, the with-stx allowance), and sells after
-// set-vault-pyth-fee-budget u100, the vault paying exactly VERIFIES x fee.
+// settle-with-refresh). Bounty mv7dfb (Super Orb): current-mid's
+// refresh-mid verify runs through vault-mid in its own as-contract? scope, so
+// one router-swap costs the vault PER_CALL = VERIFIES + 1 fees and the caller
+// none. Each scope carries with-stx pyth-fee-budget, so the budget caps one
+// verify. Expected: router-swap aborts with budget 0 and with budget = fee - 1
+// (err u0, vault-mid's with-stx allowance), and sells after
+// set-vault-pyth-fee-budget u100, the vault paying exactly PER_CALL x fee.
+// The caller is a fresh account with 0 STX (stxer charges no tx fee): it
+// could not have paid a fee, and its balance stays 0.
+// Patient Reed F2: finalize keeps the budget in the vault; a second batch
+// with no float sells on that reserve and refills it.
 // Run: node simulations/pool-vault-pyth-fee-stxer.mjs
 import {appendJingStack,JING_SRC} from './_jing-v6-3.mjs';
 import {POOL_NAME,VAULT_NAME,juiceSource,juiceForkBlock,traitSource} from './_juice-fork.mjs';
@@ -43,9 +50,11 @@ const FUND=100000,FEE=10,FLOAT=1000,BUDGET=100;
 // verifies per Jing fill, from the market source the fork deploys
 const marketSource=readFileSync(resolve(JING_SRC,'markets-sbtc-stx-jing-v6-3.clar'),'utf8');
 const VERIFIES=marketSource.includes('(settle-with-verified-feeds (get feed-x feeds) (get feed-y feeds)')?1:2;
-const SHORT=VERIFIES*FEE-1; // one uSTX under what a fill costs the vault
-if(BUDGET<VERIFIES*FEE)throw new Error('BUDGET must cover a fill');
-console.log(`market swap verifies ${VERIFIES}x per fill: a fill costs the vault ${VERIFIES*FEE} uSTX`);
+const PER_CALL=VERIFIES+1; // + current-mid's refresh-mid, also paid by the vault
+const SHORT=FEE-1; // one uSTX under one verify: each as-contract? scope caps one verify
+if(BUDGET<PER_CALL*FEE)throw new Error('BUDGET must cover a router-swap');
+console.log(`market swap verifies ${VERIFIES}x per fill, + refresh-mid: a router-swap costs the vault ${PER_CALL*FEE} uSTX`);
+const EMPTY=getAddressFromPrivateKey('5'.repeat(64)+'01','mainnet'); // never funded
 
 const {fetchLazerUpdateAny}=await import('./_pool-vault-lazer.mjs');
 const proof=await fetchLazerUpdateAny();
@@ -100,21 +109,41 @@ const bid=BigInt(FUND)*mid/10000000000n*150n/100n;
 call('real STX maker bid so the router fills on Jing',MKT,'deposit-token-y',[Cl.uint(bid),Cl.uint(mid*105n/100n),Cl.some(Cl.uint(0)),
  Cl.contractPrincipal(...WSTX.split('.')),Cl.stringAscii('wstx')],`(ok u${bid})`,STX_WHALE);
 ev('fixture: live oracle fee set to u10 (Eval in oracle context)',ORACLE,`(begin (var-set fee u${FEE}) (get-fee))`,`u${FEE}`);
-send('caller holds STX for its own refresh-mid fee',STRANGER,1000000);
 send(`vault STX float ${FLOAT} uSTX`,vid,FLOAT);
-call('budget 0: router-swap aborts on the with-stx allowance',vid,'router-swap',[update],'(err u1)',STRANGER);
+ev('caller is a fresh account with 0 STX',vid,`(stx-get-balance '${EMPTY})`,'u0');
+call('budget 0: router-swap aborts on the with-stx allowance',vid,'router-swap',[update],'(err u0)',EMPTY);
 ev('nothing sold under budget 0',vid,`(contract-call? '${SBTC} get-balance current-contract)`,`(ok u${FUND})`);
-call(`set budget u${SHORT} (${VERIFIES} x fee - 1)`,pid,'set-vault-pyth-fee-budget',[Cl.uint(SHORT)],'(ok true)');
-call(`budget ${VERIFIES} x fee - 1 aborts too: a Jing fill verifies ${VERIFIES}x`,vid,'router-swap',[update],'(err u1)',STRANGER);
+call(`set budget u${SHORT} (fee - 1)`,pid,'set-vault-pyth-fee-budget',[Cl.uint(SHORT)],'(ok true)');
+call('budget fee - 1 aborts too: vault-mid\'s scope cannot pay one verify',vid,'router-swap',[update],'(err u0)',EMPTY);
 ev(`nothing sold under budget u${SHORT}`,vid,`(contract-call? '${SBTC} get-balance current-contract)`,`(ok u${FUND})`);
 call(`admin sets budget u${BUDGET} through the pool`,pid,'set-vault-pyth-fee-budget',[Cl.uint(BUDGET)],'(ok true)');
 ev(`config reads pyth-fee-budget u${BUDGET}`,vid,'(get-config)',v=>v.includes(`(pyth-fee-budget u${BUDGET})`));
 const before=vaultStx('vault STX before the sale');
 const recipient=ev('oracle fee recipient',ORACLE,'(get-fee-recipient)',v=>/^S[PM]/.test(v));
-const sale=call('router-swap sells the whole batch with the budget set',vid,'router-swap',[update],v=>ok(v)&&v.includes(`(amount u${FUND})`)&&v.includes('(unsold u0)'),STRANGER);
+const sale=call('0-STX caller: router-swap sells the whole batch with the budget set',vid,'router-swap',[update],v=>ok(v)&&v.includes(`(amount u${FUND})`)&&v.includes('(unsold u0)'),EMPTY);
 const after=vaultStx('vault STX after the sale');
+ev('caller still holds 0 STX after the sale',vid,`(stx-get-balance '${EMPTY})`,'u0');
 ev('vault sold out',vid,'(is-empty)','true');
 const fin=call('finalize attributes the STX to the pool',pid,'finalize-swap',[],v=>/^\(ok u[1-9]\d*\)$/.test(v),STRANGER);
+// Patient Reed F2: finish keeps min(balance, budget) as the next batch's fee
+// reserve. Batch 2 gets no float: its verifies run on that reserve alone.
+ev(`F2: vault keeps exactly the budget u${BUDGET} after finalize`,vid,'(stx-get-balance current-contract)',`u${BUDGET}`);
+call('batch 2: fund real PoX sBTC balance again (fork only)',SBTC,'transfer',[Cl.uint(FUND),Cl.principal(SBTC_WHALE),Cl.principal(POX),Cl.none()],'(ok true)',SBTC_WHALE);
+ev('batch 2 fixture: a second tranche of crystallized rewards',POX,`(begin
+ (map-set signer-unclaimed-rewards-for-cycle ${key} u${FUND})
+ (var-set last-accounted-rewards-only (+ (var-get last-accounted-rewards-only) u${FUND}))
+ (ok true))`,'(ok true)');
+ev('batch 2 fixture: next distribution cycle (clear the tranche gate)',pid,`(begin (map-delete last-claim-dist-cycle u${cycle}) true)`,'true');
+call('batch 2: PoX claim flows to the vault',pid,'pox-claim-rewards',[Cl.list([]),Cl.uint(cycle)],v=>ok(v)&&v.includes(`(total-rewards u${FUND})`),STRANGER);
+ev('batch 2 fixture: patience clock elapsed, router cooldown passed',vid,'(begin (var-set batch-start (some (- burn-block-height u288))) (var-set last-router-swap u0) true)','true');
+call('batch 2: real STX maker bid',MKT,'deposit-token-y',[Cl.uint(bid),Cl.uint(mid*105n/100n),Cl.some(Cl.uint(0)),
+ Cl.contractPrincipal(...WSTX.split('.')),Cl.stringAscii('wstx')],`(ok u${bid})`,STX_WHALE);
+const before2=vaultStx('batch 2: vault STX before the sale (reserve only)');
+const sale2=call('batch 2: 0-STX caller sells; the kept reserve pays the verifies',vid,'router-swap',[update],v=>ok(v)&&v.includes(`(amount u${FUND})`)&&v.includes('(unsold u0)'),EMPTY);
+const after2=vaultStx('batch 2: vault STX after the sale');
+ev('batch 2: caller still holds 0 STX',vid,`(stx-get-balance '${EMPTY})`,'u0');
+const fin2=call('batch 2: finalize sends balance - budget',pid,'finalize-swap',[],v=>/^\(ok u[1-9]\d*\)$/.test(v),STRANGER);
+ev(`batch 2: vault again keeps u${BUDGET}`,vid,'(stx-get-balance current-contract)',`u${BUDGET}`);
 
 console.log(`pyth-fee: ${plan.length} checks at mainnet block ${forkBlock}`);
 const id=await builder.run();console.log(`View: https://stxer.xyz/simulations/mainnet/${id}`);
@@ -133,11 +162,12 @@ if(checks[sale].passed){
  const feeTo=checks[recipient].actual;
  const transfers=(result.steps[sale]?.Result?.Transaction?.Ok?.events??[]).map(e=>typeof e==='string'?JSON.parse(e):e).map(e=>e.stx_transfer_event).filter(Boolean);
  const vaultFees=transfers.filter(t=>t.sender===vid&&t.recipient===feeTo).map(t=>BigInt(t.amount));
- const callerFees=transfers.filter(t=>t.sender===STRANGER&&t.recipient===feeTo).map(t=>BigInt(t.amount));
- checks.push({label:`vault paid exactly ${VERIFIES} x ${FEE} uSTX to the fee recipient`,passed:vaultFees.length===VERIFIES&&vaultFees.every(a=>a===BigInt(FEE)),actual:`vault fees [${vaultFees}] to ${feeTo}`});
- checks.push({label:`caller paid its own refresh-mid fee (1 x ${FEE})`,passed:callerFees.length===1&&callerFees[0]===BigInt(FEE),actual:`caller fees [${callerFees}]`});
- checks.push({label:'router out is net of the vault fees (vault STX delta = out)',passed:delta===out,actual:`delta ${delta}, out ${out}`});
- checks.push({label:'finalize passes the whole STX balance (float + out)',passed:uint(checks[fin].actual)===BigInt(FLOAT)+out,actual:`${checks[fin].actual} vs ${BigInt(FLOAT)+out}`});
+ const callerSent=transfers.filter(t=>t.sender===EMPTY).map(t=>BigInt(t.amount));
+ checks.push({label:`vault paid exactly ${PER_CALL} x ${FEE} uSTX to the fee recipient (refresh-mid + market)`,passed:vaultFees.length===PER_CALL&&vaultFees.every(a=>a===BigInt(FEE)),actual:`vault fees [${vaultFees}] to ${feeTo}`});
+ checks.push({label:'caller sent no STX at all (no Pyth fee)',passed:callerSent.length===0,actual:`caller transfers [${callerSent}]`});
+ // the router measures out over its own call: net of the market's verify, not of refresh-mid before it
+ checks.push({label:`vault STX delta = out - 1 x ${FEE} (refresh-mid, outside the router)`,passed:delta===out-BigInt(FEE),actual:`delta ${delta}, out ${out}`});
+ checks.push({label:`F2: finalize passes float + out - refresh-mid fee - budget u${BUDGET}`,passed:uint(checks[fin].actual)===BigInt(FLOAT)+out-BigInt(FEE)-BigInt(BUDGET),actual:`${checks[fin].actual} vs ${BigInt(FLOAT)+out-BigInt(FEE)-BigInt(BUDGET)}`});
  let routing;
  for(const raw of result.steps[sale]?.Result?.Transaction?.Ok?.events??[]){
   const e=typeof raw==='string'?JSON.parse(raw):raw;
@@ -146,10 +176,20 @@ if(checks[sale].passed){
  }
  checks.push({label:'the sale went through the Jing leg (market verified inside the vault)',passed:routing?.['jing-in']?.value>0n,actual:routing?`jing-in ${routing['jing-in'].value}`:'router print missing'});
 }
+if(checks[sale2].passed){
+ const out2=uint(checks[sale2].actual.match(/\(out u\d+\)/)[0]);
+ const feeTo=checks[recipient].actual;
+ const transfers=(result.steps[sale2]?.Result?.Transaction?.Ok?.events??[]).map(e=>typeof e==='string'?JSON.parse(e):e).map(e=>e.stx_transfer_event).filter(Boolean);
+ const vaultFees=transfers.filter(t=>t.sender===vid&&t.recipient===feeTo).map(t=>BigInt(t.amount));
+ checks.push({label:`F2 batch 2: started from the reserve u${BUDGET} only`,passed:uint(checks[before2].actual)===BigInt(BUDGET),actual:checks[before2].actual});
+ checks.push({label:`F2 batch 2: vault paid ${PER_CALL} x ${FEE} uSTX from the reserve`,passed:vaultFees.length===PER_CALL&&vaultFees.every(a=>a===BigInt(FEE)),actual:`vault fees [${vaultFees}]`});
+ checks.push({label:'F2 batch 2: vault delta = out - refresh-mid fee',passed:uint(checks[after2].actual)-uint(checks[before2].actual)===out2-BigInt(FEE),actual:`out ${out2}`});
+ checks.push({label:'F2 batch 2: finalize = out - refresh-mid fee (reserve refilled)',passed:uint(checks[fin2].actual)===out2-BigInt(FEE),actual:`${checks[fin2].actual} vs ${out2-BigInt(FEE)}`});
+}
 for(const c of checks.slice(plan.length))console.log(`${c.passed?'PASS':'FAIL'} ${c.label}: ${c.actual}`);
 const dir=resolve(here,'results/pool-vault-stx');mkdirSync(dir,{recursive:true});
-writeFileSync(resolve(dir,'juice-pyth-fee.json'),JSON.stringify({id,url:`https://stxer.xyz/simulations/mainnet/${id}`,block:forkBlock,proofTimestamp:proof.ts,verifiesPerFill:VERIFIES,sourceHashes,
- fixtures:['live oracle fee var-set to u10 by Eval','PoX earned rewards and 1:3 shares seeded with Eval','vault clock aged by 288 blocks'],checks},null,2));
+writeFileSync(resolve(dir,'juice-pyth-fee.json'),JSON.stringify({id,url:`https://stxer.xyz/simulations/mainnet/${id}`,block:forkBlock,proofTimestamp:proof.ts,verifiesPerFill:VERIFIES,vaultFeesPerRouterSwap:PER_CALL,sourceHashes,
+ fixtures:['live oracle fee var-set to u10 by Eval','batch 2: second reward tranche seeded and the pool tranche gate and vault router cooldown cleared with Eval','PoX earned rewards and 1:3 shares seeded with Eval','vault clock aged by 288 blocks'],checks},null,2));
 const failed=checks.filter(c=>!c.passed).length;
 console.log(`=== juice-pyth-fee: ${checks.length-failed}/${checks.length} passed ===`);
 if(failed)process.exit(1);

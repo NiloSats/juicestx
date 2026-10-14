@@ -562,17 +562,27 @@ describe("emergency-recover (vault side)", function () {
   });
 });
 
-// The live Lazer oracle charges its fee to tx-sender. Inside the vault's
-// as-contract? blocks that is the vault, so the fee must fit the STX
-// allowance (pyth-fee-budget) and the vault must hold the STX.
-// A Jing fill through the v6-3 market verifies the update once and settles
-// on those feeds, so a router sale needs a budget of 1 x fee (more is
-// margin); the v6-market fixture's swap also verifies once for jing-take.
-// Both failures read (err u1): an over-allowance as-contract? names the
-// with-stx allowance (index 1); a short balance is stx-transfer?'s u1.
+// The live Lazer oracle charges its fee to tx-sender. Bounty mv7dfb (Super
+// Orb): every vault entry that takes an update reads its mid through vault-mid
+// (market refresh-mid, one verify) in its own as-contract? scope, so the vault
+// pays it, never the caller. router-swap, router-swap-split and jing-take
+// verify a second time inside the market swap, in the swap's own scope. Each
+// scope carries with-stx pyth-fee-budget, so the budget caps one verify: fee
+// - 1 aborts, fee passes and the vault pays 2 x fee. Set 2 x fee anyway: finish
+// keeps the budget back as the STX both verifies spend.
+// An over-budget verify reads (err u0): vault-mid's only allowance is with-stx
+// (index 0). A short balance is stx-transfer?'s (err u1).
+// EMPTY holds no STX at all: it can only call because simnet has no tx fee.
 describe("Pyth fee budget (oracle fee > 0)", function () {
   const FEE = 10;
+  const EMPTY = "ST39DJY81XEXTZ5XVWZ3TRGEAAY149NAGMARSPMYV";
   const split = [Cl.uint(500_000), Cl.uint(100_000), Cl.uint(100_000), Cl.uint(100_000), Cl.uint(200_000), UPDATE];
+
+  // STX the sender itself sent in this call (the fixture market may pay the
+  // admin as treasury, so compare transfers, not the balance)
+  function stxSentBy(r: any, who: string) {
+    return r.events.filter(function (e: any) { return e.event === "stx_transfer_event" && e.data.sender === who; }).length;
+  }
 
   function feeOn(float = 1_000) {
     expectOk(call("mock-lazer-oracle", "set-fee", [Cl.uint(FEE)]));
@@ -591,21 +601,23 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     expect(readStr(VAULT, "get-config")).toContain("(pyth-fee-budget u100)");
   });
 
-  it("router-swap: budget 0 or 1 x fee - 1 aborts, 1 x fee with an STX float sells", function () {
+  it("router-swap: budget 0 or fee - 1 aborts; fee sells, the vault pays both verifies, a 0-STX caller pays nothing", function () {
     // arrange
     fundRouter();
     openBatch();
     feeOn();
     simnet.mineEmptyBurnBlocks(288);
+    expect(stx(EMPTY)).toBe(0n);
     // act + assert: under the budget nothing moves
-    expectErr(vault("router-swap", [UPDATE]), 1);
+    expectErr(vault("router-swap", [UPDATE], EMPTY), 0);
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
     expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE - 1)]));
-    expectErr(vault("router-swap", [UPDATE]), 1);
+    expectErr(vault("router-swap", [UPDATE], EMPTY), 0);
     expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
-    expectOk(vault("router-swap", [UPDATE]));
+    expectOk(vault("router-swap", [UPDATE], EMPTY));
     expect(sbtc(VAULT_ID)).toBe(0n);
-    expect(stx(VAULT_ID)).toBe(REWARD_STX + 1_000n - BigInt(FEE));
+    expect(stx(VAULT_ID)).toBe(REWARD_STX + 1_000n - BigInt(2 * FEE));
+    expect(stx(EMPTY)).toBe(0n);
   });
 
   it("router-swap: a budget without an STX float still aborts", function () {
@@ -620,22 +632,26 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
   });
 
-  it("router-swap-split: budget 0 or 1 x fee - 1 aborts, 1 x fee sells", function () {
+  it("router-swap-split: budget 0 or fee - 1 aborts, fee sells; the admin pays no Pyth fee", function () {
     // arrange
     fundRouter();
     openBatch();
     feeOn();
     simnet.mineEmptyBurnBlocks(288);
     // act + assert
-    expectErr(pool("router-swap-split", split), 1);
+    expectErr(pool("router-swap-split", split), 0);
     expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE - 1)]));
-    expectErr(pool("router-swap-split", split), 1);
+    expectErr(pool("router-swap-split", split), 0);
     expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
-    expectOk(pool("router-swap-split", split));
+    const vault0 = stx(VAULT_ID);
+    const r = pool("router-swap-split", split);
+    const out = okValue(r).value.payload.value.out.value as bigint;
     expect(sbtc(VAULT_ID)).toBe(500_000n);
+    expect(stxSentBy(r, admin)).toBe(0);
+    expect(stx(VAULT_ID) - vault0).toBe(out - BigInt(2 * FEE));
   });
 
-  it("jing-take: budget 0 aborts, budget >= fee fills on the book", function () {
+  it("jing-take: budget 0 and fee - 1 abort, fee fills on the book; the vault pays both verifies", function () {
     // arrange: bob bids STX on the book (bob pays his own verify fee)
     openBatch();
     expectOk(call("v6-market", "deposit-token-y", [Cl.uint(4_000_000_000n), Cl.uint(MID), Cl.some(Cl.uint(0)), UPDATE, ...MOCK_FT], bob));
@@ -643,12 +659,89 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     expectOk(pool("set-vault-max-chunk-sats", [Cl.uint(5_000_000)]));
     simnet.mineEmptyBurnBlocks(288);
     // act + assert
-    expectErr(pool("jing-take", [Cl.uint(1), UPDATE]), 1);
+    expectErr(pool("jing-take", [Cl.uint(1), UPDATE]), 0);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE - 1)]));
+    expectErr(pool("jing-take", [Cl.uint(1), UPDATE]), 0);
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
     expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
     const before = stx(VAULT_ID);
-    const out = okValue(pool("jing-take", [Cl.uint(1), UPDATE])).value.payload.value.out.value as bigint;
-    expect(stx(VAULT_ID) - before).toBe(out - BigInt(FEE));
+    const r = pool("jing-take", [Cl.uint(1), UPDATE]);
+    const out = okValue(r).value.payload.value.out.value as bigint;
+    expect(stx(VAULT_ID) - before).toBe(out - BigInt(2 * FEE));
+    expect(stxSentBy(r, admin)).toBe(0);
     expect(sbtc(VAULT_ID)).toBe(0n);
+  });
+
+  it("jing-place and jing-refloor: the vault pays the one verify, a 0-STX caller pays nothing", function () {
+    // arrange
+    openBatch();
+    feeOn();
+    // act + assert: budget 0 aborts on the with-stx allowance
+    expectErr(vault("jing-place", [UPDATE], EMPTY), 0);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE)]));
+    const vault0 = stx(VAULT_ID);
+    expectOk(vault("jing-place", [UPDATE], EMPTY));
+    expect(marketDeposit()).toBe(REWARD_SATS);
+    expect(stx(VAULT_ID)).toBe(vault0 - BigInt(FEE));
+    expect(stx(EMPTY)).toBe(0n);
+    // refloor: the admin pays no Pyth fee, the vault pays one
+    const r = pool("refloor-vault", [UPDATE]);
+    expectOk(r);
+    expect(stx(VAULT_ID)).toBe(vault0 - BigInt(2 * FEE));
+    expect(stxSentBy(r, admin)).toBe(0);
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(0)]));
+    expectErr(pool("refloor-vault", [UPDATE]), 0);
+  });
+  // Patient Reed F2: finish keeps back min(balance, budget) so the next batch
+  // can pay its verifies; the pool's delta check sees only the sent amount.
+  it("F2: finish keeps the budget; the next batch's verifies run on that reserve alone", function () {
+    // arrange: batch 1 is seeded with a 1000 uSTX float (the first reserve)
+    const BUDGET = 100;
+    fundRouter();
+    openBatch(150);
+    feeOn();
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(BUDGET)]));
+    simnet.mineEmptyBurnBlocks(288);
+    expectOk(vault("router-swap", [UPDATE], EMPTY));
+    const bal1 = stx(VAULT_ID);
+    expect(bal1).toBe(REWARD_STX + 1_000n - BigInt(2 * FEE));
+    // act 1: finalize batch 1
+    const sent1 = okValue(pool("finalize-swap", [], alice)) as any;
+    // assert 1: pool gets balance - budget, the vault keeps the budget
+    expect(sent1).toBeUint(bal1 - BigInt(BUDGET));
+    expect(stx(VAULT_ID)).toBe(BigInt(BUDGET));
+    expect(read(POOL, "get-stx-pot", [Cl.uint(150), Cl.uint(0)])).toBeUint(bal1 - BigInt(BUDGET));
+    // act 2: batch 2, no float; a 0-STX caller sells, the reserve pays both verifies
+    openBatch(151);
+    simnet.mineEmptyBurnBlocks(288);
+    expectOk(vault("router-swap", [UPDATE], EMPTY));
+    expect(stx(EMPTY)).toBe(0n);
+    const bal2 = stx(VAULT_ID);
+    expect(bal2).toBe(REWARD_STX + BigInt(BUDGET - 2 * FEE));
+    const sent2 = okValue(pool("finalize-swap", [], alice)) as any;
+    // assert 2: the reserve refills from batch 2's proceeds
+    expect(sent2).toBeUint(bal2 - BigInt(BUDGET));
+    expect(stx(VAULT_ID)).toBe(BigInt(BUDGET));
+  });
+
+  it("F2: balance <= budget finishes with 0 (no 0 transfer); budget 0 sweeps the reserve", function () {
+    // arrange: a dust-only batch (1 sat; 2 after the next claim, still dust),
+    // a 50 uSTX float under a 100 budget
+    expectOk(call("mock-pox", "set-reward", [Cl.uint(1)]));
+    stake(alice, 150, 1n);
+    claim(150);
+    expectOk({ result: simnet.transferSTX(50, VAULT_ID, admin).result });
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(100)]));
+    expectOk(vault("close-batch"));
+    // act + assert: nothing sent, the float stays
+    expect(pool("finalize-swap", [], alice).result).toBeOk(Cl.uint(0));
+    expect(stx(VAULT_ID)).toBe(50n);
+    // a budget of 0 sends the whole reserve with the next finish
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(0)]));
+    stake(alice, 151, 1n);
+    claim(151);
+    expectOk(vault("close-batch"));
+    expect(pool("finalize-swap", [], alice).result).toBeOk(Cl.uint(50));
+    expect(stx(VAULT_ID)).toBe(0n);
   });
 });

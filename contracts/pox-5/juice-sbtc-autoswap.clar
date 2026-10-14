@@ -72,11 +72,16 @@
 
 (define-data-var no-pyth-slippage-bps uint u1000)
 
-;; uSTX the vault may pay per call when the market verifies a Lazer update
-;; inside as-contract? (the oracle charges its fee to tx-sender, the vault).
-;; The v6-3 market verifies the update once per swap and settles on those
-;; feeds, so one Jing fill costs 1 x fee: set at least 1 x fee (more is
-;; margin). u0 while the oracle fee is u0.
+;; uSTX the vault may pay per call for Pyth Lazer verifies (the oracle charges
+;; its fee to tx-sender). Every entry that takes an update reads its mid
+;; through vault-mid (market refresh-mid, one verify, in its own as-contract?
+;; scope), so the vault pays, never the caller. router-swap, router-swap-split
+;; and jing-take then verify again inside the market swap (their swap scope
+;; also carries with-stx pyth-fee-budget): 2 x fee. jing-place and
+;; jing-refloor: 1 x fee. Each scope's allowance needs only 1 x fee, but finish
+;; keeps the budget back as the STX both verifies spend: set at least 2 x fee
+;; (more is margin). u0 while the oracle fee is u0.
+;; The 10 STX cap allows a fee up to 5 STX per verify.
 (define-data-var pyth-fee-budget uint u0)
 
 (define-data-var window-blocks uint u288)
@@ -250,24 +255,37 @@
   )
 )
 
+;; Keeps back up to pyth-fee-budget uSTX so the next batch can pay its Lazer
+;; verifies (every batch starts here; with 0 STX the with-stx allowance has
+;; nothing behind it). Sends only the rest and returns that amount.
 (define-public (finish)
-  (let ((balance (stx-get-balance current-contract)))
+  (let (
+      (balance (stx-get-balance current-contract))
+      (reserve (var-get pyth-fee-budget))
+      (amount (if (> balance reserve)
+        (- balance reserve)
+        u0
+      ))
+    )
     (asserts! (is-eq contract-caller POOL) ERR_UNAUTHORIZED)
     (asserts! (var-get ready-to-finish) ERR_NO_CLOCK)
-    ;; a dust-only batch (<= DUST_SATS, nothing sold) closes with 0 STX:
-    ;; a 0 transfer fails, so skip it (as emergency-recover does)
+    ;; a dust-only batch (<= DUST_SATS, nothing sold) or balance <= reserve
+    ;; closes with 0 STX: a 0 transfer fails, so skip it
     (and
-      (> balance u0)
-      (try! (as-contract? ((with-stx balance))
-        (try! (stx-transfer? balance current-contract POOL))
+      (> amount u0)
+      (try! (as-contract? ((with-stx amount))
+        (try! (stx-transfer? amount current-contract POOL))
       ))
     )
     (var-set ready-to-finish false)
     (print {
       notification: "finish",
-      payload: { amount: balance },
+      payload: {
+        amount: amount,
+        reserve: (- balance amount),
+      },
     })
-    (ok balance)
+    (ok amount)
   )
 )
 
@@ -348,7 +366,7 @@
 
 (define-public (jing-place (update (buff 8192)))
   (let (
-      (floor (ask-of (try! (current-mid update))))
+      (floor (ask-of (try! (vault-mid update))))
       (amount (sbtc-balance))
     )
     (asserts! (window-open) ERR_WINDOW_CLOSED)
@@ -383,7 +401,7 @@
     (asserts! (is-eq contract-caller POOL) ERR_UNAUTHORIZED)
     (asserts! (window-elapsed) ERR_WINDOW_OPEN)
     (try! (check-amount amount))
-    (let ((limit (floor-of (try! (current-mid update)))))
+    (let ((limit (floor-of (try! (vault-mid update)))))
       (let ((result (try! (as-contract? (
             (with-ft SBTC_TOKEN ASSET_SBTC amount)
             (with-stx (var-get pyth-fee-budget))
@@ -411,7 +429,7 @@
       ;; permissionless: always the whole balance or one full chunk, never a
       ;; caller-chosen sliver that burns the shared cooldown
       (amount (chunk-amount))
-      (mid (try! (current-mid update)))
+      (mid (try! (vault-mid update)))
       (limit (floor-of mid))
       (mins (contract-call? JING_MARKET get-min-deposits))
     )
@@ -477,7 +495,7 @@
     (update (buff 8192))
   )
   (let (
-      (mid (try! (current-mid update)))
+      (mid (try! (vault-mid update)))
       (limit (floor-of mid))
       (velar-limit (/ (* mid (- BPS_PRECISION VELAR_SLIPPAGE_BPS)) BPS_PRECISION))
       (mins {
@@ -699,6 +717,9 @@
   ))
 )
 
+;; refresh-mid verifies the update and the oracle charges its fee to
+;; tx-sender: entries call this only through vault-mid, so the vault pays,
+;; never the caller (bounty mv7dfb, Super Orb)
 (define-private (current-mid (update (buff 8192)))
   (let (
       (mid (try! (contract-call? JING_MARKET refresh-mid update)))
@@ -717,6 +738,17 @@
       )
       (ok mid)
     )
+  )
+)
+
+;; The mid every entry that takes an update reads: current-mid in its own
+;; as-contract? scope with the pyth-fee-budget allowance, so tx-sender is the
+;; vault and the vault pays the Lazer verify fee. A fee above the budget fails
+;; the allowance check (err u0, the with-stx index); current-mid errors pass
+;; through unchanged.
+(define-private (vault-mid (update (buff 8192)))
+  (as-contract? ((with-stx (var-get pyth-fee-budget)))
+    (try! (current-mid update))
   )
 )
 
@@ -824,7 +856,7 @@
 
 (define-public (jing-refloor (update (buff 8192)))
   (let (
-      (mid (try! (current-mid update)))
+      (mid (try! (vault-mid update)))
       (floor (if (window-open)
         (ask-of mid)
         (floor-of mid)

@@ -1,16 +1,16 @@
 {
-  "id": "f0178a3fa58ef551e847b8e6f81190b6",
-  "url": "https://stxer.xyz/simulations/mainnet/f0178a3fa58ef551e847b8e6f81190b6",
-  "block": 9207370,
+  "id": "8fea0140abaa163798e31f38dc34f80e",
+  "url": "https://stxer.xyz/simulations/mainnet/8fea0140abaa163798e31f38dc34f80e",
+  "block": 9207787,
   "cycle": 145,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
     "markets-sbtc-stx-jing-v6-3": "943927cc5067d21d50c87e3f7464d379c3d704cb2ed8dcbfb5c88205a68c5a67",
-    "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
+    "swap-router-sbtc-stx-jing-v5-3": "fb64c9a0c642bdf821cfb754900e58edc7d5b7f27aeab7348cc34a4645e43698",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
-    "juice-pool-sbtc-signer": "ffc629e1d8f28611f7622c9518387db69adaa79cb312bc19d68f18885cd7e784"
+    "juice-sbtc-autoswap": "1cd93089874a08f9e02b4c72c9b307bcfb4b3bcbb419394cf7cd9a5d14bca8c7",
+    "juice-pool-sbtc-signer": "603a7dca7cdcf0be9d11246aa5b81e12d3ab771f1f53d4bf6e1cf883e59a0c9c"
   },
   "checks": [
     {
@@ -66,7 +66,7 @@
     {
       "label": "register the pool as a pox-5 signer",
       "passed": true,
-      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x036b3842bf6901dc13b9ce9d3cd77e3e31d210f272f656a4e998f91f2ad6ed1af3)))"
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x03bfa5c84227f55d518e18a224d1b32136841548741b3b01f6d74f0ae4f08fff20)))"
     },
     {
       "label": "HOP is locked at fastpool on mainnet",
@@ -244,7 +244,7 @@
       "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u201009726243) (seats u3))"
     },
     {
-      "label": "(f) into the cycle 145 prepare phase: advance 1164 burn blocks -> offset 2030",
+      "label": "(f) into the cycle 145 prepare phase: advance 1151 burn blocks -> offset 2030",
       "passed": true,
       "actual": "ok"
     },
