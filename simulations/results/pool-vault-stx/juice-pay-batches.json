@@ -1,13 +1,13 @@
 {
-  "id": "9a28245b73f5484cad4df7a73fa32a29",
-  "url": "https://stxer.xyz/simulations/mainnet/9a28245b73f5484cad4df7a73fa32a29",
-  "block": 9208572,
+  "id": "a430d1411dc124f02fe66de34851d54f",
+  "url": "https://stxer.xyz/simulations/mainnet/a430d1411dc124f02fe66de34851d54f",
+  "block": 9210669,
   "cycle": 145,
   "rewardCycle": 144,
   "newSource": {
-    "rev": "e425a4c",
-    "path": "contracts/pox-5/juice-pool-sbtc-signer.clar",
-    "sha256": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7"
+    "rev": null,
+    "path": "/home/raphastacks/projects/jing-contracts-v3/simulations/deploy-bytes-mv7dfb/juice-pool-sbtc-signer.clar",
+    "sha256": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a"
   },
   "oldSource": {
     "rev": "e8ad9b1",
@@ -15,7 +15,7 @@
   },
   "sourceHashes": {
     "juice-swap-vault-trait-v2": "655b22cb792a8204699d8292803eee8364d15e0a32d827ebb85b9687c4a50657",
-    "juice-pool-sbtc-signer": "acfdbfd4a0e6f27b1c1f9c02d376093bd7763fb4e1d1ab3c05e408aab7e094f7",
+    "juice-pool-sbtc-signer": "a0a28431f61e2e329a8b5af6b98d37cb0d0575f4e18821fd3de3777fca56195a",
     "juice-pool-sbtc-signer-e8ad9b1": "c777a45dc0025b11ddc0050c143b6e4be67ff3d118517cea7fb0073ecd841ad4"
   },
   "checks": [
@@ -25,7 +25,7 @@
       "actual": "(ok true)"
     },
     {
-      "label": "deploy NEW juice-pool-sbtc-signer (e425a4c file)",
+      "label": "deploy NEW juice-pool-sbtc-signer (/home/raphastacks/projects/jing-contracts-v3/simulations/deploy-bytes-mv7dfb/juice-pool-sbtc-signer.clar file)",
       "passed": true,
       "actual": "(ok true)"
     },

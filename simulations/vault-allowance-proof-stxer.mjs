@@ -70,7 +70,8 @@ const newVault=juiceSource('juice-sbtc-autoswap',resolve(directory,'../contracts
 const newPool=juiceSource('juice-pool-sbtc-signer',resolve(directory,'../contracts/pox-5/juice-pool-sbtc-signer.clar'),sourceHashes);
 const newSource=newVault.source;
 // the test copy: the dust and rest-rebate terms taken out of the router-swap allowance
-const NEW_ALLOW=/\(\+ amount \(get min-token-x mins\)\s+JING_REBATE_DUST_SATS\s+\(\/ \(\+ \(\* \(get min-token-x mins\) JING_TAKER_REBATE_MAX_BPS\)\s+\(- BPS_PRECISION u1\)\s*\)\s+BPS_PRECISION\s*\)\s*\)/g;
+// Whitespace-insensitive: matches the commented repo file and the formatted deploy bytes.
+const NEW_ALLOW=/\(\+\s+amount\s+\(get\s+min-token-x\s+mins\)\s+JING_REBATE_DUST_SATS\s+\(\/\s*\(\+\s*\(\*\s*\(get\s+min-token-x\s+mins\)\s+JING_TAKER_REBATE_MAX_BPS\)\s+\(-\s+BPS_PRECISION\s+u1\)\s*\)\s+BPS_PRECISION\s*\)\s*\)/g;
 if((newSource.match(NEW_ALLOW)||[]).length!==1)throw new Error('F1 router-swap allowance not found exactly once');
 const oldSource=newSource.replace(NEW_ALLOW,'(+ amount (get min-token-x mins))');
 const sha=s=>createHash('sha256').update(s).digest('hex');

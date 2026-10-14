@@ -16,7 +16,8 @@
 //
 // Run: node simulations/pool-autostake-e2e-stxer.mjs
 import { createRequire } from 'node:module';
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { appendJingStack } from './_jing-v6-3.mjs';
@@ -91,7 +92,9 @@ const deployJuice = (name, path) => {
   plan.push({ label: `deploy ${j.name} (repo source)`, kind: 'deploy' });
 };
 const deployFile = (name, path, version) => {
-  builder.addContractDeploy({ contract_name: name, source_code: readFileSync(path, 'utf8'), clarity_version: version });
+  const source = readFileSync(path, 'utf8');
+  sourceHashes[name] = createHash('sha256').update(source).digest('hex');
+  builder.addContractDeploy({ contract_name: name, source_code: source, clarity_version: version });
   plan.push({ label: `deploy ${name} (pillar-wallets source, unchanged)`, kind: 'deploy' });
 };
 const call = (label, id, fn, args, want, sender = DEP) => {
@@ -132,7 +135,7 @@ call('onboard the safe', SAFE, 'onboard',
 // Stake outside the prepare phase.
 if ((burn - FIRST_BURN) % CYCLE > 1950) advance(CYCLE - ((burn - FIRST_BURN) % CYCLE) + 20, 'leave the prepare phase');
 call('owner stakes all 2000 STX with juice-pool-sbtc-signer (real pox-5 stake)', SAFE, 'stake-stx-juice',
-  [Cl.uint(STAKE), Cl.none(), Cl.none()], ok, OWNER);
+  [Cl.uint(STAKE), Cl.none(), Cl.none(), Cl.none()], ok, OWNER); // amount, sig-auth, gas, signer-calldata
 ev('pox-5 position names juice-pool-sbtc-signer', POX, `(get-staker-info '${SAFE})`,
   (v) => v.includes(PID) && v.includes(`amount-ustx u${STAKE}`));
 ev('all 2000 STX locked, 0 unlocked', POX, `(stx-account '${SAFE})`,
@@ -240,5 +243,7 @@ for (const [label, passed, actual] of extra) {
   checks.push({ label, passed, actual });
 }
 const failed = checks.filter((c) => !c.passed).length;
+const resultDir = resolve(dirname(fileURLToPath(import.meta.url)), 'results/pool-vault-stx'); mkdirSync(resultDir, { recursive: true });
+writeFileSync(resolve(resultDir, 'juice-autostake-e2e.json'), JSON.stringify({ id, url: `https://stxer.xyz/simulations/mainnet/${id}`, block: forkBlock, rewardCycle, sourceHashes, checks }, null, 2));
 console.log(`\n=== ${checks.length - failed}/${checks.length} passed ===\nView: https://stxer.xyz/simulations/mainnet/${id}`);
 if (failed) process.exit(1);

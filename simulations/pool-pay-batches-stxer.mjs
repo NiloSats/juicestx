@@ -25,7 +25,7 @@
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { juiceForkBlock, traitSource } from './_juice-fork.mjs';
@@ -48,7 +48,9 @@ const sha = (s) => createHash('sha256').update(s).digest('hex');
 // Both sources come from git so the sim pins exact commits (NEW_REV overrides).
 const NEW_REV = process.env.NEW_REV || 'e425a4c';
 const gitShow = (rev) => execFileSync('git', ['show', `${rev}:${REPO_PATH}`], { cwd: resolve(directory, '..'), encoding: 'utf8' });
-const newSource = gitShow(NEW_REV), oldSource = gitShow(OLD_REV);
+// NEW_SOURCE_FILE=<path> deploys that file as NEW instead (e.g. the exact deploy bytes).
+const NEW_FILE = process.env.NEW_SOURCE_FILE ? resolve(process.env.NEW_SOURCE_FILE) : null;
+const newSource = NEW_FILE ? readFileSync(NEW_FILE, 'utf8') : gitShow(NEW_REV), oldSource = gitShow(OLD_REV);
 if (newSource === oldSource) throw new Error('NEW and OLD sources are identical');
 const POOLS = { NEW: `${DEP}.juice-pool-sbtc-signer`, OLD: `${DEP}.juice-pool-sbtc-signer-${OLD_REV}` };
 
@@ -96,7 +98,7 @@ for (const [tag, src] of [['NEW', newSource], ['OLD', oldSource]]) {
   const name = POOLS[tag].split('.')[1];
   sourceHashes[name] = sha(src);
   builder.addContractDeploy({ contract_name: name, source_code: src, clarity_version: ClarityVersion.Clarity6 });
-  push({ label: `deploy ${tag} ${name} (${tag === 'NEW' ? NEW_REV : OLD_REV} file)`, kind: 'deploy' });
+  push({ label: `deploy ${tag} ${name} (${tag === 'NEW' ? (NEW_FILE ?? NEW_REV) : OLD_REV} file)`, kind: 'deploy' });
 }
 
 // -- fixtures (identical for both pools) ----------------------------------------
@@ -295,6 +297,6 @@ for (const [label, passed, actual] of extra) {
 const failed = checks.filter((c) => !c.passed).length;
 const dir = resolve(directory, 'results/pool-vault-stx'); mkdirSync(dir, { recursive: true });
 writeFileSync(resolve(dir, 'juice-pay-batches.json'), JSON.stringify({ id, url, block: forkBlock, cycle: cycleNow, rewardCycle: R,
-  newSource: { rev: NEW_REV, path: REPO_PATH, sha256: sha(newSource) }, oldSource: { rev: OLD_REV, sha256: sha(oldSource) }, sourceHashes, checks }, null, 2));
+  newSource: { rev: NEW_FILE ? null : NEW_REV, path: NEW_FILE ?? REPO_PATH, sha256: sha(newSource) }, oldSource: { rev: OLD_REV, sha256: sha(oldSource) }, sourceHashes, checks }, null, 2));
 console.log(`\n=== juice-pay-batches: ${checks.length - failed}/${checks.length} passed ===\nView: ${url}`);
 if (failed) process.exit(1);
