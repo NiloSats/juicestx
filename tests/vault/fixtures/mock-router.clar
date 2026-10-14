@@ -41,13 +41,12 @@
         (ok { out: out, unsold: u0 })))))
 
 ;; The real router's Jing leg hands `update` to the v6-3 market, whose `swap`
-;; verifies it twice (at entry and again in settle-with-refresh), each time
-;; charging the oracle fee to the caller. Mirror that: a supplied update is
-;; verified twice through the mock oracle.
+;; verifies it once and settles on those feeds, charging the oracle fee to the
+;; caller once. Mirror that: a supplied update is verified once through the
+;; mock oracle.
 (define-private (verify (update (optional (buff 8192))))
   (match update
     u (begin
-      (try! (contract-call? .mock-lazer-oracle verify-price-feeds u .mock-lazer-oracle none))
       (try! (contract-call? .mock-lazer-oracle verify-price-feeds u .mock-lazer-oracle none))
       (ok true))
     (ok true)))

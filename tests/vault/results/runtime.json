@@ -3,7 +3,7 @@
     "juice-swap-vault-trait": "4881086b2a235c8857362c76f265bf1627ea1997c49c2a89b8d85f8920b6bf08",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
     "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39",
-    "juice-sbtc-autoswap": "6d699fa4b424aaab6979e701404bf0003bb9d5762c99f9f0051db0a4ba97eaf3"
+    "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825"
   },
   "status": "passed",
   "scope": "full-source local runtime with fixture dependencies; fork runs validate real dependency behavior"

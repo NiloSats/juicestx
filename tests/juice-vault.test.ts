@@ -565,9 +565,9 @@ describe("emergency-recover (vault side)", function () {
 // The live Lazer oracle charges its fee to tx-sender. Inside the vault's
 // as-contract? blocks that is the vault, so the fee must fit the STX
 // allowance (pyth-fee-budget) and the vault must hold the STX.
-// A Jing fill through the v6-3 market verifies twice (swap entry and
-// settle-with-refresh), so a router sale needs a budget of 2 x fee; the
-// v6-market fixture's swap verifies once, so jing-take needs 1 x fee here.
+// A Jing fill through the v6-3 market verifies the update once and settles
+// on those feeds, so a router sale needs a budget of 1 x fee (more is
+// margin); the v6-market fixture's swap also verifies once for jing-take.
 // Both failures read (err u1): an over-allowance as-contract? names the
 // with-stx allowance (index 1); a short balance is stx-transfer?'s u1.
 describe("Pyth fee budget (oracle fee > 0)", function () {
@@ -591,7 +591,7 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     expect(readStr(VAULT, "get-config")).toContain("(pyth-fee-budget u100)");
   });
 
-  it("router-swap: budget 0 or under 2 x fee aborts, 2 x fee with an STX float sells", function () {
+  it("router-swap: budget 0 or 1 x fee - 1 aborts, 1 x fee with an STX float sells", function () {
     // arrange
     fundRouter();
     openBatch();
@@ -600,12 +600,12 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     // act + assert: under the budget nothing moves
     expectErr(vault("router-swap", [UPDATE]), 1);
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
-    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE - 1)]));
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE - 1)]));
     expectErr(vault("router-swap", [UPDATE]), 1);
-    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE)]));
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
     expectOk(vault("router-swap", [UPDATE]));
     expect(sbtc(VAULT_ID)).toBe(0n);
-    expect(stx(VAULT_ID)).toBe(REWARD_STX + 1_000n - BigInt(2 * FEE));
+    expect(stx(VAULT_ID)).toBe(REWARD_STX + 1_000n - BigInt(FEE));
   });
 
   it("router-swap: a budget without an STX float still aborts", function () {
@@ -620,7 +620,7 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     expect(sbtc(VAULT_ID)).toBe(REWARD_SATS);
   });
 
-  it("router-swap-split: budget 0 or one fee aborts, 2 x fee sells", function () {
+  it("router-swap-split: budget 0 or 1 x fee - 1 aborts, 1 x fee sells", function () {
     // arrange
     fundRouter();
     openBatch();
@@ -628,9 +628,9 @@ describe("Pyth fee budget (oracle fee > 0)", function () {
     simnet.mineEmptyBurnBlocks(288);
     // act + assert
     expectErr(pool("router-swap-split", split), 1);
-    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE - 1)]));
     expectErr(pool("router-swap-split", split), 1);
-    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(2 * FEE)]));
+    expectOk(pool("set-vault-pyth-fee-budget", [Cl.uint(FEE)]));
     expectOk(pool("router-swap-split", split));
     expect(sbtc(VAULT_ID)).toBe(500_000n);
   });

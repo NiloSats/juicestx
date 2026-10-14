@@ -1,16 +1,16 @@
 {
-  "id": "f6ccee093a748b24ca490c3b714e8140",
-  "url": "https://stxer.xyz/simulations/mainnet/f6ccee093a748b24ca490c3b714e8140",
-  "block": 9200908,
-  "proofTimestamp": 1791934366,
+  "id": "e09b8aff1928b1b948d8d323a10f686d",
+  "url": "https://stxer.xyz/simulations/mainnet/e09b8aff1928b1b948d8d323a10f686d",
+  "block": 9201081,
+  "proofTimestamp": 1791936260,
   "verifiesPerFill": 1,
   "sourceHashes": {
     "jing-core-v6": "88a689affb23f13030953e891336af42a3f5cb275f13b3c54c79d8cd4de50697",
     "jing-ladder-v1": "0f1e08b023272ed96a2653f727292626d4b0325dcf4e42963104d977860ec786",
     "markets-sbtc-stx-jing-v6-3": "65a8dc9aed179a3cc440306e31aff7da5bcecb99872423ca50b8ba417abbb6c0",
-    "swap-router-sbtc-stx-jing-v5-3": "13a64639aa6fa3c8b8b9d47a0bfbc1148c485712db31b3af8cfecb05fdf6cac2",
+    "swap-router-sbtc-stx-jing-v5-3": "a33f8692d3f0c9f54d19f47cd71cf2b8a93fe1494bd11e672bfa59b6cc8a9382",
     "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
-    "juice-sbtc-autoswap": "6d699fa4b424aaab6979e701404bf0003bb9d5762c99f9f0051db0a4ba97eaf3",
+    "juice-sbtc-autoswap": "865ae99d37532f490c6496527345cf086d68087f404353af3126a7884a5d8825",
     "juice-pool-sbtc-signer": "57a89d24db188d2c842efc04ca99c039769b135a0cbaa323a656ebdfc6a76a39"
   },
   "fixtures": [
@@ -112,7 +112,7 @@
     {
       "label": "real STX maker bid so the router fills on Jing",
       "passed": true,
-      "actual": "(ok u286799259)"
+      "actual": "(ok u288075916)"
     },
     {
       "label": "fixture: live oracle fee set to u10 (Eval in oracle context)",
@@ -177,12 +177,12 @@
     {
       "label": "router-swap sells the whole batch with the budget set",
       "passed": true,
-      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u18928751121980) (mid u19119950628263) (out u190626280) (unsold u0)))))"
+      "actual": "(ok (tuple (notification \"router-swap\") (payload (tuple (amount u100000) (limit-price u19013010564619) (mid u19205061176383) (out u191474834) (unsold u0)))))"
     },
     {
       "label": "vault STX after the sale",
       "passed": true,
-      "actual": "u190627280"
+      "actual": "u191475834"
     },
     {
       "label": "vault sold out",
@@ -192,7 +192,7 @@
     {
       "label": "finalize attributes the STX to the pool",
       "passed": true,
-      "actual": "(ok u190627280)"
+      "actual": "(ok u191475834)"
     },
     {
       "label": "vault paid exactly 1 x 10 uSTX to the fee recipient",
@@ -207,12 +207,12 @@
     {
       "label": "router out is net of the vault fees (vault STX delta = out)",
       "passed": true,
-      "actual": "delta 190626280, out 190626280"
+      "actual": "delta 191474834, out 191474834"
     },
     {
       "label": "finalize passes the whole STX balance (float + out)",
       "passed": true,
-      "actual": "(ok u190627280) vs 190627280"
+      "actual": "(ok u191475834) vs 191475834"
     },
     {
       "label": "the sale went through the Jing leg (market verified inside the vault)",

@@ -6,10 +6,10 @@
 // context (governance set-fee is not driven). A real STX maker bid rests on a
 // fresh exact v6-3 market, so the router's Jing leg verifies the update inside
 // the vault. How often one Jing fill verifies is read from the market
-// source deployed below (JING_SRC): the deployed v6-3 swap verified twice
-// (entry and settle-with-refresh); the bounty fix verifies once and hands
-// the feeds to settle-with-verified-feeds. So one fill costs the vault
-// VERIFIES x fee.
+// source deployed below (JING_SRC): v6-3 since jing-contracts-v3 314aaba
+// verifies once and hands the feeds to settle-with-verified-feeds
+// (VERIFIES = 1); the older source verified twice (entry and
+// settle-with-refresh). So one fill costs the vault VERIFIES x fee.
 // Expected: router-swap aborts with budget 0 and with budget = VERIFIES x
 // fee - 1 (err u1, the with-stx allowance), and sells after
 // set-vault-pyth-fee-budget u100, the vault paying exactly VERIFIES x fee.

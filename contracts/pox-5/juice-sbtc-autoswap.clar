@@ -74,8 +74,9 @@
 
 ;; uSTX the vault may pay per call when the market verifies a Lazer update
 ;; inside as-contract? (the oracle charges its fee to tx-sender, the vault).
-;; A Jing fill verifies twice (swap entry and settle-with-refresh): set at
-;; least 2 x fee. u0 while the oracle fee is u0.
+;; The v6-3 market verifies the update once per swap and settles on those
+;; feeds, so one Jing fill costs 1 x fee: set at least 1 x fee (more is
+;; margin). u0 while the oracle fee is u0.
 (define-data-var pyth-fee-budget uint u0)
 
 (define-data-var window-blocks uint u288)
