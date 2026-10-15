@@ -1,0 +1,244 @@
+{
+  "id": "0ed03a914e327031e1b1b1691198e1f9",
+  "url": "https://stxer.xyz/simulations/mainnet/0ed03a914e327031e1b1b1691198e1f9",
+  "block": 9216064,
+  "cycle": 145,
+  "R": 144,
+  "sourceHashes": {
+    "juice-swap-vault-trait-v2": "e6ee46a72857916f33b8d0c91a7344d62b51d303279ff9a7ea28954fe52b8093",
+    "juice-pool-sbtc-signer": "36866b2eb8b61f7f5a41c01f558bc75ed15e3370ea7a18210c69e5fb2ce69c30",
+    "juice-pool-sbtc-signer-old": "f82170805337ee50a23d056af01bf9e966a6c9d0397e387267b4cc88273c85a3"
+  },
+  "checks": [
+    {
+      "label": "deploy juice-swap-vault-trait-v2",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy NEW juice-pool-sbtc-signer (2bf7ac0 file)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "deploy OLD juice-pool-sbtc-signer-old (9b28e1e file)",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "NEW register the pool as a pox-5 signer",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (signer-key 0x028ca3fde056c0384c736141945a7a21c52ec01a6b9c01416c35f63acb5c365ebd)))"
+    },
+    {
+      "label": "NEW fixture: FILLER holds the whole 2100000 STX cap",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "NEW og status: 1 seat, cap covered",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u2100000000000) (seats u1))"
+    },
+    {
+      "label": "fund SP29HM6Q… 111000000 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "NEW BOB stakes 100 STX (real pox-5) while the cap is full",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u100000000) (first-reward-cycle u146) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP29HM6QNTKT8B2XBX5SX375T0Z042C9D9P5VN809) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "NEW BOB cover 0 (cap full)",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW pox-5 get-staker-info FILLER = none",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "NEW STRANGER evicts FILLER",
+      "passed": true,
+      "actual": "(ok u2100000000000)"
+    },
+    {
+      "label": "NEW BOB stake-update +1 STX (real pox-5)",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u1000000) (amount-ustx u101000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (prev-unlock-height u242) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer) (staker SP29HM6QNTKT8B2XBX5SX375T0Z042C9D9P5VN809) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "NEW BOB cover now 101 STX",
+      "passed": true,
+      "actual": "u101000000"
+    },
+    {
+      "label": "NEW BOB cover for the ended cycle R is 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW fixture: pox-5 cycle 144 shares, BOB 100000000",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "NEW fixture: cycle 144 tranche 0 finalized, pot 10000007 uSTX",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fund SPV9K21T… 10000007 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "NEW fee is 4.5%",
+      "passed": true,
+      "actual": "u450"
+    },
+    {
+      "label": "NEW earned fees before payout 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW BOB STX before payout",
+      "passed": true,
+      "actual": "u10000000"
+    },
+    {
+      "label": "NEW pay-stx-stakers [BOB] cycle 144 tranche 0",
+      "passed": true,
+      "actual": "(ok u9550007)"
+    },
+    {
+      "label": "NEW BOB STX after payout",
+      "passed": true,
+      "actual": "u19550007"
+    },
+    {
+      "label": "NEW earned fees after payout",
+      "passed": true,
+      "actual": "u450000"
+    },
+    {
+      "label": "OLD register the pool as a pox-5 signer",
+      "passed": true,
+      "actual": "(ok (tuple (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer-old) (signer-key 0x03b4874de7154f3ca06846b5d315a40536567452fdcc8dcde545f7428608ee16ea)))"
+    },
+    {
+      "label": "OLD fixture: FILLER holds the whole 2100000 STX cap",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "OLD og status: 1 seat, cap covered",
+      "passed": true,
+      "actual": "(tuple (cap-ustx u2100000000000) (covered-ustx u2100000000000) (seats u1))"
+    },
+    {
+      "label": "fund SP3MXDFN… 111000000 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "OLD BOB stakes 100 STX (real pox-5) while the cap is full",
+      "passed": true,
+      "actual": "(ok (tuple (amount-ustx u100000000) (first-reward-cycle u146) (num-cycles u96) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer-old) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "OLD BOB cover 0 (cap full)",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "OLD pox-5 get-staker-info FILLER = none",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "label": "OLD STRANGER evicts FILLER",
+      "passed": true,
+      "actual": "(ok u2100000000000)"
+    },
+    {
+      "label": "OLD BOB stake-update +1 STX (real pox-5)",
+      "passed": true,
+      "actual": "(ok (tuple (amount-increase u1000000) (amount-ustx u101000000) (cycles-to-extend u0) (num-cycles u96) (old-signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer-old) (prev-unlock-height u242) (signer SPV9K21TBFAK4KNRJXF5DFP8N7W46G4V9RCJDC22.juice-pool-sbtc-signer-old) (staker SP3MXDFNH3SBQEW5D3DQ42AD06NAEZFEAAB8B2P4N) (unlock-burn-height u1174250) (unlock-cycle u242)))"
+    },
+    {
+      "label": "OLD BOB cover now 101 STX",
+      "passed": true,
+      "actual": "u101000000"
+    },
+    {
+      "label": "OLD fixture: pox-5 cycle 144 shares, BOB 100000000",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "OLD fixture: cycle 144 tranche 0 finalized, pot 10000007 uSTX",
+      "passed": true,
+      "actual": "true"
+    },
+    {
+      "label": "fund SPV9K21T… 10000007 uSTX",
+      "passed": true,
+      "actual": "(ok true)"
+    },
+    {
+      "label": "OLD fee is 4.5%",
+      "passed": true,
+      "actual": "u450"
+    },
+    {
+      "label": "OLD earned fees before payout 0",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "OLD BOB STX before payout",
+      "passed": true,
+      "actual": "u10000000"
+    },
+    {
+      "label": "OLD pay-stx-stakers [BOB] cycle 144 tranche 0",
+      "passed": true,
+      "actual": "(ok u10000007)"
+    },
+    {
+      "label": "OLD BOB STX after payout",
+      "passed": true,
+      "actual": "u20000007"
+    },
+    {
+      "label": "OLD earned fees after payout",
+      "passed": true,
+      "actual": "u0"
+    },
+    {
+      "label": "NEW: BOB receives pot - 4.5% = 9550007 uSTX",
+      "passed": true,
+      "actual": "9550007"
+    },
+    {
+      "label": "NEW: pool earns the 450000 uSTX fee on cycle 144",
+      "passed": true,
+      "actual": "u450000"
+    },
+    {
+      "label": "OLD (unfixed): BOB receives the whole pot 10000007 uSTX",
+      "passed": true,
+      "actual": "10000007"
+    },
+    {
+      "label": "OLD (unfixed): pool earns 0 fee on cycle 144 (the cover won later reaches back)",
+      "passed": true,
+      "actual": "u0"
+    }
+  ]
+}

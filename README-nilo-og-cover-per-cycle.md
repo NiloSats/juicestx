@@ -60,4 +60,19 @@ Every call carries a fixed +2,246 runtime/read_length because the contract is la
   - a legitimate OG who tops up in 151, still paid 0% for 150 with the 150 cover;
   - a two-step growth (partial cover in 151, the rest in 152), where cycle 150 still pays the fee.
 
-Not checked: a stxer mainnet-fork run. The harness mock models `stake-update` as a stake for a later cycle that passes the new total, which is how `validate-stake!` documents pox-5's call.
+## Mainnet fork (stxer), added 15-oct
+
+`simulations/pool-og-retro-stxer.mjs`: **46/46 pass**, https://stxer.xyz/simulations/mainnet/0ed03a914e327031e1b1b1691198e1f9 (fork block and source hashes in `simulations/results/pool-vault-stx/juice-og-retro.json`).
+
+Both pools on one fork, side by side: NEW = `2bf7ac0` file, OLD = `9b28e1e` file (pool `570226c`), deployed with `git show`. Per pool:
+- a real pox-5 signer registration (`register-self`);
+- **real pox-5 calls** for the cover: BOB stakes 100 STX while the cap is full (cover 0), a stranger evicts the FILLER (no pox-5 lock, `get-staker-info` none), BOB tops up +1 STX with `stake-update` (pox-5 returns `first-reward-cycle` 146 on the fork, cover 101 STX);
+- **fixtures** for what a fork can not produce in one run, with the same shape as `pool-pay-fees-stxer.mjs`: the FILLER seat holding the 2.1M cap (the fork whale holds ~2.7k STX), and the ended cycle 144 that BOB earned (pox-5 shares + finalized tranche 0 + `stx-pot`, pool funded with the pot in real STX);
+- `pay-stx-stakers [BOB] 144 0`.
+
+| | BOB receives | pool earned fees |
+|---|---|---|
+| OLD `570226c` | 10,000,007 uSTX (whole pot) | **0** |
+| NEW `2bf7ac0` | 9,550,007 uSTX (pot − 4.5%) | **450,000** |
+
+On real pox-5, `stake-update` reaches `validate-stake!` the way the harness mock models it, and the old pool applies the later cover to cycle 144.
