@@ -277,6 +277,57 @@
   (default-to u0 (map-get? og-stakers staker))
 )
 
+;; Cover by reward cycle: each increase is recorded with the first reward
+;; cycle it applies to, and payout reads the cover the staker had for the
+;; cycle being paid. An increase never reaches back into cycles earned
+;; before it (Nilo, bounty mv8wal65aa4a0c11edcd). A decrease (shrink, evict)
+;; still applies at once, as before: the per-cycle value is capped by the
+;; current cover. Keeps the last 6 increases; a cycle older than all of them
+;; reads 0, so the error can only be a fee charged, never one skipped.
+(define-map og-history
+  principal
+  (list 6 {
+    from: uint,
+    ustx: uint,
+  })
+)
+
+(define-private (cover-at-step
+    (e {
+      from: uint,
+      ustx: uint,
+    })
+    (acc {
+      cycle: uint,
+      ustx: uint,
+    })
+  )
+  (if (<= (get from e) (get cycle acc))
+    (merge acc { ustx: (get ustx e) })
+    acc
+  )
+)
+
+(define-read-only (get-og-ustx-at
+    (staker principal)
+    (reward-cycle uint)
+  )
+  (let (
+      (now (get-og-ustx staker))
+      (then (get ustx
+        (fold cover-at-step (default-to (list) (map-get? og-history staker)) {
+          cycle: reward-cycle,
+          ustx: u0,
+        })
+      ))
+    )
+    (if (< then now)
+      then
+      now
+    )
+  )
+)
+
 (define-read-only (get-og-status)
   {
     seats: (var-get og-seats),
@@ -299,8 +350,27 @@
     (owed uint)
     (bips uint)
   )
+  (fee-on-cover (get-og-ustx staker) shares owed bips)
+)
+
+;; Same, with the cover the staker had for `reward-cycle`. Payouts use this.
+(define-read-only (get-staker-fee-at
+    (staker principal)
+    (reward-cycle uint)
+    (shares uint)
+    (owed uint)
+    (bips uint)
+  )
+  (fee-on-cover (get-og-ustx-at staker reward-cycle) shares owed bips)
+)
+
+(define-private (fee-on-cover
+    (covered uint)
+    (shares uint)
+    (owed uint)
+    (bips uint)
+  )
   (let (
-      (covered (get-og-ustx staker))
       (taxed (if (> shares covered)
         (- shares covered)
         u0
@@ -320,6 +390,7 @@
 (define-private (take-og-seat
     (staker principal)
     (amount uint)
+    (first-cycle uint)
   )
   (let (
       (prev (get-og-ustx staker))
@@ -359,6 +430,23 @@
         (asserts! (> want u0) ERR_OG_NOTHING_TO_ADD)
         (asserts! (> add u0) ERR_OG_CAP_FULL)
         (map-set og-stakers staker covered)
+        ;; the increase applies from `first-cycle`, not to cycles already earned
+        (map-set og-history staker
+          (let ((h (default-to (list) (map-get? og-history staker))))
+            (unwrap-panic (as-max-len?
+              (append
+                (if (< (len h) u6)
+                  h
+                  (unwrap-panic (as-max-len? (unwrap-panic (slice? h u1 u6)) u5))
+                )
+                {
+                  from: first-cycle,
+                  ustx: covered,
+                })
+              u6
+            ))
+          )
+        )
         (if (is-eq prev u0)
           (var-set og-seats (+ (var-get og-seats) u1))
           true
@@ -528,7 +616,7 @@
     (asserts! (not is-bond) ERR_BOND_NOT_SUPPORTED)
     ;; A stake opens or grows a free OG seat while the cap has room. Nothing to
     ;; add or a covered cap is skipped, never an error: the offer must not block a stake.
-    (match (take-og-seat staker amount-ustx)
+    (match (take-og-seat staker amount-ustx first-index)
       covered true
       e true
     )
@@ -763,7 +851,7 @@
       u0
       (let (
           (gross (/ (* (get-stx-pot reward-cycle tranche) shares) total))
-          (fee (get-staker-fee staker shares gross (var-get fee-bips)))
+          (fee (get-staker-fee-at staker reward-cycle shares gross (var-get fee-bips)))
         )
         (- gross fee)
       )
@@ -795,7 +883,7 @@
         u0
         (/ (* (get pot acc) shares) (get total-shares acc))
       ))
-      (fee (get-staker-fee staker shares owed (get fee acc)))
+      (fee (get-staker-fee-at staker cycle shares owed (get fee acc)))
       (net (- owed fee))
     )
     (if (or
@@ -1172,7 +1260,7 @@
         u0
         (/ (* (get pot acc) shares) (get total-shares acc))
       ))
-      (fee (get-staker-fee staker shares owed (get fee acc)))
+      (fee (get-staker-fee-at staker cycle shares owed (get fee acc)))
       (net (- owed fee))
       (batch {
         reward-cycle: cycle,
