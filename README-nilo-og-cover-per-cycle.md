@@ -40,7 +40,16 @@ Read the cover **per reward cycle** at payout:
 - `get-staker-fee-at` is used in the three payout sites. `get-staker-fee` is kept unchanged, so the public interface only gains functions.
 - A cycle older than all 6 recorded increases reads 0. If the history is too short, the error can only be a fee charged; a fee is never skipped.
 
-Cost: one map read plus a fold over at most 6 entries per staker paid, and one map write per cover increase. I have not measured this with `--costs`.
+Cost, measured with clarinet `--costs` (added 15-oct 04:00 UTC). I ran `juice-pool-payouts`, `juice-pool-og` and `juice-pool-recovery` (61 tests) on `570226c` and on the patch, and paired the calls by method in order:
+
+| call | read_count | runtime | write_count |
+|---|---|---|---|
+| `pay-stx-stakers` (largest case, 4 entries) | 44 → 48 (+1 per staker paid) | 298,645 → 331,827 (+11%) | 7 → 7 |
+| `pay-recovered-sbtc-stakers` (largest) | 59 → 63 | 287,010 → 320,192 | 11 → 11 |
+| stake through `validate-stake!` (largest, a seat increase) | 20 → 22 | 126,689 → 143,285 | 6 → 7 (+127 bytes) |
+| `evict-og` | 15 → 15 | +2,246 | 3 → 3 |
+
+Every call carries a fixed +2,246 runtime/read_length because the contract is larger. On top of that, a payout adds one map read and a fold of at most 6 entries per staker. A 100-staker `pay-stx-stakers` batch therefore adds about 100 reads, against the 15,000 read_count limit. A stake that does not grow cover writes nothing extra.
 
 ## Tests
 
